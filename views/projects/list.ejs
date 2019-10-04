@@ -1,91 +1,127 @@
-<% include ../partials/header.ejs%>
-<body>
-    <div class="container" style="margin-top: 20px" ; style="margin-left: 50px">
-        <h2>Projects</h2>
-        <div class="panel panel-default">
-            <h3 class="panel-title">Filters</h3>
+<% include ../partials/header%>
+
+<div class="container" style="margin-top: 20px" ; style="margin-left: 50px">
+    <h2>Projects</h2>
+    <div class="panel panel-default">
+        <h3 class="panel-title">Filters</h3>
+    </div>
+    <form class="form-horizontal" action="" method="GET">
+        <!-- ==================== FILTER ID ======================== -->
+        <div class="panel-body form-control-sm">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="">
+                    <input type="checkbox" id="" name="checkprojectid">ID</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control form-control-sm" id="id" placeholder="ID" name="pjid">
+                </div>
+            </div>
         </div>
-        <form class="form-horizontal" action="/projects" method="GET">
-            <!-- ==================== FILTER ID ======================== -->
-            <div class="panel-body form-control-sm">
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="">
-                        <input type="checkbox" id="" name="checkprojectid">ID</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control form-control-sm" id="id"
-                            placeholder="ID" name="id">
-                    </div>
+        <!-- ==================== FILTER NAME ======================== -->
+        <div class="panel-body form-control-sm">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="">
+                    <input type="checkbox" id="name" name="checkprojectname">Name</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control form-control-sm" id="name" placeholder="Name" name="pjname">
                 </div>
             </div>
-            <!-- ==================== FILTER NAME ======================== -->
-            <div class="panel-body form-control-sm">
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="">
-                        <input type="checkbox" id="name" name="checkprojectname">Name</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control form-control-sm" id="name"
-                            placeholder="Name" name="name">
-                    </div>
-                </div>
-            </div>
-            <!-- ==================== FILTER MEMBER ======================== -->
-            <div class="panel-body form-control-sm">
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">
-                        <input type="checkbox" id="member" name="checkprojectmember">
-                        Member </label>
-                    <div class="col-sm-5">
-                        <select class="form-control form-control-sm" id="member" name="projectmember">
-                            <option disabled selected>Choose the Member ...</option>
-                            <option value="">duar</option>
-                            <option value="">nmax</option>
-                            <!--  data.forEach((item) => { 
+        </div>
+        <!-- ==================== FILTER MEMBER ======================== -->
+        <div class="panel-body form-control-sm">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">
+                    <input type="checkbox" id="member" name="checkprojectmember">
+                    Member </label>
+                <div class="col-sm-5">
+                    <select class="form-control form-control-sm" id="member" name="pjmember">
+                        <option disabled selected>Choose the Member ...</option>
+                        <option value="">duar</option>
+                        <option value="">nmax</option>
+                        <!--  data.forEach((item) => { 
                                 <option >
                                      item.firstmembername 
                                 </option>
                              })  -->
-                        </select>
-                    </div>
+                    </select>
                 </div>
             </div>
-            <div class="form-group row">
-                <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary" role="button">Search</button>
-                    <button type="submit" href="/projects/list" class="btn btn-warning">Reset</button>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="button" class="btn btn-outline-primary" role="button">Search</button>
+                <button type="button" class="btn btn-outline-light"> <a href="/projects">Reset</a></button>
+            </div>
+        </div>
+    </form>
+    <!-- ==================== OPTION ======================== -->
+    <h2 class="display-4">Options</h2>
+    <form action="" method="POST" class="mx-5">
+        <div class="form-group row">
+            <div class="col-sm-2">Columns</div>
+            <div class="col">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="checkoptionid" id="checkoptid">
+                    <label class="form-check-label" for="checkoptid">
+                        ID
+                    </label>
                 </div>
             </div>
+            <div class="col">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="checkoptionname" id="checkoptname">
+                    <label class="form-check-label" for="checkoptname">
+                        Name
+                    </label>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="checkoptionmembers" id="checkoptmembers">
+                    <label class="form-check-label" for="checkoptmembers">
+                        Members
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="button" class="btn btn-outline-primary"><a href="/projects/add">Add</a></button>
+                <button type="submit" class="btn btn-outline-info">Apply</button>
+            </div>
+        </div>
+    </form>
 
-            <!-- ==================== TABLES ======================== -->
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Members</th>
-                            <th scope="col">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <a href="edit/" class="btn btn-success">EDIT</a>
-                                <a href="delete/" class="btn btn-danger">DELETE</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="form-group row">
-                <div class="col-sm-10">
-                    <a href="/add" type="button" class="btn btn-primary">ADD</a>
-                </div>
-            </div>
-        </form>
+    <!-- ==================== TABLES ======================== -->
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Members</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% data.forEach((item) => { %>
+                <tr>
+                    <td>
+                        <%= item.projectid %>
+                    </td>
+                    <td>
+                        <%= item.name %>
+                    </td>
+                    <td>
+                        <%= item.members %>
+                    </td>
+                    <td>
+                        <a href="/projects/edit/<%= item.projectid %>" class="btn btn-outline-success">EDIT</a>
+                        <a href="/projects/delete/<%= item.projectid %>" class="btn btn-outline-danger">DELETE</a>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
     </div>
-</body>
-
-</html>
+</div>
+<% include ../partials/footer%>

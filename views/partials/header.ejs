@@ -5,12 +5,16 @@
     <title>Project Manajegement System</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/style.css" rel="stylesheet">
+    <!-- <link href="../stylesheets/style.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="stylesheets/typography.css">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Project Management System</a>
+    <link rel="stylesheet" href="../stylesheets/typography.css">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-info">
+        <a class="navbar-brand" href="/projects" >Project Management System</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -19,18 +23,19 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/projects/list">Projects <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/projects">Projects <span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/profile/list">Profile</a>
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users">Users</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" href="logout">
+            <!-- <form class="form-inline my-2 my-lg-0"> -->
+                <button class="btn btn-outline-white my-2 my-sm-0" type="submit" href="logout">
                     <a class="nav-link" href="/logout">Logout</a>
                 </button>
-            </form>
+            
         </div>
     </nav>
-</head>

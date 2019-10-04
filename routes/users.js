@@ -5,7 +5,7 @@ var { isLogged } = require('../helpers/util');
 module.exports = (pool) => {
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  res.render('users/list');
 });
 
 return router;

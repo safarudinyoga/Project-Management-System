@@ -1,0 +1,146 @@
+<% include ../partials/header%>
+
+<div class="container" style="margin-top: 20px" ; style="margin-left: 50px">
+    <div class="panel panel-default">
+        <h3 class="panel-title">Filters</h3>
+    </div>
+    <form class="form-horizontal" action="" method="GET">
+        <!-- ==================== FILTER ID ======================== -->
+        <div class="panel-body form-control-sm">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="">
+                    <input type="checkbox" id="id" name="checkuserid">ID</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control form-control-sm" id="id" placeholder="ID" name="id">
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== FILTER EMAIL ======================== -->
+        <div class="panel-body form-control-sm">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="">
+                    <input type="checkbox" id="email" name="checkusersemail" class="">Email</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control form-control-sm" id="email" placeholder="Email" name="checkusersemail">
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== FILTER NAME ======================== -->
+        <div class="panel-body form-control-sm">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="">
+                    <input type="checkbox" id="name" name="checkusersname">Name</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control form-control-sm" id="name" placeholder="Name" name="checkusersname">
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== FILTER ROLES ======================== -->
+        <div class="panel-body form-control-sm">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">
+                    <input type="checkbox" id="usersrole" name="checkusersrole">
+                    Role </label>
+                <div class="col-sm-5">
+                    <select class="form-control form-control-sm" id="usersrole" name="checkusersrole">
+                        <option disabled selected>Choose the Member ...</option>
+                        <option value="">duar</option>
+                        <option value="">nmax</option>
+                        <!--  data.forEach((item) => { 
+                            <option >
+                                 item.firstmembername 
+                            </option>
+                         })  -->
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== FILTER TYPEJOB ======================== -->
+        <div class="panel-body form-control-sm">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">
+                    <input type="checkbox" id="member" name="checkuserstypejob">
+                    Type Job </label>
+                <div class="col-sm-5">
+                    <select class="form-control form-control-sm" id="member" name="userstypejob">
+                        <option disabled selected>Choose the Member ...</option>
+                        <option value="">duar</option>
+                        <option value="">nmax</option>
+                        <!--  data.forEach((item) => { 
+                                <option >
+                                     item.firstmembername 
+                                </option>
+                             })  -->
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="button" class="btn btn-primary" role="button">Search</button>
+                <button type="button" class="btn btn-white"> <a href="/projects">Reset</a></button>
+            </div>
+        </div>
+    </form>
+    <!-- ==================== OPTION ======================== -->
+    <h2 class="display-4">Options</h2>
+    <form action="" method="POST" class="mx-5">
+        <div class="form-group row">
+            <div class="col-sm-2">Columns</div>
+            <div class="col">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="checkoption" id="">
+                    <label class="form-check-label">
+                        testing
+                    </label>
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">Apply</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- ==================== TABLES ======================== -->
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">TypeJob</th>
+                    <th scope="col">Roles</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <a href="/projects/edit/" class="btn btn-success">EDIT</a>
+                        <a href="/projects/delete/" class="btn btn-danger">DELETE</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <a href="/projects/add" type="button" class="btn btn-primary">ADD</a>
+        </div>
+    </div>
+
+</div>
+<% include ../partials/footer%>
