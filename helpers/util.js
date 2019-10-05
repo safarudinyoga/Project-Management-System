@@ -5,7 +5,7 @@ module.exports = {
         } else {
             req.session.latestUrl = req.originalUrl;
             console.log(req.session.latestUrl);
-            res.redirect('/login')
+            res.redirect('/')
         }
     },
 

@@ -13,7 +13,9 @@ router.use(bodyParser.json())
 module.exports = (pool) => {
 
   // // GET home page. //
-  router.get('/login', (req, res, next) => {
+  //router.get('/', )
+
+  router.get('/', isLoggedOut, (req, res, next) => {
     //console.log(req.session.user);
     console.log(req.session.latestUrl);
     res.render('login', { title: 'Login', latestUrl: req.session.latestUrl });
@@ -46,7 +48,7 @@ module.exports = (pool) => {
   router.get('/logout', (req, res, next) => {
     req.session.destroy((err) => {
       if (err) throw err;
-      res.redirect('/login');
+      res.redirect('/');
     })
   })
 
