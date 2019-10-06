@@ -1,70 +1,100 @@
 <% include ../partials/header%>
 
-<div class="container" style="margin-top: 20px" ; style="margin-left: 50px">
-    <div class="panel panel-default">
-        <h1 class="display-4">Profile</h1>
-    </div>
-    <form class="form-horizontal" action="" method="POST">
-        <div class="panel-body form-control-sm">
-            <div class="form-group row">
-                <label for="inputPassword3" class="col-sm-2 col-form-label">Email</label>
-                <div class="col-sm-5">
-                    <input type="email" class="form-control form-control-sm" id="email" placeholder="<%= data.email %>"
-                        name="email" readonly>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-                <div class="col-sm-5">
-                    <input type="password" class="form-control form-control-sm" id="password" placeholder=""
-                        name="password">
-                </div>
-            </div>
+<div class="container-fluid">
+    <div class="card border-light mx-1">
+        <h3 class="card-header bg-transparent display-3">Profile</h3>
+        <div class="card-body">
+            <div class="card border-light">
+                <div class="card-body">
+                    <form class="form-horizontal" action="" method="POST">
+                        <div class="panel-body form-control-sm">
+                            <div class="form-group row">
+                                <h5 for="email" class="col-sm-2 col-form-label col-form-label-lg">Email</h5>
+                                <div class="col-sm-5">
+                                    <input type="email" class="form-control form-control-lg" id="email"
+                                        placeholder="<%= data.email %>" name="email" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h5 for="password" class="col-sm-2 col-form-label col-form-label-lg">Password</h5>
+                                <div class="col-sm-5">
+                                    <input type="password" class="form-control form-control-lg" id="password"
+                                        placeholder="password" name="password">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h5 for="firstname" class="col-sm-2 col-form-label col-form-label-lg">First Name</h5>
+                                <div class="col-sm-5">
+                                    <input type="firstname" class="form-control form-control-lg" id=""
+                                        placeholder="<%= data.firstname %>" name="firstname" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h5 for="lastname" class="col-sm-2 col-form-label col-form-label-lg">Last Name</h5>
+                                <div class="col-sm-5">
+                                    <input type="lastname" class="form-control form-control-lg" id=""
+                                        placeholder="<%= data.lastname %>" name="lastname" readonly>
+                                </div>
+                            </div>
 
-            <!-- =================POSITION================ -->
-            <fieldset class="form-group">
-                <div class="row">
-                    <legend class="col-form-label col-sm-2 pt-0">Position</legend>
-                    <div class="col-sm-10">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="role" id="gridRadios1" value="Manager" <%= data.role == 'Manager' ? ' checked' : '' %>>
-                            <label class="form-check-label" for="gridRadios1">
-                                Manager
-                            </label>
+                            <!-- =================POSITION================ -->
+
+                            <fieldset class="form-group">
+                                <div class="form-group row">
+                                    <h5 for="gridRadios" class="col-sm-2 col-form-label-lg ">Position</h5>
+                                    <div class="col-sm-5">
+                                        <div class="custom-control custom-radio">
+                                            <input class="custom-control-input" type="radio" name="role" id="gridRadios1"
+                                                value="Manager" <%= data.role == 'Manager' ? ' checked' : '' %>>
+                                            <label class="custom-control-label" for="gridRadios1">
+                                                Manager
+                                            </label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input class="custom-control-input" type="radio" name="role" id="gridRadios2"
+                                                value="Software Developer"
+                                                <%= data.role == 'Software Developer' ? ' checked' : '' %>>
+                                            <label class="custom-control-label" for="gridRadios2">
+                                                Software Developer
+                                            </label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input class="custom-control-input" type="radio" name="role" id="gridRadios3"
+                                                value="Quality Assurance"
+                                                <%= data.role == 'Quality Assurance' ? ' checked' : '' %>>
+                                            <label class="custom-control-label" for="gridRadios3">
+                                                Quality Assurance
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            
+                            <!-- TYPEJOB -->
+
+                            <div class="form-group row">
+                                <h5 class="col-sm-2 col-form-label-lg ">Type</h5>
+                                <div class="col-12 col-sm-7">
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" name="typejob" type="checkbox" id="typejob"
+                                            value="true" <%= (data.typejob == true) ? ' checked' : ' false' %>>
+                                        <label class="custom-control-label" for="typejob">
+                                            Fulltime
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-10">
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="role" id="gridRadios2" value="Software Developer" <%= data.role == 'Software Developer' ? ' checked' : '' %>>
-                            <label class="form-check-label" for="gridRadios2">
-                                Software Developer
-                            </label>
-                        </div>
-                        <div class="form-check disabled">
-                            <input class="form-check-input" type="radio" name="role" id="gridRadios3" value="Quality Assurance" <%= data.role == 'Quality Assurance' ? ' checked' : '' %>>
-                            <label class="form-check-label" for="gridRadios3">
-                                Quality Assurance
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-            <div class="form-group row">
-                <div class="col-sm-2">Type</div>
-                <div class="col-sm-10">
-                    <div class="form-check">
-                        <input class="form-check-input" name="typejob" type="checkbox" id="typejob" value="true" <%= (data.typejob == true) ? ' checked' : ' false' %> >
-                        <label class="form-check-label" for="typejob">
-                            Fulltime
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    </form>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
 </div>
 
 <% include ../partials/footer%>

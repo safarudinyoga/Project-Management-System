@@ -1,40 +1,47 @@
 <% include ../partials/header%>
 
-<div class="container" style="margin-top: 20px" ; style="margin-left: 50px">
-    <div class="panel panel-default">
-        <h1 class="display-4">Add Projects</h1>
-    </div>
-    <form class="form-horizontal" action="" method="POST">
-        <div class="panel-divody form-control-sm">
-            <div class="form-group row">
-                <label for="inputPassword3" class="col-sm-2 col-form-label">Name</label>
-                <div class="col-sm-5">
-                    <input type="text" class="form-control form-control-sm" id="name" placeholder="Projects Name"
-                        name="addpjname" required>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div for="inputPassword3" class="col-sm-2 col-form-label">Members</div>
-                <div class="col-sm-5">
-                    <% for (let i = 0; i < flname.length; i++) { %>
-                    <div class="custom-check">
-                        <input class="custom-check-input" type="checkbox" name="member" id="checkbox <%= i %>">
-                        <label class="custom-check-label" for="checkbox<%= i %>">
-                            <%= flname[i] %>
-                        </label>
-                    </div>
-                    <% } %>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-sm-10">
-                    <button type="submit" class="btn btn-success">Save</button>
-                    <button type="button" class="btn btn-white"><a href="/projects">Cancel</a></button>
-                    </button>
+<div class="container-fluid">
+    <div class="card border-light mx-1">
+        <h3 class="card-header bg-transparent display-3">Add Project</h3>
+        <div class="card-body">
+            <div class="card border-light">
+                <div class="card-body">
+                    <form class="form-horizontal" action="" method="POST">
+                        <div class="panel-body form-control-sm">
+                            <div class="form-group row">
+                                <h5 class="col-sm-2 col-form-label-lg">Name</h5>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control form-control-lg" id="name"
+                                        placeholder="Projects Name" name="addpjname" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h5 class="col-sm-2 col-form-label-lg">Members</h5>
+                                <div class="col-sm-5">
+                                    <% for (let i = 0; i < flname.length; i++) { %>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" name="member"
+                                            id="checkbox<%= i %>">
+                                        <label class="custom-control-label" for="checkbox<%= i %>">
+                                            <%= flname[i] %>
+                                        </label>
+                                    </div>
+                                    <% } %>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-10">
+                                    <button type="submit" class="btn btn-success">Save</button>
+                                    <button type="button" class="btn btn-white"><a href="/projects">Cancel</a></button>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
 </div>
 
 <% include ../partials/footer%>

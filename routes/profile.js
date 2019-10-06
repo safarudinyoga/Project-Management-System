@@ -12,7 +12,7 @@ module.exports = (pool) => {
       if (err) throw err;
       //console.log(req.session.user.userid);
       //console.log(email);
-      res.render('profile/view', { title: 'Profile', data: data.rows[0] })
+      res.render('profile/view', { title: 'Profile', data: data.rows[0], path:"/profile"})
     })
   });
 

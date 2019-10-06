@@ -98,11 +98,11 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-sm-10">
+                                <button type="submit" class="btn btn-outline-info">Apply</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="col-sm-10">
-                        <button type="submit" class="btn btn-outline-info">Apply</button>
-                    </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -146,6 +146,19 @@
                                 <% }) %>
                             </tbody>
                         </table>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item <%= page == 1 ? 'disabled': ''; %>"><a class="page-link"
+                                        href="/?page=<%= parseInt(page) - 1%>">Previous</a></li>
+                                <% for (let i = 1; i <= pages; i++) { %>
+                                <li class="page-item <%= page == i ? 'active': ''; %>"><a class="page-link"
+                                        href="/?page=<%= i %>">
+                                        <%= i %></a></li>
+                                <% }; %>
+                                <li class="page-item <%= page == pages ? 'disabled': ''; %>"><a class="page-link"
+                                        href="/?page=<%= parseInt(page) + 1%>">Next</a></li>
+                            </ul>
+                        </nav>
                         <div class="col-sm-10">
                             <a type="button" class="btn btn-outline-primary" href="/projects/add">Add Project
                                 <!-- <i class="fa fa-plus" aria-hidden="true"></i>Add project -->

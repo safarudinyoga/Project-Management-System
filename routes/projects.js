@@ -8,14 +8,34 @@ module.exports = (pool) => {
 
     // =============== GET DATA & FILTER =============== \\
     router.get('/', isLoggedIn, (req, res, next) => {
-        // let filter = [];
-        // let currentPage = req.query.page || 1;
-        // let limit = 3;
-        // let offset = (currentPage - 1) * limit;
-        let sql = `SELECT projects.projectid, projects.name, users.userid, CONCAT (users.firstname,' ',users.lastname) AS members FROM projects LEFT JOIN members ON projects.projectid = members.projectid LEFT JOIN users ON users.userid = members.userid ORDER BY projectid`
-        pool.query(sql, [], (err, row) => {
-            if (err) throw err;
-            res.render('projects/list', { title: 'Projects', data: row.rows });
+
+
+        // ============ SQL UNTUK MENAMPILKAN BANYAK MEMBER ========== \\
+        // let sql = `SELECT members.projectid, MAX(projects.name) projectname, STRING_AGG(CONCAT(users.firstname, ' ', users.lastname), ', ') fullname FROM members INNER JOIN projects USING (projectid) INNER JOIN users USING (userid) GROUP BY projectid ORDER BY projectid`
+
+        // let sql = `SELECT projects.projectid, projects.name, users.userid, CONCAT (users.firstname,' ',users.lastname) AS members FROM projects LEFT JOIN members ON projects.projectid = members.projectid LEFT JOIN users ON users.userid = members.userid ORDER BY projectid`
+
+        let sql = `SELECT COUNT(members.projectid) total, MAX(projects.name) projectname, STRING_AGG(CONCAT(users.firstname, ' ', users.lastname), ', ') fullname FROM members INNER JOIN projects USING (projectid) INNER JOIN users USING (userid) GROUP BY projectid ORDER BY projectid`
+        pool.query(sql, (err, count) => {
+            let countpage = count.rows[0].total;
+            let page = req.query.page || 1;
+            let limit = 1;
+            let offset = (page - 1) * limit;
+            let url = req.url == '/' ? '/?page=1' : req.url;
+            let pages = Math.ceil(countpage / limit);
+            let sql = `SELECT COUNT(members.projectid) total, MAX(projects.name) projectname, STRING_AGG(CONCAT(users.firstname, ' ', users.lastname), ', ') fullname FROM members INNER JOIN projects USING (projectid) INNER JOIN users USING (userid) GROUP BY projectid ORDER BY projectid LIMIT ${limit} OFFSET ${offset}`;
+            pool.query(sql, [], (err, row) => {
+                if (err) throw err;
+                res.render('projects/list', {
+                    title: 'Projects',
+                    data: row.rows,
+                    path: "/projects",
+                    query: req.query,
+                    pages,
+                    page,
+                    url
+                });
+            })
         })
     })
 
@@ -29,7 +49,7 @@ module.exports = (pool) => {
             if (err) throw err;
             const flname = concat.rows.map(x => x.fullname);
             console.log(flname);
-            res.render('projects/add', { flname });
+            res.render('projects/add', { flname, path: "/projects" });
         })
     })
 
@@ -74,7 +94,7 @@ module.exports = (pool) => {
                 console.log(item);
                 console.log(sqlgetedit);
                 //let projectname = item.rows[0]
-                res.render('projects/edit', { item: item.rows[0], flname });
+                res.render('projects/edit', { item: item.rows[0], flname, path: "/projects" });
             })
         })
     })

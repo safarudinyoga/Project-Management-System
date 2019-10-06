@@ -13,7 +13,6 @@ router.use(bodyParser.json())
 module.exports = (pool) => {
 
   // // GET home page. //
-  //router.get('/', )
 
   router.get('/', isLoggedOut, (req, res, next) => {
     //console.log(req.session.user);
