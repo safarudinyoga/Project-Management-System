@@ -42,10 +42,12 @@ module.exports = (pool) => {
     
         pool.query(sql1, (err, count) => {
             if (err) console.log(err);
-            //console.log(count);
-            let rows = count.rows[0].total;
+            //let rows = result.rows.map(x => x.total)
+            const rows = count.rows[0].total;
+            //let rows = doCount;
+            console.log(rows);
             let page = req.query.page || 1;
-            let limit = 2;
+            let limit = 1;
             let offset = (page - 1) * limit;
             let url = req.url == '/' ? '/?page=1' : req.url;
             let pages = Math.ceil(rows / limit);
