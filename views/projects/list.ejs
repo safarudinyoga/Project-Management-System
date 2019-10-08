@@ -42,9 +42,9 @@
                             <div class="col-12 col-sm-9">
                                 <select class="form-control" id="member" name="member">
                                     <option disabled selected>Choose the Member ...</option>
-                                    <% data.forEach((item) => { %>
-                                    <option value="<%= item.member %>">
-                                        <%= item.fullname %>
+                                    <% elemen.forEach((item, i) => { %>
+                                    <option value="<%= item %>">
+                                        <%= flname[i] %>
                                     </option>
                                     <% }) %>
                                 </select>
@@ -144,14 +144,14 @@
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
                                 <li class="page-item <%= page == 1 ? 'disabled': ''; %>"><a class="page-link"
-                                        href="/?page=<%= parseInt(page) - 1%>">Previous</a></li>
+                                        href="/projects?page=<%= parseInt(page) - 1%>">Previous</a></li>
                                 <% for (let i = 1; i <= pages; i++) { %>
                                 <li class="page-item <%= page == i ? 'active': ''; %>"><a class="page-link"
-                                        href="/?page=<%= i %>">
+                                        href="/projects?page=<%= i %>">
                                         <%= i %></a></li>
                                 <% }; %>
                                 <li class="page-item <%= page == pages ? 'disabled': ''; %>"><a class="page-link"
-                                        href="/?page=<%= parseInt(page) + 1%>">Next</a></li>
+                                        href="/projects?page=<%= parseInt(page) + 1%>">Next</a></li>
                             </ul>
                         </nav>
                         <div class="col-sm-10">

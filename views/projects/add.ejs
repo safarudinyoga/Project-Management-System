@@ -21,8 +21,8 @@
                                     <% for (let i = 0; i < flname.length; i++) { %>
                                     <div class="custom-control custom-checkbox">
                                         <input class="custom-control-input" type="checkbox" name="member"
-                                            id="gridCheck1" value="<%= elemen[i] %>">
-                                        <label class="custom-control-label" for="gridCheck1" >
+                                            id="gridCheck<%= i %>" value="<%= elemen[i] %>">
+                                        <label class="custom-control-label" for="gridCheck<%= i %>" >
                                             <%= flname[i] %>
                                         </label>
                                     </div>

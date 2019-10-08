@@ -11,70 +11,94 @@ module.exports = (pool) => {
 
         // ============ SQL UNTUK MENAMPILKAN BANYAK MEMBER ========== \\
         // let sql = `SELECT members.projectid, MAX(projects.name) projectname, STRING_AGG(CONCAT(users.firstname, ' ', users.lastname), ', ') fullname FROM members INNER JOIN projects USING (projectid) INNER JOIN users USING (userid) GROUP BY projectid ORDER BY projectid`
+
         // ============ SQL CONCAT MEMBER ========== \\
         // let sql = `SELECT projects.projectid, projects.name, users.userid, CONCAT (users.firstname,' ',users.lastname) AS members FROM projects LEFT JOIN members ON projects.projectid = members.projectid LEFT JOIN users ON users.userid = members.userid ORDER BY projectid`
 
         const { checkid, projectid, checkname, projectname, checkmember, member } = req.query;
+
+        // =================== SQL MULTIPLE MEMBER ON FILTER =============== \\
+        const subsubquery = `SELECT projectid FROM members WHERE userid=${member}`;
+        const subquery = `SELECT userid FROM members WHERE projectid IN (${subsubquery})`;
+        // `users.userid IN ( ${subquery} ) AND proj.projectid IN ( ${subsubquery} )`
+
         let arr = [];
+        let page = req.query.page || 1;
+        let limit = 3;
+        let offset = (page - 1) * limit;
+        let url = (req.url == '/') ? '/?page=1' : req.url;
+        //console.log(page);
         //console.log(req.query);
 
         if (checkid && projectid) {
-            arr.push(`projectid=${projectid}`)
+            arr.push(`projectid=${projectid}`);
         }
         if (checkname && projectname) {
-            arr.push(`LOWER(name) LIKE '%${projectname.toLowerCase()}%'`)
+            arr.push(`LOWER(name) LIKE '%${projectname.toLowerCase()}%'`);
         }
         if (checkmember && member) {
-            arr.push(`users.userid=${member}`)
+            //arr.push(`users.userid=${member}`)
+            arr.push(`users.userid IN ( ${subquery} ) AND projects.projectid IN ( ${subsubquery} )`);
         }
         //console.log(arr);
-        // ============ SQL UNTUK MENGHITUNG BANYAK MEMBER ========== \\
-        let sql1 = `SELECT COUNT(members.projectid) total, ARRAY_AGG(userid) member, projectid, MAX(projects.name) projectname, STRING_AGG(CONCAT(users.firstname, ' ', users.lastname), ', ') fullname FROM members INNER JOIN projects USING (projectid) INNER JOIN users USING (userid)`
+        // ============ SQL UNTUK MENAMPILKAN FILTER ========== \\
+        let sqlfilter = `SELECT COUNT(members.projectid) total, ARRAY_AGG(userid) member, projectid, MAX(projects.name) projectname, STRING_AGG(CONCAT(users.firstname, ' ', users.lastname), ', ') fullname FROM members INNER JOIN projects USING (projectid) INNER JOIN users USING (userid)`
 
         // let sql1 = `SELECT DISTINCT projects.projectid, projects.name, users.firstname, users.userid FROM projects LEFT JOIN members ON projects.projectid = members.projectid LEFT JOIN users ON users.userid = members.userid`
 
         if (arr.length > 0) {
-            sql1 += ` WHERE ${arr.join(' AND ')}`
-            //console.log(sql1);
+            sqlfilter += ` WHERE ${arr.join(' AND ')}`;
         }
-        sql1 += ` GROUP BY projectid ORDER BY projectid`
-        //console.log(sql1);
-    
-        pool.query(sql1, (err, count) => {
-            if (err) console.log(err);
-            //let rows = result.rows.map(x => x.total)
-            const rows = count.rows[0].total;
-            //let rows = doCount;
-            console.log(rows);
-            let page = req.query.page || 1;
-            let limit = 1;
-            let offset = (page - 1) * limit;
-            let url = req.url == '/' ? '/?page=1' : req.url;
-            let pages = Math.ceil(rows / limit);
+        sqlfilter += ` GROUP BY projectid ORDER BY projectid`;
+        console.log(sqlfilter);
 
-            //================= SQL UNTUK MENAMPILKAN TABLE DATA PROJECTS ==============\\
+        pool.query(sqlfilter, (err, result) => {
+            if (err) console.log(err);
+            console.log(result.rows.map(x => x.total));
+            let total = result.rows.length
+            let pages = Math.ceil(total / limit);
+
+            // ================= METHOD REDUCE ============= \\
+            //let total = result.rows.map(x => Number(x.total)).reduce((total, el) => total + el, 0);
+            // console.log(total);
+            // console.log(pages);
+
+            // ================= SQL UNTUK MENAMPILKAN TABLE DATA PROJECTS ============== \\
             let sql = `SELECT members.projectid, MAX(projects.name) projectname, ARRAY_AGG(userid) member, STRING_AGG(CONCAT(users.firstname, ' ', users.lastname), ', ') fullname FROM members INNER JOIN projects USING (projectid) INNER JOIN users USING (userid)`;
 
             if (arr.length > 0) {
-                sql += ` WHERE ${arr.join(' AND ')}`          
+                sql += ` WHERE ${arr.join(' AND ')}`;
             }
 
-            //================= SQL UNTUK PAGINATION ==============\\
+            // ================= SQL UNTUK PAGINATION ============== \\
             sql += ` GROUP BY projectid ORDER BY projectid LIMIT ${limit} OFFSET ${offset}`;
-            //console.log(sql);
+            console.log(sql);
 
-            pool.query(sql, (err, row) => {
-                if (err) throw err;
+            // ================ SQL UNTUK MENAMPILKAN SEMUA MEMBER DI FILTER =========== \\
+            let sqluser = `SELECT users.userid, 
+            CONCAT(users.firstname,' ',users.lastname) fullname 
+            FROM users GROUP BY userid`;
+
+            const getTable = pool.query(sql);
+            const getUsers = pool.query(sqluser);
+
+            Promise.all([getTable, getUsers]).then(results => {
+                const data = results[0].rows;
+                const dataUsers = results[1].rows;
+                let flname = dataUsers.map(x => x.fullname);
+                let elemen = dataUsers.map(y => y.userid);
                 res.render('projects/list', {
                     title: 'Projects',
-                    data: row.rows,
+                    data,
                     path: "/projects",
                     query: req.query,
                     pages,
                     page,
-                    url
+                    url,
+                    flname,
+                    elemen
                 });
-            })
+            }).catch(err => console.error(err));
         })
     })
 
@@ -93,7 +117,7 @@ module.exports = (pool) => {
         pool.query(sqlgetadd, (err, result) => {
             if (err) throw err;
             const flname = result.rows.map(x => x.fullname);
-            const elemen = result.rows.map(y => y.userid)
+            const elemen = result.rows.map(y => y.userid);
             console.log(flname);
             console.log(elemen);
             //console.log(row.rows);
@@ -104,10 +128,12 @@ module.exports = (pool) => {
     //=========HOW TO SEQUENCE(INDEX) BACK TO RESTART=======\\
     //ALTER SEQUENCE projects_projectid_seq RESTART WITH 3\\
 
+    //let sqlnext = `SELECT nextval('projects_projectid_seq') AS nextid`
+
     router.post('/add', isLoggedIn, (req, res, next) => {
-        let sql = `INSERT INTO projects(name) VALUES ('${req.body.addpjname}')`
+        let sql = `INSERT INTO projects(name) VALUES ('${req.body.addpjname}')`;
         console.log(sql);
-        //let sqlnext = `SELECT nextval('projects_projectid_seq') AS nextid`
+
         pool.query(sql, (err) => {
             //let sql = `INSERT INTO projects(name) VALUES ('${req.body.addpjname}')`
             let sqlnext = `SELECT MAX(projectid) total FROM projects`
@@ -124,7 +150,7 @@ module.exports = (pool) => {
                     }
                 }
                 console.log(temp);
-                let sqladd = `INSERT INTO members (userid, projectid) VALUES ${temp.join(',')}`
+                let sqladd = `INSERT INTO members (userid, projectid) VALUES ${temp.join(', ')}`
                 console.log(sqladd);
                 pool.query(sqladd, (err) => {
                     if (err) console.log(err);
@@ -165,7 +191,7 @@ module.exports = (pool) => {
     // =============== EDIT DATA =============== \\
     router.get('/delete/:id', isLoggedIn, (req, res, next) => {
         let projectid = req.params.id;
-        let sqldelete = `DELETE FROM projects WHERE projectid=$1`;
+        let sqldelete = `DELETE FROM members WHERE projectid=$1`;
         pool.query(sqldelete, [projectid], (err) => {
             if (err) throw err;
             console.log("Data Project Telah Dihapus");
