@@ -9,22 +9,59 @@ module.exports = (pool) => {
     // =============== GET DATA & FILTER =============== \\
     router.get('/', isLoggedIn, (req, res, next) => {
 
-
         // ============ SQL UNTUK MENAMPILKAN BANYAK MEMBER ========== \\
         // let sql = `SELECT members.projectid, MAX(projects.name) projectname, STRING_AGG(CONCAT(users.firstname, ' ', users.lastname), ', ') fullname FROM members INNER JOIN projects USING (projectid) INNER JOIN users USING (userid) GROUP BY projectid ORDER BY projectid`
-
+        // ============ SQL CONCAT MEMBER ========== \\
         // let sql = `SELECT projects.projectid, projects.name, users.userid, CONCAT (users.firstname,' ',users.lastname) AS members FROM projects LEFT JOIN members ON projects.projectid = members.projectid LEFT JOIN users ON users.userid = members.userid ORDER BY projectid`
 
-        let sql = `SELECT COUNT(members.projectid) total, MAX(projects.name) projectname, STRING_AGG(CONCAT(users.firstname, ' ', users.lastname), ', ') fullname FROM members INNER JOIN projects USING (projectid) INNER JOIN users USING (userid) GROUP BY projectid ORDER BY projectid`
-        pool.query(sql, (err, count) => {
-            let countpage = count.rows[0].total;
+        const { checkid, projectid, checkname, projectname, checkmember, member } = req.query;
+        let arr = [];
+        //console.log(req.query);
+
+        if (checkid && projectid) {
+            arr.push(`projectid=${projectid}`)
+        }
+        if (checkname && projectname) {
+            arr.push(`LOWER(name) LIKE '%${projectname.toLowerCase()}%'`)
+        }
+        if (checkmember && member) {
+            arr.push(`users.userid=${member}`)
+        }
+        //console.log(arr);
+        // ============ SQL UNTUK MENGHITUNG BANYAK MEMBER ========== \\
+        let sql1 = `SELECT COUNT(members.projectid) total, ARRAY_AGG(userid) member, projectid, MAX(projects.name) projectname, STRING_AGG(CONCAT(users.firstname, ' ', users.lastname), ', ') fullname FROM members INNER JOIN projects USING (projectid) INNER JOIN users USING (userid)`
+
+        // let sql1 = `SELECT DISTINCT projects.projectid, projects.name, users.firstname, users.userid FROM projects LEFT JOIN members ON projects.projectid = members.projectid LEFT JOIN users ON users.userid = members.userid`
+
+        if (arr.length > 0) {
+            sql1 += ` WHERE ${arr.join(' AND ')}`
+            //console.log(sql1);
+        }
+        sql1 += ` GROUP BY projectid ORDER BY projectid`
+        //console.log(sql1);
+    
+        pool.query(sql1, (err, count) => {
+            if (err) console.log(err);
+            //console.log(count);
+            let rows = count.rows[0].total;
             let page = req.query.page || 1;
-            let limit = 1;
+            let limit = 2;
             let offset = (page - 1) * limit;
             let url = req.url == '/' ? '/?page=1' : req.url;
-            let pages = Math.ceil(countpage / limit);
-            let sql = `SELECT COUNT(members.projectid) total, MAX(projects.name) projectname, STRING_AGG(CONCAT(users.firstname, ' ', users.lastname), ', ') fullname FROM members INNER JOIN projects USING (projectid) INNER JOIN users USING (userid) GROUP BY projectid ORDER BY projectid LIMIT ${limit} OFFSET ${offset}`;
-            pool.query(sql, [], (err, row) => {
+            let pages = Math.ceil(rows / limit);
+
+            //================= SQL UNTUK MENAMPILKAN TABLE DATA PROJECTS ==============\\
+            let sql = `SELECT members.projectid, MAX(projects.name) projectname, ARRAY_AGG(userid) member, STRING_AGG(CONCAT(users.firstname, ' ', users.lastname), ', ') fullname FROM members INNER JOIN projects USING (projectid) INNER JOIN users USING (userid)`;
+
+            if (arr.length > 0) {
+                sql += ` WHERE ${arr.join(' AND ')}`          
+            }
+
+            //================= SQL UNTUK PAGINATION ==============\\
+            sql += ` GROUP BY projectid ORDER BY projectid LIMIT ${limit} OFFSET ${offset}`;
+            //console.log(sql);
+
+            pool.query(sql, (err, row) => {
                 if (err) throw err;
                 res.render('projects/list', {
                     title: 'Projects',
@@ -42,14 +79,23 @@ module.exports = (pool) => {
     // =============== ADD DATA PROJECT =============== \\
     router.get('/add', isLoggedIn, (req, res, next) => {
         console.log('=======ADD DATA PROJECT=======');
-        let sqlgetadd = `SELECT users.userid, CONCAT(users.firstname,' ',users.lastname) as fullname
-        FROM projects LEFT JOIN members ON projects.projectid = members.projectid 
-        LEFT JOIN users ON users.userid = members.userid ORDER BY userid`
-        pool.query(sqlgetadd, (err, concat) => {
+
+        // ================ QUERY BUAT MENAMPILKAN ARRAY_AGG & STRING_AGG =============== \\
+        // let sqlgetadd = `SELECT ARRAY_AGG(userid) member, STRING_AGG(CONCAT(users.firstname,' ',users.lastname), ', ') fullname FROM members INNER JOIN users USING (userid) INNER JOIN projects USING (projectid) GROUP BY projectid ORDER BY projectid`
+
+        let sqlgetadd = `SELECT users.userid, 
+        STRING_AGG(CONCAT(users.firstname,' ',users.lastname), ', ') fullname 
+        FROM users GROUP BY userid`;
+
+        // console.log(sqlgetadd);
+        pool.query(sqlgetadd, (err, result) => {
             if (err) throw err;
-            const flname = concat.rows.map(x => x.fullname);
+            const flname = result.rows.map(x => x.fullname);
+            const elemen = result.rows.map(y => y.userid)
             console.log(flname);
-            res.render('projects/add', { flname, path: "/projects" });
+            console.log(elemen);
+            //console.log(row.rows);
+            res.render('projects/add', { flname, elemen, path: "/projects" });
         })
     })
 
@@ -57,24 +103,29 @@ module.exports = (pool) => {
     //ALTER SEQUENCE projects_projectid_seq RESTART WITH 3\\
 
     router.post('/add', isLoggedIn, (req, res, next) => {
-        let sql = `SELECT nextval('projects_projectid_seq') AS nextid`
-        pool.query(sql, (err, data) => {
-            const projectid = data.rows[0].nextid
-            let sql1 = `INSERT INTO projects(projectid, name) VALUES ('${projectid}','${req.body.addpjname}')`
-
-            pool.query(sql1, (err, data) => {
-                if (err) return res.send(err)
+        let sql = `INSERT INTO projects(name) VALUES ('${req.body.addpjname}')`
+        console.log(sql);
+        //let sqlnext = `SELECT nextval('projects_projectid_seq') AS nextid`
+        pool.query(sql, (err) => {
+            //let sql = `INSERT INTO projects(name) VALUES ('${req.body.addpjname}')`
+            let sqlnext = `SELECT MAX(projectid) total FROM projects`
+            console.log(sqlnext);
+            pool.query(sqlnext, (err, result) => {
+                if (err) return res.send(err);
                 let temp = [];
+                const projectId = result.rows[0].total;
                 if (typeof req.body.member == 'string') {
-                    temp.push(`(${req.body.member}, ${projectid})`)
+                    temp.push(`(${req.body.member}, ${projectId})`)
                 } else {
                     for (let i = 0; i < req.body.member.length; i++) {
-                        temp.push(`(${req.body.member[i]}, ${projectid})`)
+                        temp.push(`(${req.body.member[i]}, ${projectId})`)
                     }
                 }
-                let sql2 = `INSERT INTO members (userid, roles, projectid) values ${temp.join(',')}`
-                pool.query(sql2, (err) => {
-                    if (err) return res.send(err)
+                console.log(temp);
+                let sqladd = `INSERT INTO members (userid, projectid) VALUES ${temp.join(',')}`
+                console.log(sqladd);
+                pool.query(sqladd, (err) => {
+                    if (err) console.log(err);
                     res.redirect('/projects')
                 })
             })

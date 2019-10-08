@@ -12,12 +12,11 @@
 
                         <div class="form-group row">
                             <div class="custom-control custom-checkbox col-12 col-sm-2">
-                                <input type="checkbox" class="custom-control-input" for="" id="customCheck1">
-                                <label class="custom-control-label" for="customCheck1" id=""
-                                    name="checkprojectid">ID</label>
+                                <input type="checkbox" class="custom-control-input" for="" id="customCheck1" name="checkid">
+                                <label class="custom-control-label" for="customCheck1" id=""  <%= query.checkid ? ' checked' : '' %>>ID</label>
                             </div>
                             <div class="col-12 col-sm-9">
-                                <input type="text" class="form-control" id="id" placeholder="ID" name="pjid">
+                                <input type="text" class="form-control" id="id" placeholder="ID" name="projectid">
                             </div>
                         </div>
 
@@ -25,12 +24,11 @@
 
                         <div class="form-group row">
                             <div class="custom-control custom-checkbox col-12 col-sm-2">
-                                <input type="checkbox" class="custom-control-input" for="" id="customCheck2">
-                                <label class="custom-control-label" for="customCheck2" id="name"
-                                    name="checkpjname">Name</label>
+                                <input type="checkbox" class="custom-control-input" for="" id="customCheck2" name="checkname">
+                                <label class="custom-control-label" for="customCheck2" id="name"  <%= query.checkname ? ' checked' : '' %>>Name</label>
                             </div>
                             <div class="col-12 col-sm-9">
-                                <input type="text" class="form-control" id="id" placeholder="Name" name="pjname">
+                                <input type="text" class="form-control" id="id" placeholder="Name" name="projectname">
                             </div>
                         </div>
 
@@ -38,27 +36,24 @@
 
                         <div class="form-group row">
                             <div class="custom-control custom-checkbox col-12 col-sm-2">
-                                <input type="checkbox" class="custom-control-input" for="" id="customCheck3">
-                                <label class="custom-control-label" for="customCheck3" id="name"
-                                    name="checkpjmember">Member</label>
+                                <input type="checkbox" class="custom-control-input" for="" id="customCheck3" name="checkmember">
+                                <label class="custom-control-label" for="customCheck3" id="name" <%= query.checkmember ? ' checked' : '' %>>Member</label>
                             </div>
                             <div class="col-12 col-sm-9">
-                                <select class="form-control" id="member" name="checkpjmember">
+                                <select class="form-control" id="member" name="member">
                                     <option disabled selected>Choose the Member ...</option>
-                                    <option value="">duar</option>
-                                    <option value="">nmax</option>
-                                    <!--  data.forEach((item) => { 
-                                <option >
-                                     item.firstmembername 
-                                </option>
-                             })  -->
+                                    <% data.forEach((item) => { %>
+                                    <option value="<%= item.member %>">
+                                        <%= item.fullname %>
+                                    </option>
+                                    <% }) %>
                                 </select>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="col-sm-10">
-                                <button type="button" class="btn btn-outline-primary" role="button">Search</button>
+                                <button type="submit" class="btn btn-outline-primary" >Search</button>
                                 <button type="button" class="btn btn-outline-light"> <a
                                         href="/projects">Reset</a></button>
                             </div>
@@ -131,10 +126,10 @@
                                         <%= item.projectid %>
                                     </td>
                                     <td>
-                                        <%= item.name %>
+                                        <%= item.projectname %>
                                     </td>
                                     <td>
-                                        <%= item.members %>
+                                        <%= item.fullname %>
                                     </td>
                                     <td>
                                         <a href="/projects/edit/<%= item.projectid %>"
