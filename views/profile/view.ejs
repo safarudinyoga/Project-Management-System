@@ -77,7 +77,7 @@
                                 <div class="col-12 col-sm-7">
                                     <div class="custom-control custom-checkbox">
                                         <input class="custom-control-input" name="typejob" type="checkbox" id="typejob"
-                                            value="true" <%= (data.typejob == true) ? ' checked' : ' false' %>>
+                                            value="true" <%= data.typejob ? ' checked' : '' %>>
                                         <label class="custom-control-label" for="typejob">
                                             Fulltime
                                         </label>

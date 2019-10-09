@@ -27,7 +27,7 @@ module.exports = (pool) => {
         let limit = 3;
         let offset = (page - 1) * limit;
         let url = (req.url == '/') ? '/?page=1' : req.url;
-        //console.log(page);
+        console.log("session >", req.session.user.userid);
         //console.log(req.query);
 
         if (checkid && projectid) {
@@ -50,11 +50,11 @@ module.exports = (pool) => {
             sqlfilter += ` WHERE ${arr.join(' AND ')}`;
         }
         sqlfilter += ` GROUP BY projectid ORDER BY projectid`;
-        console.log(sqlfilter);
+        //console.log(sqlfilter);
 
         pool.query(sqlfilter, (err, result) => {
             if (err) console.log(err);
-            console.log(result.rows.map(x => x.total));
+            //console.log(result.rows.map(x => x.total));
             let total = result.rows.length
             let pages = Math.ceil(total / limit);
 
@@ -72,19 +72,26 @@ module.exports = (pool) => {
 
             // ================= SQL UNTUK PAGINATION ============== \\
             sql += ` GROUP BY projectid ORDER BY projectid LIMIT ${limit} OFFSET ${offset}`;
-            console.log(sql);
+            //console.log(sql);
 
             // ================ SQL UNTUK MENAMPILKAN SEMUA MEMBER DI FILTER =========== \\
             let sqluser = `SELECT users.userid, 
             CONCAT(users.firstname,' ',users.lastname) fullname 
             FROM users GROUP BY userid`;
 
+            let sqloption = `SELECT projectopt FROM users WHERE userid = ${req.session.user.userid}`;
+
             const getTable = pool.query(sql);
             const getUsers = pool.query(sqluser);
+            const getOption = pool.query(sqloption);
 
-            Promise.all([getTable, getUsers]).then(results => {
+            // =========== PROMISE UNTUK MENRENDER SQL DENGAN TUJUAN YG BERBEDA ======= \\
+            Promise.all([getTable, getUsers, getOption]).then(results => {
                 const data = results[0].rows;
                 const dataUsers = results[1].rows;
+                const dataOption = results[2].rows;
+                console.log(dataOption);
+                console.log(dataOption[0].projectopt);
                 let flname = dataUsers.map(x => x.fullname);
                 let elemen = dataUsers.map(y => y.userid);
                 res.render('projects/list', {
@@ -96,9 +103,34 @@ module.exports = (pool) => {
                     page,
                     url,
                     flname,
-                    elemen
+                    elemen,
+                    option: dataOption[0].projectopt,
                 });
-            }).catch(err => console.error(err));
+            }).catch(err => console.error(err)); //CATCH HARUS DI DEFINISI
+        })
+    })
+
+    // =============== APPLY OPTION DATA PROJECT =============== \\  
+    router.post("/", isLoggedIn, (req, res, next ) => {
+        console.log('===== APPLY OPTION PROJECT =====');
+        //let objectKey = ['projectid', 'projectname', 'members'];
+        let saveKey = Object.keys(req.body)
+        let simpanObjek = {
+            projectid: saveKey.includes('projectid'),
+            projectname: saveKey.includes('projectname'),
+            members: saveKey.includes('members')
+        }
+
+        // let sqlopt = `UPDATE users SET projectopt='${JSON.stringify(simpanObjek)}' WHERE userid=${req.session.user.userid}`;
+        
+        let sqlopt = `UPDATE users SET projectopt=$1 WHERE userid=${req.session.user.userid}`;
+        
+        console.log(req.body, saveKey);
+        console.log(sqlopt);
+        pool.query(sqlopt, [simpanObjek], (err, item) => {
+            if (err) throw err;
+            req.session.user.projectopt = simpanObjek;
+            res.redirect('/projects')
         })
     })
 
@@ -128,7 +160,7 @@ module.exports = (pool) => {
     //=========HOW TO SEQUENCE(INDEX) BACK TO RESTART=======\\
     //ALTER SEQUENCE projects_projectid_seq RESTART WITH 3\\
 
-    //let sqlnext = `SELECT nextval('projects_projectid_seq') AS nextid`
+    //let sqlnext = `SELE/projects/updateCT nextval('projects_projectid_seq') AS nextid`
 
     router.post('/add', isLoggedIn, (req, res, next) => {
         let sql = `INSERT INTO projects(name) VALUES ('${req.body.addpjname}')`;
@@ -170,7 +202,7 @@ module.exports = (pool) => {
             let sqlgetedit = `SELECT * FROM projects WHERE projectid=$1`;
             pool.query(sqlgetedit, [projectid], (err, item) => {
                 if (err) throw err;
-                console.log(item);
+                //console.log(item);
                 console.log(sqlgetedit);
                 //let projectname = item.rows[0]
                 res.render('projects/edit', { item: item.rows[0], flname, path: "/projects" });

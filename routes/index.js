@@ -25,8 +25,7 @@ module.exports = (pool) => {
     let sql = `SELECT * FROM users WHERE email=$1 AND password=$2`;
     //console.log(sql);
     let { email, password,latestUrl } = req.body;
-    console.log(latestUrl);
-    
+    //console.log(latestUrl);
     //console.log(email, password);
     //let { user } = req.session;
     pool.query(sql, [email, password], (err, row) => {
@@ -35,7 +34,7 @@ module.exports = (pool) => {
       if (row == undefined || row.rows.length == 0){
         res.redirect('login')
       } else {
-        console.log(req.session);
+        //console.log(req.session);
         req.session.user = row.rows[0];
         latestUrl = latestUrl || '/projects';
         res.redirect(latestUrl);
