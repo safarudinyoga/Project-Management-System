@@ -12,18 +12,19 @@
                                 <h5 class="col-sm-2 col-form-label-lg">Name</h5>
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control form-control-lg" id="name"
-                                        placeholder="Projects Name" name="addpjname" value="<%= item.name %>">
+                                        placeholder="Projects Name" name="name" value="<%= item.nama %>">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <h5 class="col-sm-2 col-form-label-lg">Members</h5>
                                 <div class="col-sm-5">
-                                    <% for (let i = 0; i < flname.length; i++) { %>
+                                    <% for (let i = 0; i < userdata.length; i++) { %>
                                     <div class="custom-control custom-checkbox">
                                         <input class="custom-control-input" type="checkbox" name="member"
-                                            id="checkbox<%= i %>" value="<%= [i+1] %>">
+                                            id="checkbox<%= i %>" value="<%= userdata[i].userid %>"
+                                            <%= (item.member.includes(userdata[i].userid)) ? ' checked' : '' %>>
                                         <label class="custom-control-label" for="checkbox<%= i %>">
-                                            <%= flname[i] %>
+                                            <%= userdata[i].fullname %>
                                         </label>
                                     </div>
                                     <% } %>

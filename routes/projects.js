@@ -27,8 +27,6 @@ module.exports = (pool) => {
         let limit = 3;
         let offset = (page - 1) * limit;
         let url = (req.url == '/') ? '/?page=1' : req.url;
-        console.log("session >", req.session.user.userid);
-        //console.log(req.query);
 
         if (checkid && projectid) {
             arr.push(`projectid=${projectid}`);
@@ -37,10 +35,9 @@ module.exports = (pool) => {
             arr.push(`LOWER(name) LIKE '%${projectname.toLowerCase()}%'`);
         }
         if (checkmember && member) {
-            //arr.push(`users.userid=${member}`)
             arr.push(`users.userid IN ( ${subquery} ) AND projects.projectid IN ( ${subsubquery} )`);
         }
-        //console.log(arr);
+
         // ============ SQL UNTUK MENAMPILKAN FILTER ========== \\
         let sqlfilter = `SELECT COUNT(members.projectid) total, ARRAY_AGG(userid) member, projectid, MAX(projects.name) projectname, STRING_AGG(CONCAT(users.firstname, ' ', users.lastname), ', ') fullname FROM members INNER JOIN projects USING (projectid) INNER JOIN users USING (userid)`
 
@@ -50,18 +47,15 @@ module.exports = (pool) => {
             sqlfilter += ` WHERE ${arr.join(' AND ')}`;
         }
         sqlfilter += ` GROUP BY projectid ORDER BY projectid`;
-        //console.log(sqlfilter);
 
         pool.query(sqlfilter, (err, result) => {
+
             if (err) console.log(err);
-            //console.log(result.rows.map(x => x.total));
             let total = result.rows.length
             let pages = Math.ceil(total / limit);
 
             // ================= METHOD REDUCE ============= \\
             //let total = result.rows.map(x => Number(x.total)).reduce((total, el) => total + el, 0);
-            // console.log(total);
-            // console.log(pages);
 
             // ================= SQL UNTUK MENAMPILKAN TABLE DATA PROJECTS ============== \\
             let sql = `SELECT members.projectid, MAX(projects.name) projectname, ARRAY_AGG(userid) member, STRING_AGG(CONCAT(users.firstname, ' ', users.lastname), ', ') fullname FROM members INNER JOIN projects USING (projectid) INNER JOIN users USING (userid)`;
@@ -72,7 +66,6 @@ module.exports = (pool) => {
 
             // ================= SQL UNTUK PAGINATION ============== \\
             sql += ` GROUP BY projectid ORDER BY projectid LIMIT ${limit} OFFSET ${offset}`;
-            //console.log(sql);
 
             // ================ SQL UNTUK MENAMPILKAN SEMUA MEMBER DI FILTER =========== \\
             let sqluser = `SELECT users.userid, 
@@ -110,10 +103,10 @@ module.exports = (pool) => {
         })
     })
 
-    // =============== APPLY OPTION DATA PROJECT =============== \\  
-    router.post("/", isLoggedIn, (req, res, next ) => {
+    // =============== OPTION DATA PROJECT =============== \\  
+    router.post("/", isLoggedIn, (req, res, next) => {
+
         console.log('===== APPLY OPTION PROJECT =====');
-        //let objectKey = ['projectid', 'projectname', 'members'];
         let saveKey = Object.keys(req.body)
         let simpanObjek = {
             projectid: saveKey.includes('projectid'),
@@ -121,12 +114,11 @@ module.exports = (pool) => {
             members: saveKey.includes('members')
         }
 
+        // ========= SQL TANPA QUERY BINDING '[]' DI POOL.QUERY ======== \\
         // let sqlopt = `UPDATE users SET projectopt='${JSON.stringify(simpanObjek)}' WHERE userid=${req.session.user.userid}`;
-        
+
         let sqlopt = `UPDATE users SET projectopt=$1 WHERE userid=${req.session.user.userid}`;
-        
-        console.log(req.body, saveKey);
-        console.log(sqlopt);
+
         pool.query(sqlopt, [simpanObjek], (err, item) => {
             if (err) throw err;
             req.session.user.projectopt = simpanObjek;
@@ -136,6 +128,7 @@ module.exports = (pool) => {
 
     // =============== ADD DATA PROJECT =============== \\
     router.get('/add', isLoggedIn, (req, res, next) => {
+
         console.log('=======ADD DATA PROJECT=======');
 
         // ================ QUERY BUAT MENAMPILKAN ARRAY_AGG & STRING_AGG =============== \\
@@ -145,14 +138,10 @@ module.exports = (pool) => {
         STRING_AGG(CONCAT(users.firstname,' ',users.lastname), ', ') fullname 
         FROM users GROUP BY userid`;
 
-        // console.log(sqlgetadd);
         pool.query(sqlgetadd, (err, result) => {
             if (err) throw err;
             const flname = result.rows.map(x => x.fullname);
             const elemen = result.rows.map(y => y.userid);
-            console.log(flname);
-            console.log(elemen);
-            //console.log(row.rows);
             res.render('projects/add', { flname, elemen, path: "/projects" });
         })
     })
@@ -160,16 +149,12 @@ module.exports = (pool) => {
     //=========HOW TO SEQUENCE(INDEX) BACK TO RESTART=======\\
     //ALTER SEQUENCE projects_projectid_seq RESTART WITH 3\\
 
-    //let sqlnext = `SELE/projects/updateCT nextval('projects_projectid_seq') AS nextid`
-
     router.post('/add', isLoggedIn, (req, res, next) => {
+
         let sql = `INSERT INTO projects(name) VALUES ('${req.body.addpjname}')`;
-        console.log(sql);
 
         pool.query(sql, (err) => {
-            //let sql = `INSERT INTO projects(name) VALUES ('${req.body.addpjname}')`
             let sqlnext = `SELECT MAX(projectid) total FROM projects`
-            console.log(sqlnext);
             pool.query(sqlnext, (err, result) => {
                 if (err) return res.send(err);
                 let temp = [];
@@ -181,11 +166,9 @@ module.exports = (pool) => {
                         temp.push(`(${req.body.member[i]}, ${projectId})`)
                     }
                 }
-                console.log(temp);
                 let sqladd = `INSERT INTO members (userid, projectid) VALUES ${temp.join(', ')}`
-                console.log(sqladd);
                 pool.query(sqladd, (err) => {
-                    if (err) console.log(err);
+                    if (err) res.send(err);
                     res.redirect('/projects')
                 })
             })
@@ -195,36 +178,55 @@ module.exports = (pool) => {
 
     // =============== EDIT DATA =============== \\
     router.get('/edit/:id', isLoggedIn, (req, res, next) => {
-        let sql1 = `SELECT concat(users.firstname,' ', users.lastname) as fullname FROM users ORDER BY userid`
-        pool.query(sql1, (err, concat) => {
-            const flname = concat.rows.map(x => x.fullname);
+
+        let sqledit = `SELECT users.userid, concat(users.firstname,' ', users.lastname) as fullname FROM users ORDER BY userid`
+        pool.query(sqledit, (err, result) => {
+            const userdata = result.rows;
             let projectid = req.params.id;
-            let sqlgetedit = `SELECT * FROM projects WHERE projectid=$1`;
+
+            let sqlgetedit = `SELECT members.projectid, MAX(projects.name) nama, ARRAY_AGG(userid) member, 
+            STRING_AGG(CONCAT(users.firstname, ' ', users.lastname), ', ') fullname 
+            FROM members INNER JOIN projects USING (projectid) INNER JOIN users USING (userid) 
+            WHERE projectid=$1 GROUP BY projectid ORDER BY projectid`;
+
             pool.query(sqlgetedit, [projectid], (err, item) => {
                 if (err) throw err;
-                //console.log(item);
-                console.log(sqlgetedit);
-                //let projectname = item.rows[0]
-                res.render('projects/edit', { item: item.rows[0], flname, path: "/projects" });
+                let elemenedit = item.rows.map(x => x.member)
+                res.render('projects/edit', { item: item.rows[0], elemenedit, userdata, path: "/projects" });
             })
         })
     })
 
     router.post('/edit/:id', isLoggedIn, (req, res, next) => {
+        
         let projectid = req.params.id;
-        let sqlpostedit = `UPDATE projects SET name=$1 WHERE projectid=$2`;
-        pool.query(sqlpostedit, [req.body.name, projectid], (err) => {
+        let sqlpostedit = `UPDATE projects SET name='${req.body.name}' WHERE projectid=${projectid}`;
+        pool.query(sqlpostedit, (err) => {
             if (err) throw err;
-            console.log("DATA TELAH DIEDIT");
-            res.redirect('projects/list')
+            let sqldeletemembertemp = `DELETE FROM members WHERE projectid = ${projectid}`;
+            pool.query(sqldeletemembertemp, (err) => {
+                let temp = [];
+                if (typeof req.body.member == 'string') {
+                    temp.push(`(${req.body.member}, ${projectid})`)
+                } else {
+                    for (let i = 0; i < req.body.member.length; i++) {
+                        temp.push(`(${req.body.member[i]}, ${projectid})`)
+                    }
+                }
+                let sql = `INSERT INTO members (userid, projectid) VALUES ${temp.join(', ')}`
+                pool.query(sql, (err) => {
+                    if (err) res.send(err);
+                    res.redirect('/projects')
+                })
+            })
         })
     })
 
-    // =============== EDIT DATA =============== \\
+    // =============== DELETE DATA =============== \\
     router.get('/delete/:id', isLoggedIn, (req, res, next) => {
         let projectid = req.params.id;
-        let sqldelete = `DELETE FROM members WHERE projectid=$1`;
-        pool.query(sqldelete, [projectid], (err) => {
+        let sqldelete = `DELETE FROM members WHERE projectid=${projectid}`;
+        pool.query(sqldelete, (err) => {
             if (err) throw err;
             console.log("Data Project Telah Dihapus");
             res.redirect('/projects')
