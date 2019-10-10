@@ -16,7 +16,7 @@ module.exports = (pool) => {
 
   router.get('/', isLoggedOut, (req, res, next) => {
     //console.log(req.session.user);
-    console.log(req.session.latestUrl);
+    //console.log(req.session.latestUrl);
     res.render('login', { title: 'Login', latestUrl: req.session.latestUrl });
 
   });

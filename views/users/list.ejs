@@ -11,12 +11,13 @@
 
                         <div class="form-group row">
                             <div class="custom-control custom-checkbox col-12 col-sm-2">
-                                <input type="checkbox" class="custom-control-input" for="" id="customCheck1">
-                                <label class="custom-control-label" for="customCheck1" id=""
-                                    name="checkprojectid">ID</label>
+                                <input type="checkbox" class="custom-control-input" for="" id="customCheck1"
+                                    name="checkuserid">
+                                <label class="custom-control-label" for="customCheck1"
+                                    <%= query.checkuserid ? ' checked' : '' %>>ID</label>
                             </div>
                             <div class="col-12 col-sm-9">
-                                <input type="text" class="form-control" id="userId" placeholder="ID" name="userId">
+                                <input type="text" class="form-control" id="userId" placeholder="User ID" name="userid">
                             </div>
                         </div>
 
@@ -24,13 +25,14 @@
 
                         <div class="form-group row">
                             <div class="custom-control custom-checkbox col-12 col-sm-2">
-                                <input type="checkbox" class="custom-control-input" for="" id="customCheck2">
-                                <label class="custom-control-label" for="customCheck2" id=""
-                                    name="checkpjname">Email</label>
+                                <input type="checkbox" class="custom-control-input" for="" id="customCheck2"
+                                    name="checkuseremail">
+                                <label class="custom-control-label" for="customCheck2"
+                                    <%= query.checkuseremail ? ' checked' : '' %>>Email</label>
                             </div>
                             <div class="col-12 col-sm-9">
-                                <input type="email" class="form-control" id="userEmail" placeholder="Email"
-                                    name="userEmail">
+                                <input type="text" class="form-control" id="userEmail"
+                                    placeholder="example => admin@gmail.com" name="email" style="font-style: italic">
                             </div>
                         </div>
 
@@ -38,13 +40,14 @@
 
                         <div class="form-group row">
                             <div class="custom-control custom-checkbox col-12 col-sm-2">
-                                <input type="checkbox" class="custom-control-input" for="" id="customCheck3">
-                                <label class="custom-control-label" for="customCheck3" id=""
-                                    name="checkpjname">Name</label>
+                                <input type="checkbox" class="custom-control-input" for="" id="customCheck3"
+                                    name="checkfullname">
+                                <label class="custom-control-label" for="customCheck3"
+                                    <%= query.checkfullname ? ' checked' : '' %>>Name </label>
                             </div>
                             <div class="col-12 col-sm-9">
                                 <input type="text" class="form-control" id="userName" placeholder="Name"
-                                    name="userName">
+                                    name="fullname">
                             </div>
                         </div>
 
@@ -52,20 +55,22 @@
 
                         <div class="form-group row">
                             <div class="custom-control custom-checkbox col-12 col-sm-2">
-                                <input type="checkbox" class="custom-control-input" for="" id="customCheck4">
-                                <label class="custom-control-label" for="customCheck4" id=""
-                                    name="userRole">Role</label>
+                                <input type="checkbox" class="custom-control-input" for="" id="customCheck4" name="checkuserrole">
+                                <label class="custom-control-label" for="customCheck4" 
+                                    <%= query.checkuserrole ? ' checked' : '' %>>Position </label>
                             </div>
                             <div class="col-12 col-sm-9">
-                                <select class="form-control" id="userRole" name="userRole">
-                                    <option disabled selected>Choose the Role ...</option>
-                                    <option value="">duar</option>
-                                    <option value="">nmax</option>
-                                    <!--  data.forEach((item) => { 
-                                <option >
-                                     item.firstmembername 
-                                </option>
-                             })  -->
+                                <select class="form-control" name="userrole">
+                                    <option disabled selected>Choose the Position ...</option>
+                                    <option value="Manager">
+                                        Manager
+                                    </option>
+                                    <option value="Software Developer">
+                                        Software Developer
+                                    </option>
+                                    <option value="Quality Assurance">
+                                        Quality Assurance
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -74,30 +79,30 @@
 
                         <div class="form-group row">
                             <div class="custom-control custom-checkbox col-12 col-sm-2">
-                                <input type="checkbox" class="custom-control-input" for="" id="customCheck4">
-                                <label class="custom-control-label" for="customCheck4" id="" name="userTypejob">Type
-                                    Job</label>
+                                <input type="checkbox" class="custom-control-input" id="customCheck5"
+                                    name="checkusertypejob">
+                                <label class="custom-control-label" for="customCheck5"
+                                    <%= query.checkusertypejob ? ' checked' : '' %>>Type Job</label>
                             </div>
                             <div class="col-12 col-sm-9">
-                                <select class="form-control" id="userTypejob" name="userTypejob">
-                                    <option disabled selected>Choose the Type Job ...</option>
-                                    <option value="">duar</option>
-                                    <option value="">nmax</option>
-                                    <!--  data.forEach((item) => { 
-                                <option >
-                                     item.firstmembername 
-                                </option>
-                             })  -->
-                                </select>
-                            </div>
+                                    <select class="form-control" name="typejob">
+                                        <option disabled selected>Choose the Position ...</option>
+                                        <option value="true">
+                                            Full-Time
+                                        </option>
+                                        <option value="false">
+                                            Part-Time
+                                        </option>
+                                    </select>
+                                </div>
                         </div>
 
                         <!-- ==================== BUTTON ======================== -->
 
                         <div class="form-group row">
                             <div class="col-sm-10">
-                                <button type="button" class="btn btn-primary" role="button">Search</button>
-                                <button type="button" class="btn btn-white"> <a href="/projects">Reset</a></button>
+                                <button type="submit" class="btn btn-primary">Search</button>
+                                <button type="button" class="btn btn-white"> <a href="/users">Reset</a></button>
                             </div>
                         </div>
                     </form>
@@ -115,23 +120,35 @@
                                                 Columns
                                             </h5>
                                             <div class="row col-12 col-sm-7">
-                                                <div class="custom-control custom-checkbox col-12 col-sm-7">
+                                                <div class="custom-control custom-checkbox col-12 col-sm-5">
                                                     <input type="checkbox" class="custom-control-input" for=""
-                                                        id="opcheck1">
-                                                    <label class="custom-control-label" for="opcheck1" id="opid"
-                                                        name="opid">ID</label>
+                                                        id="opcheck1" name="userid" value="true"
+                                                        <%= option.userid ? ' checked' : '' %>>
+                                                    <label class="custom-control-label" for="opcheck1">ID</label>
                                                 </div>
-                                                <div class="custom-control custom-checkbox col-12 col-sm-7">
+                                                <div class="custom-control custom-checkbox col-12 col-sm-5">
                                                     <input type="checkbox" class="custom-control-input" for=""
-                                                        id="opcheck2">
-                                                    <label class="custom-control-label" for="opcheck2" id="opname"
-                                                        name="opname">Name</label>
+                                                        id="opcheck2" name="email" value="true"
+                                                        <%= option.email ? ' checked' : '' %>>
+                                                    <label class="custom-control-label" for="opcheck2">Email</label>
                                                 </div>
-                                                <div class="custom-control custom-checkbox col-12 col-sm-7">
+                                                <div class="custom-control custom-checkbox col-12 col-sm-5">
                                                     <input type="checkbox" class="custom-control-input" for=""
-                                                        id="opcheck3">
-                                                    <label class="custom-control-label" for="opcheck3" id="opmembers"
-                                                        name="opmembers">Members</label>
+                                                        id="opcheck3" name="fullname" value="true"
+                                                        <%= option.fullname ? ' checked' : '' %>>
+                                                    <label class="custom-control-label" for="opcheck3">Name</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox col-12 col-sm-5">
+                                                    <input type="checkbox" class="custom-control-input" for=""
+                                                        id="opcheck4" name="role" value="true"
+                                                        <%= option.role ? ' checked' : '' %>>
+                                                    <label class="custom-control-label" for="opcheck4">Position</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox col-12 col-sm-5">
+                                                    <input type="checkbox" class="custom-control-input" for=""
+                                                        id="opcheck5" name="typejob" value="true"
+                                                        <%= option.typejob ? ' checked' : '' %>>
+                                                    <label class="custom-control-label" for="opcheck5">Type Job</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -146,36 +163,61 @@
                 </div>
 
                 <!-- ==================== TABLES ======================== -->
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">TypeJob</th>
-                                <th scope="col">Roles</th>
-                                <th scope="col">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <a href="/projects/edit/" class="btn btn-success">EDIT</a>
-                                    <a href="/projects/delete/" class="btn btn-danger">DELETE</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-10">
-                        <a href="/projects/add" type="button" class="btn btn-primary">ADD</a>
+                <div class="card border-light mx-1">
+                    <div class="card-body">
+                        <div class="card border-light">
+                            <div class="card-body">
+                                <div class="table-responsive table-responsive-sm table-responsive-md">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <%- option.userid ? '<th scope="col">#</th>' : '' %>
+                                                <%- option.email ? '<th scope="col">Email</th>' : '' %>
+                                                <%- option.fullname ? '<th scope="col">Name</th>' : '' %>
+                                                <%- option.role ? '<th scope="col">Position</th>' : '' %>
+                                                <%- option.typejob ? '<th scope="col">Type Job</th>' : '' %>
+                                                <th scope="col">Actions</th>
+                                            </tr>
+                                        </thead>WHERE role='Software Developer'
+                                        <tbody>
+                                            <% data.forEach((item) => { %>
+                                            <tr>
+                                                <%- option.userid ? '<td>' + item.userid + '</td>' : '' %>
+                                                <%- option.email ? '<td>' + item.email + '</td>' : '' %>
+                                                <%- option.fullname ? '<td>' + item.fullname + '</td>' : '' %>
+                                                <%- option.role ? '<td>' + item.role + '</td>' : '' %>
+                                                <%- option.typejob ? '<td>' + (item.typejob==true ? ' Fulltime' : ' Partime') + '</td>' : '' %>
+                                                <td>
+                                                    <a href="/users/edit/" class="btn btn-success">EDIT</a>
+                                                    <a href="/users/delete/" class="btn btn-danger">DELETE</a>
+                                                </td>
+                                            </tr>
+                                            <% }) %>
+                                        </tbody>
+                                    </table>
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination">
+                                            <li class="page-item <%= page == 1 ? 'disabled': ''; %>"><a
+                                                    class="page-link"
+                                                    href="/users?page=<%= parseInt(page) - 1%>">Previous</a></li>
+                                            <% for (let i = 1; i <= pages; i++) { %>
+                                            <li class="page-item <%= page == i ? 'active': ''; %>"><a class="page-link"
+                                                    href="/projects?page=<%= i %>">
+                                                    <%= i %></a></li>
+                                            <% }; %>
+                                            <li class="page-item <%= page == pages ? 'disabled': ''; %>"><a
+                                                    class="page-link"
+                                                    href="/users?page=<%= parseInt(page) + 1%>">Next</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-10">
+                                        <a href="/projects/add" type="button" class="btn btn-primary">ADD</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

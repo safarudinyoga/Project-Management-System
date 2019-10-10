@@ -47,6 +47,7 @@ module.exports = (pool) => {
             sqlfilter += ` WHERE ${arr.join(' AND ')}`;
         }
         sqlfilter += ` GROUP BY projectid ORDER BY projectid`;
+        console.log(sqlfilter);
 
         pool.query(sqlfilter, (err, result) => {
 
@@ -83,10 +84,12 @@ module.exports = (pool) => {
                 const data = results[0].rows;
                 const dataUsers = results[1].rows;
                 const dataOption = results[2].rows;
-                console.log(dataOption);
-                console.log(dataOption[0].projectopt);
+                // console.log(dataOption);
+                // console.log(dataOption[0].projectopt);
                 let flname = dataUsers.map(x => x.fullname);
                 let elemen = dataUsers.map(y => y.userid);
+                console.log(flname);
+                console.log(elemen);
                 res.render('projects/list', {
                     title: 'Projects',
                     data,
