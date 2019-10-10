@@ -108,5 +108,32 @@ module.exports = (pool) => {
     })
   });
 
+  // =============== OPTION POST USERS ============== \\
+  router.post('/', isLoggedIn, (req, res, next) => {
+
+    let saveKey = Object.keys(req.body);
+    let simpanObjek = {
+      userid: saveKey.includes('userid'),
+      email: saveKey.includes('email'),
+      fullname: saveKey.includes('fullname'),
+      role: saveKey.includes('role'),
+      typejob: saveKey.includes('typejob')
+    }
+
+    let sqlopt = `UPDATE users SET useropt=$1 WHERE userid=${req.session.user.userid}`;
+    
+    pool.query(sqlopt, [simpanObjek], (err) => {
+      if (err) res.send(err);
+      req.session.user.useropt = simpanObjek;
+      console.log(req.session.user.useropt)
+      res.redirect('/users')
+    })
+
+  })
+  
+  
+  
+  
+  
   return router;
 }
