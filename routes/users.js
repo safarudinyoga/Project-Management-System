@@ -49,7 +49,7 @@ module.exports = (pool) => {
     }
 
     sqlgetuser += ` GROUP BY userid`;
-    console.log(sqlgetuser); 
+    console.log(sqlgetuser);
 
     pool.query(sqlgetuser, (err, result) => {
       if (err) res.send(err);
@@ -68,7 +68,7 @@ module.exports = (pool) => {
 
       // ============== SQL PAGINATION =============== \\
       sqltable += ` GROUP BY userid ORDER BY userid LIMIT ${limit} OFFSET ${offset}`;
-      
+
       // =============== SQL GET OPTION ============ \\
       let sqloption = `SELECT useropt FROM users WHERE userid=${req.session.user.userid}`
 
@@ -86,11 +86,11 @@ module.exports = (pool) => {
         let elementypejob = data.map(z => z.typejob)
         let option = dataOption[0].useropt
 
-        console.log('fullname',fullname);
-        console.log('elemenrole',elemenrole);
-        console.log('elementypejob',elementypejob);
-        console.log('option',option);
-        console.log('elemenuserid>',elemenuserid);
+        console.log('fullname', fullname);
+        console.log('elemenrole', elemenrole);
+        console.log('elementypejob', elementypejob);
+        console.log('option', option);
+        console.log('elemenuserid>', elemenuserid);
         res.render('users/list', {
           path: "/users",
           data,
@@ -120,20 +120,63 @@ module.exports = (pool) => {
       typejob: saveKey.includes('typejob')
     }
 
-    let sqlopt = `UPDATE users SET useropt=$1 WHERE userid=${req.session.user.userid}`;
-    
-    pool.query(sqlopt, [simpanObjek], (err) => {
+    let sqlopt = `UPDATE users SET useropt='${JSON.stringify(simpanObjek)}' WHERE userid=${req.session.user.userid}`;
+
+    pool.query(sqlopt, (err) => {
       if (err) res.send(err);
       req.session.user.useropt = simpanObjek;
       console.log(req.session.user.useropt)
       res.redirect('/users')
     })
-
   })
-  
-  
-  
-  
-  
+
+  // =============== GET ADD DATA USERS ============== \\
+  router.get('/add', isLoggedIn, (req, res, next) => {
+
+    let sqlgetadd = `SELECT MAX(userid) total, users.userid, email, 
+    CONCAT(users.firstname,' ',users.lastname) fullname, role, typejob 
+    FROM users GROUP BY userid`
+
+    pool.query(sqlgetadd, (err, result) => {
+      if (err) res.send(err);
+      const usernextvalue = result.rows[0].total
+      console.log(usernextvalue);
+      // const flname = result.rows.map(x => x.fullname);
+      // const elemen = result.rows.map(y => y.userid);
+      res.render('users/add', {
+        // flname, 
+        // elemen, 
+        path: "/users"
+      });
+    })
+  })
+
+  // =============== POST ADD DATA USERS ============== \\
+  router.post('/add', isLoggedIn, (req, res, next) => {
+
+    let { firstname, lastname, email, password, role, typejob } = req.body;
+    //let insert = [firstname, lastname, email, password, role, typejob];
+    let sqladd = `INSERT INTO users(firstname, lastname, email, password, role`
+    let sqlvalue = ` VALUES('${firstname}','${lastname}','${email}','${password}','${role}'`
+    let arr = [];
+    if (Boolean(typejob) != undefined) {
+      // arr.push(`'${Boolean(typejob)}'`)
+      sqladd += `,typejob)`
+      sqlvalue += `, ${Boolean(typejob)})`
+    } else {
+      sqladd += `)`
+      sqlvalue += `)`
+    }
+    console.log(sqladd);
+    let sql = sqladd + sqlvalue
+    pool.query(sql, (err) => {
+      if (err) throw (err);
+      res.redirect('/users');
+    })
+  })
+
+
+
+
   return router;
 }
