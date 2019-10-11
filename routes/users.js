@@ -253,5 +253,12 @@ module.exports = (pool) => {
     })
   })
 
+  router.get('/delete/:id', isLoggedIn, (req, res, next) => {
+
+    let userid = req.params.id;
+    let sqldel = `DELETE FROM users WHERE userid=${userid}`;
+    pool.query(sqldel).then(result => res.redirect('/users')).catch(err => console.log(err));
+  })
+
   return router;
 }
