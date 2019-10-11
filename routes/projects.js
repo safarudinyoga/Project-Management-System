@@ -183,6 +183,7 @@ module.exports = (pool) => {
     router.get('/edit/:id', isLoggedIn, (req, res, next) => {
 
         let sqledit = `SELECT users.userid, concat(users.firstname,' ', users.lastname) as fullname FROM users ORDER BY userid`
+        
         pool.query(sqledit, (err, result) => {
             const userdata = result.rows;
             let projectid = req.params.id;
@@ -201,7 +202,7 @@ module.exports = (pool) => {
     })
 
     router.post('/edit/:id', isLoggedIn, (req, res, next) => {
-        
+
         let projectid = req.params.id;
         let sqlpostedit = `UPDATE projects SET name='${req.body.name}' WHERE projectid=${projectid}`;
         pool.query(sqlpostedit, (err) => {

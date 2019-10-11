@@ -49,12 +49,12 @@ module.exports = (pool) => {
     }
 
     sqlgetuser += ` GROUP BY userid`;
-    console.log(sqlgetuser);
+    //console.log(sqlgetuser);
 
     pool.query(sqlgetuser, (err, result) => {
       if (err) res.send(err);
       let total = result.rows.length;
-      console.log(total);
+      //console.log(total);
       let pages = Math.ceil(total / limit)
 
       // =============== SQL GET TABLE & PAGINATION ============ \\
@@ -78,7 +78,7 @@ module.exports = (pool) => {
       // ========== PROMISE ALL =========== \\
       Promise.all([getTable, getOption]).then(results => {
         const data = results[0].rows;
-        console.log(data);
+        //console.log(data);
         const dataOption = results[1].rows;
         let fullname = data.map(x => x.fullname);
         let elemenrole = data.map(y => y.role)
@@ -86,11 +86,11 @@ module.exports = (pool) => {
         let elementypejob = data.map(z => z.typejob)
         let option = dataOption[0].useropt
 
-        console.log('fullname', fullname);
-        console.log('elemenrole', elemenrole);
-        console.log('elementypejob', elementypejob);
-        console.log('option', option);
-        console.log('elemenuserid>', elemenuserid);
+        // console.log('fullname', fullname);
+        // console.log('elemenrole', elemenrole);
+        // console.log('elementypejob', elementypejob);
+        // console.log('option', option);
+        // console.log('elemenuserid>', elemenuserid);
         res.render('users/list', {
           path: "/users",
           data,
@@ -125,7 +125,7 @@ module.exports = (pool) => {
     pool.query(sqlopt, (err) => {
       if (err) res.send(err);
       req.session.user.useropt = simpanObjek;
-      console.log(req.session.user.useropt)
+      //console.log(req.session.user.useropt)
       res.redirect('/users')
     })
   })
@@ -140,7 +140,7 @@ module.exports = (pool) => {
     pool.query(sqlgetadd, (err, result) => {
       if (err) res.send(err);
       const usernextvalue = result.rows[0].total
-      console.log(usernextvalue);
+      //console.log(usernextvalue);
       // const flname = result.rows.map(x => x.fullname);
       // const elemen = result.rows.map(y => y.userid);
       res.render('users/add', {
@@ -175,8 +175,83 @@ module.exports = (pool) => {
     })
   })
 
+  // =============== GET EDIT DATA USERS ============== \\
+  router.get('/edit/:id', isLoggedIn, (req, res, next) => {
 
+    let userid = req.params.id;
+    let sql = `SELECT users.userid, email, 
+    firstname,lastname,password ,role, typejob 
+    FROM users WHERE userid=${userid} GROUP BY userid ORDER BY userid`
+    // ============= PROMISE ============ \\
+    pool.query(sql).then(item => {
+      console.log(item.rows)
+      
+      // let userdata = item.rows
+      // let sqledit = `SELECT users.userid, email, 
+      // firstname,lastname,password ,role, typejob 
+      // FROM users GROUP BY userid ORDER BY userid`  
+      res.render('users/edit', {
+        path: '/users',
+        item: item.rows[0],
+      })
+    }).catch(err => {
+      throw err;
+    })
 
+    // pool.query(sql, (err, result) => {
+    //   if (err) throw err;
+    //   console.log(res.rows);
+    //   res.render('users/edit', {
+    //     path: '/users'
+    //   })
+    // })
+  })
+
+  // =============== GET POST DATA USERS ============== \\
+
+  router.post('/edit/:id', isLoggedIn, (req, res, next) => {
+
+    let userid = req.params.id;
+    let { firstname, lastname, email, password, role, typejob } = req.body;
+    let result = [];
+    let check = false;
+    if (firstname) {
+      check = true;
+      result.push(`firstname='${firstname}'`)
+    }
+    if (lastname) {
+      check = true;
+      result.push(`lastname='${lastname}'`)
+    }
+    if (email) {
+      check = true;
+      result.push(`email='${email}'`)
+    }
+    if (password) {
+      check = true;
+      result.push(`password='${password}'`)
+    }
+    if (role) {
+      check = true;
+      result.push(`role='${role}'`)
+    }
+    if (Boolean(typejob) != undefined) {
+      check = true;
+      result.push(`typejob='${Boolean(typejob)}'`)
+    }
+    let sqledit = `UPDATE users `;
+    if (check) {
+      sqledit += `SET ${result.join(', ')} WHERE userid=${userid}`
+    }
+    console.log(sqledit);
+
+    pool.query(sqledit).then(response => {
+      res.redirect('/users');
+      console.log(firstname,lastname,email,password,role,typejob);
+    }).catch(err => {
+      throw err;
+    })
+  })
 
   return router;
 }

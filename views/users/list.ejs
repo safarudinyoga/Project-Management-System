@@ -189,8 +189,8 @@
                                                 <%- option.role ? '<td>' + item.role + '</td>' : '' %>
                                                 <%- option.typejob ? '<td>' + (item.typejob==true ? ' Fulltime' : ' Partime') + '</td>' : '' %>
                                                 <td>
-                                                    <a href="/users/edit/" class="btn btn-success">EDIT</a>
-                                                    <a href="/users/delete/" class="btn btn-danger">DELETE</a>
+                                                    <a href="/users/edit/<%= item.userid %>" class="btn btn-success">EDIT</a>
+                                                    <a href="/users/delete/<%= item.userid %>" class="btn btn-danger">DELETE</a>
                                                 </td>
                                             </tr>
                                             <% }) %>
