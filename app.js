@@ -20,7 +20,6 @@ var indexRouter = require('./routes/index')(pool);
 var projectRouter = require('./routes/projects')(pool);
 var profileRouter = require('./routes/profile')(pool);
 var usersRouter = require('./routes/users')(pool);
-//var memberRouter = require('./routes/members')(pool);
 
 
 // view engine setup
@@ -50,7 +49,6 @@ app.use('/', indexRouter);
 app.use('/projects', projectRouter);
 app.use('/profile', profileRouter);
 app.use('/users', usersRouter);
-//app.use('/members', memberRouter);
 
 
 // catch 404 and forward to error handler

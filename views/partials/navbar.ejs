@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-info fixed-top">
+    <a class="navbar-brand" style="font-size: 3vh !important" href="/projects">Project Management System</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse align-middle" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item <%= path=='/projects' ? ' active' : '' %>">
+                <a class="nav-link mb-0 display-4" style="font-size:x-large" href="/projects">Projects</a>
+            </li>
+            <li class="nav-item <%= path=='/profile' ? ' active' : '' %>">
+                <a class="nav-link mb-0 display-4" style="font-size:x-large" href="/profile">Profile</a>
+            </li>
+            <li class="nav-item <%= path=='/users' ? ' active' : '' %>">
+                <a class="nav-link mb-0 display-4" style="font-size:x-large" href="/users">Users</a>
+            </li>
+        </ul>
+        <!-- <form class="form-inline my-2 my-lg-0"> -->
+        <a href="/logout"><button class="btn btn-light">Logout
+                <i class="fa fa-sign-out" aria-hidden="true"></i>
+            </button></a>
+        <!-- <button class="btn btn-light" type="submit" href="logout">
+                <a class="nav-link" href="/logout">Logout</a>
+            </button> -->
+    </div>
+</nav>

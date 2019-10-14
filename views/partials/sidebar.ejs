@@ -1,0 +1,31 @@
+<div class="d-md-flex bg-light sidebar collapse navbar-collapse" id="sidebar">
+    <div class="sidebar-sticky">
+        <ul class="nav flex-column nav-pills">
+            <li class="nav-item">
+                <a class="nav-link <%= path=='/projects/overview' ? 'active' : ''%>"
+                    href="/projects/overview/<%=projectid%>">
+                    Overview
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <%= path=='/projects/activity' ? 'active' : ''%>"
+                    href="/projects/activity/<%=projectid%>">
+                    Activity
+                </a>
+            </li>
+        </ul>
+        <ul class="nav flex-column nav-pills">
+            <li class="nav-item">
+                <a class="nav-link <%= path=='/projects/members' ? 'active' : ''%>"
+                    href="/projects/members/<%=projectid%>">
+                    Members
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <%= path=='/projects/issues' ? 'active' : ''%>" href="/projects/issues/<%=projectid%>">
+                    Issues
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
