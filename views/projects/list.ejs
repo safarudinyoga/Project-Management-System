@@ -12,9 +12,9 @@
 
                         <div class="form-group row">
                             <div class="custom-control custom-checkbox col-12 col-sm-2">
-                                <input type="checkbox" class="custom-control-input" aria-label="checkid" for="" id="customCheck1"
-                                    name="checkid">
-                                <label class="custom-control-label" style="font-size: x-large" for="customCheck1" id=""
+                                <input type="checkbox" class="custom-control-input" aria-label="checkid" for=""
+                                    id="customCheck1" name="checkid">
+                                <label class="custom-control-label" style="font-size: large" for="customCheck1" id=""
                                     <%= query.checkid ? ' checked' : '' %>>ID</label>
                             </div>
                             <div class="col-12 col-sm-9">
@@ -59,9 +59,9 @@
 
                         <div class="form-group row">
                             <div class="col-sm-10">
-                                <button type="submit" class="btn btn-primary">Search</button>
-                                <button type="button" class="btn btn-white"> <a
-                                        href="/projects">Reset</a></button>
+                                <button type="submit" class="btn btn-outline-primary"><i class="fa fa-search" aria-hidden="true"> Search</i>
+                                </button>
+                                <button type="button" class="btn btn-light"> <a href="/projects"><i class="fa fa-undo" aria-hidden="true"></i> Reset</a></button>
                             </div>
                         </div>
                     </form>
@@ -83,13 +83,13 @@
                                 </h5>
                                 <div class="row col-12 col-sm-7">
                                     <div class="custom-control custom-checkbox col-12 col-sm-7">
-                                        <input type="checkbox" name="projectid" class="custom-control-input" id="opcheck1"
-                                            value="true" <%= option.projectid ? ' checked' : '' %>>
+                                        <input type="checkbox" name="projectid" class="custom-control-input"
+                                            id="opcheck1" value="true" <%= option.projectid ? ' checked' : '' %>>
                                         <label class="custom-control-label" for="opcheck1">ID</label>
                                     </div>
                                     <div class="custom-control custom-checkbox col-12 col-sm-7">
-                                        <input type="checkbox" name="projectname" class="custom-control-input" id="opcheck2"
-                                            value="true" <%= option.projectname ? ' checked' : '' %>>
+                                        <input type="checkbox" name="projectname" class="custom-control-input"
+                                            id="opcheck2" value="true" <%= option.projectname ? ' checked' : '' %>>
                                         <label class="custom-control-label" for="opcheck2">Name</label>
                                     </div>
                                     <div class="custom-control custom-checkbox col-12 col-sm-7">
@@ -100,7 +100,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-10">
-                                <button type="submit" class="btn btn-outline-info">Apply</button>
+                                <button type="submit" class="btn btn-outline-info"><i class="fa fa-refresh" aria-hidden="true"></i> Apply</button>
                             </div>
                         </form>
                     </div>
@@ -120,8 +120,8 @@
                             <thead>
                                 <tr>
                                     <%- option.projectid ? '<th scope="col">#</th>' : '' %>
-                                    <%- option.projectname ? '<th scope="col">name</th>' : '' %>
-                                    <%- option.members ? '<th scope="col">members</th>' : '' %>
+                                    <%- option.projectname ? '<th scope="col">Name</th>' : '' %>
+                                    <%- option.members ? '<th scope="col">Members</th>' : '' %>
                                     <th scope="col">Actions</th>
                                 </tr>
                             </thead>
@@ -133,9 +133,9 @@
                                     <%- option.members ? '<td>' + item.fullname + '</td>' : '' %>
                                     <td>
                                         <a href="/projects/edit/<%= item.projectid %>"
-                                            class="btn btn-outline-success">EDIT</a>
-                                        <a href="/projects/delete/<%= item.projectid %>"
-                                            class="btn btn-outline-danger">DELETE</a>
+                                            class="btn btn-outline-success"><i class="fa fa-pencil" aria-hidden="true"></i> EDIT</a>
+                                        <a href="/projects/delete/<%= item.projectid %>" class="btn btn-outline-danger">
+                                            <i class="fa fa-trash-o fa-lg"></i> DELETE</a>
                                     </td>
                                 </tr>
                                 <% }) %>
@@ -144,19 +144,20 @@
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
                                 <li class="page-item <%= page == 1 ? 'disabled': ''; %>"><a class="page-link"
-                                        href="/projects?page=<%= parseInt(page) - 1%>">Previous</a></li>
+                                        href="/projects?page=<%= parseInt(page) - 1%>"><i class="fa fa-arrow-left" aria-hidden="true"></i> Previous</a></li>
                                 <% for (let i = 1; i <= pages; i++) { %>
                                 <li class="page-item <%= page == i ? 'active': ''; %>"><a class="page-link"
                                         href="/projects?page=<%= i %>">
                                         <%= i %></a></li>
                                 <% }; %>
                                 <li class="page-item <%= page == pages ? 'disabled': ''; %>"><a class="page-link"
-                                        href="/projects?page=<%= parseInt(page) + 1%>">Next</a></li>
+                                        href="/projects?page=<%= parseInt(page) + 1%>"><i class="fa fa-arrow-right" aria-hidden="true"></i> Next</a></li>
                             </ul>
                         </nav>
                         <div class="col-sm-10">
-                            <a type="button" class="btn btn-outline-primary" href="/projects/add">Add Project
-                                <!-- <i class="fa fa-plus" aria-hidden="true"></i>Add project -->
+                            <a href="/projects/add">
+                                <button class="btn btn-outline-primary"><i class="fa fa-plus" aria-hidden="true"></i> Add Project
+                                    </button>
                             </a>
                         </div>
                     </div>
