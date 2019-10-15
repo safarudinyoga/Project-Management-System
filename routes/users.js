@@ -78,11 +78,11 @@ module.exports = (pool) => {
       // ========== PROMISE ALL =========== \\
       Promise.all([getTable, getOption]).then(results => {
         const data = results[0].rows;
-        //console.log(data);
+        console.log(data);
         const dataOption = results[1].rows;
         let fullname = data.map(x => x.fullname);
         let elemenrole = data.map(y => y.role)
-        let elemenuserid = data.map(a => a.userid)
+        // let elemenuserid = data.map(a => a.userid)
         let elementypejob = data.map(z => z.typejob)
         let option = dataOption[0].useropt
 
@@ -139,7 +139,7 @@ module.exports = (pool) => {
 
     pool.query(sqlgetadd, (err, result) => {
       if (err) res.send(err);
-      const usernextvalue = result.rows[0].total
+      // const usernextvalue = result.rows[0].total
       //console.log(usernextvalue);
       // const flname = result.rows.map(x => x.fullname);
       // const elemen = result.rows.map(y => y.userid);
