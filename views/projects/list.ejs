@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Projects</title>
     <% include ../partials/header%>
+
 </head>
 
 <body>
@@ -42,8 +43,8 @@
                                     <div class="custom-control custom-checkbox col-12 col-sm-2">
                                         <input type="checkbox" class="custom-control-input" for="" id="customCheck2"
                                             name="checkname">
-                                        <label class="custom-control-label" style="font-size: large" for="customCheck2" id="name"
-                                            <%= query.checkname ? ' checked' : '' %>>Name</label>
+                                        <label class="custom-control-label" style="font-size: large" for="customCheck2"
+                                            id="name" <%= query.checkname ? ' checked' : '' %>>Name</label>
                                     </div>
                                     <div class="col-12 col-sm-9">
                                         <input type="text" class="form-control" id="id" placeholder="Name"
@@ -57,8 +58,8 @@
                                     <div class="custom-control custom-checkbox col-12 col-sm-2">
                                         <input type="checkbox" class="custom-control-input" for="" id="customCheck3"
                                             name="checkmember">
-                                        <label class="custom-control-label" for="customCheck3" style="font-size: large" id="name"
-                                            <%= query.checkmember ? ' checked' : '' %>>Member</label>
+                                        <label class="custom-control-label" for="customCheck3" style="font-size: large"
+                                            id="name" <%= query.checkmember ? ' checked' : '' %>>Member</label>
                                     </div>
                                     <div class="col-12 col-sm-9">
                                         <select class="form-control" id="member" name="member">
@@ -103,18 +104,21 @@
                                                 <input type="checkbox" name="projectid" class="custom-control-input"
                                                     id="opcheck1" value="true"
                                                     <%= option.projectid ? ' checked' : '' %>>
-                                                <label class="custom-control-label" for="opcheck1" style="font-size: large">ID</label>
+                                                <label class="custom-control-label" for="opcheck1"
+                                                    style="font-size: large">ID</label>
                                             </div>
                                             <div class="custom-control custom-checkbox col-12 col-sm-7">
                                                 <input type="checkbox" name="projectname" class="custom-control-input"
                                                     id="opcheck2" value="true"
                                                     <%= option.projectname ? ' checked' : '' %>>
-                                                <label class="custom-control-label" for="opcheck2" style="font-size: large">Name</label>
+                                                <label class="custom-control-label" for="opcheck2"
+                                                    style="font-size: large">Name</label>
                                             </div>
                                             <div class="custom-control custom-checkbox col-12 col-sm-7">
                                                 <input type="checkbox" name="members" class="custom-control-input"
                                                     id="opcheck3" value="true" <%= option.members ? ' checked' : '' %>>
-                                                <label class="custom-control-label" for="opcheck3" style="font-size: large">Members</label>
+                                                <label class="custom-control-label" for="opcheck3"
+                                                    style="font-size: large">Members</label>
                                             </div>
                                         </div>
                                     </div>
@@ -135,7 +139,8 @@
                 <div class="card-body">
                     <div class="card border-light">
                         <div class="card-body">
-                            <div class="table-responsive table-responsive-sm table-responsive-md">
+                            <div class="table-responsive table-responsive-sm table-responsive-md"
+                                style="font-size: x-large;">
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
@@ -155,35 +160,41 @@
                                                     <%- option.projectname ? '<td>' + item.projectname + '</td>' : '' %>
                                                     <%- option.members ? '<td>' + item.fullname + '</td>' : '' %> <td>
                                                     <a href="/projects/edit/<%= item.projectid %>"
-                                                        class="btn btn-outline-success"><i class="fa fa-pencil"
-                                                            aria-hidden="true"></i> EDIT</a>
-                                                    <a href="/projects/delete/<%= item.projectid %>"
-                                                        class="btn btn-outline-danger">
+                                                        class="btn btn-outline-success" style="font-size: large;"><i
+                                                            class="fa fa-pencil" aria-hidden="true"></i> EDIT</a>
+                                                    <a href="" style="font-size: large;" class="btn btn-outline-danger"
+                                                        data-id="<%=item.projectid%>">
                                                         <i class="fa fa-trash-o fa-lg"></i> DELETE</a>
                                             </td>
                                         </tr>
                                         <% }) %>
                                     </tbody>
                                 </table>
+
+                                <!-- ================ PAGINATION ================== -->
+
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination">
-                                        <li class="page-item <%= page == 1 ? 'disabled': ''; %>"><a class="page-link"
+                                        <li style="font-size: large;"
+                                            class="page-item <%= page == 1 ? 'disabled': ''; %>"><a class="page-link"
                                                 href="/projects?page=<%= parseInt(page) - 1%>"><i
                                                     class="fa fa-arrow-left" aria-hidden="true"></i> Previous</a></li>
                                         <% for (let i = 1; i <= pages; i++) { %>
-                                        <li class="page-item <%= page == i ? 'active': ''; %>"><a class="page-link"
+                                        <li style="font-size: large;"
+                                            class="page-item <%= page == i ? 'active': ''; %>"><a class="page-link"
                                                 href="/projects?page=<%= i %>">
                                                 <%= i %></a></li>
                                         <% }; %>
-                                        <li class="page-item <%= page == pages ? 'disabled': ''; %>"><a
+                                        <li style="font-size: large;"
+                                            class="page-item <%= page == pages ? 'disabled': ''; %>"><a
                                                 class="page-link" href="/projects?page=<%= parseInt(page) + 1%>"><i
                                                     class="fa fa-arrow-right" aria-hidden="true"></i> Next</a></li>
                                     </ul>
                                 </nav>
                                 <div class="col-sm-10">
                                     <a href="/projects/add">
-                                        <button class="btn btn-outline-primary"><i class="fa fa-plus"
-                                                aria-hidden="true"></i> Add Project
+                                        <button style="font-size: large;" class="btn btn-outline-primary"><i
+                                                class="fa fa-plus" aria-hidden="true"></i> Add Project
                                         </button>
                                     </a>
                                 </div>
@@ -196,6 +207,71 @@
     </div>
 
     <% include ../partials/footer%>
+    <script type="text/javascript">
+        // di eksekusi ketika semua dom (html) ter-load
+        $(document).ready(() => {
+            function myfunction(projectid) {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'You will not be able to recover this file!',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'No, keep it'
+                }).then((result) => {
+                    // if (result.value) {
+                    //     // buat manggil router (pengganti href) WITH AJAX
+                    //     // $.ajax({
+                    //     //     url: `/projects/delete/${projectid}`,
+                    //     //     method: "GET"
+                    //     // }).done(() => { 
+                    //     //     Swal.fire(
+                    //     //         'Deleted!',
+                    //     //         'Your file has been deleted.',
+                    //     //         'success'
+                    //     //     )
+                    //     //     // redirect ke project
+                    //     //     window.location = '/projects'
+                    //     // })
+                    //     Swal.fire(
+                    //         'Deleted!',
+                    //         'Your file has been deleted.',
+                    //         'success',
+                    //     );
+                    //     // window.location = `/projects/delete/${projectid}`;
+                    // }
+                    if (result.value) {
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success',
+                            '500'
+                        )
+                        setTimeout(() => { window.location = `/projects/delete/${projectid}`}, 1000);
+                        // window.location = `/projects`;
+                        // window.location = `/projects/delete/${projectid}`;
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                        Swal.fire(
+                            'Cancelled',
+                            'Your file is safe :)',
+                            'error',
+                            '500'
+                        )
+                        setTimeout(() => { window.location = '/projects' }, 1000);
+                        // window.location = `/projects`;
+                    }
+                });
+            }
+
+            $(".btn-outline-danger").click(function (e) {
+                e.preventDefault();
+                // console.log($(this));
+                let projectid = $(this).attr("data-id");
+                console.log(projectid);
+                myfunction(projectid);
+            })
+        })
+    </script>
 </body>
 
 </html>
