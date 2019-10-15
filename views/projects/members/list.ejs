@@ -8,6 +8,7 @@
     <title>Document</title>
     <% include ../../partials/header%>
     <link rel="stylesheet" href="/stylesheets/sidebar.css">
+    
 </head>
 
 <body>
@@ -17,8 +18,8 @@
     <div class="container-fluid">
         <main role="main" class="col-md-10 ml-sm-auto col-lg-11">
             <div class="card border-light mx-1">
-                <h3 class="card-header bg-transparent display-3" style="margin-top: 8vh;">Projects</h3>
-                <div class="card-body">
+                <h3 class="card-header bg-transparent display-3" style="margin-top: 8vh; margin-left: 5vh;">Projects</h3>
+                <div class="card-body" style="margin-left: 5vh;">
                     <div class="card border-light">
                         <h4 class="card-title bg-transparent display-4">Filters</h4>
                         <div class="card-body">
@@ -28,12 +29,12 @@
                                 <div class="form-group row">
                                     <div class="custom-control custom-checkbox col-12 col-sm-2">
                                         <input type="checkbox" class="custom-control-input" aria-label="checkid" for=""
-                                            id="customCheck1" name="checkid">
+                                            id="customCheck1" name="checkid" >
                                         <label class="custom-control-label" style="font-size: large" for="customCheck1"
-                                            id="">ID</label>
+                                            id="" >ID</label>
                                     </div>
                                     <div class="col-12 col-sm-9">
-                                        <input type="text" class="form-control" id="id" placeholder="ID" name="userid">
+                                        <input type="text" style="font-size: large;" class="form-control" id="id" placeholder="ID" name="userid">
                                     </div>
                                 </div>
 
@@ -48,11 +49,11 @@
                                     </div>
                                     <div class="col-12 col-sm-9">
                                         <input type="text" class="form-control" id="id" placeholder="Name"
-                                            name="fullname">
+                                            name="fullname" style="font-size: large;">
                                     </div>
                                 </div>
 
-                                <!-- ==================== FILTER MEMBER ======================== -->
+                                <!-- ==================== FILTER POSITION ======================== -->
 
                                 <div class="form-group row">
                                     <div class="custom-control custom-checkbox col-12 col-sm-2">
@@ -62,10 +63,16 @@
                                             id="name">Position</label>
                                     </div>
                                     <div class="col-12 col-sm-9">
-                                        <select class="form-control" id="role" name="roles">
+                                        <select class="form-control" id="role" name="roles" style="font-size: large;">
                                             <option disabled selected>Choose the Position ...</option>
-
-                                            <option value="">
+                                            <option value="Manager">
+                                                Manager
+                                            </option>
+                                            <option value="Software Developer">
+                                                Software Developers
+                                            </option>
+                                            <option value="Quality Assurance">
+                                                Quality Assurance
                                             </option>
                                         </select>
                                     </div>
@@ -73,11 +80,12 @@
 
                                 <div class="form-group row">
                                     <div class="col-sm-10">
-                                        <button type="submit" class="btn btn-outline-primary"><i class="fa fa-search"
+                                        <button type="submit" class="btn btn-outline-primary" style="font-size: large;"><i class="fa fa-search"
                                                 aria-hidden="true"> Search</i>
                                         </button>
-                                        <button type="button" class="btn btn-light"> <a href="/projects"><i
-                                                    class="fa fa-undo" aria-hidden="true"></i> Reset</a></button>
+                                        <button type="button" style="font-size: large;" class="btn btn-light"> <a
+                                                href="/projects/members/<%=projectid%>"><i class="fa fa-undo"
+                                                    aria-hidden="true"></i> Reset</a></button>
                                     </div>
                                 </div>
                             </form>
@@ -88,13 +96,13 @@
                 <!-- ==================== OPTION ======================== -->
 
                 <div class="card border-light mx-1">
-                    <div class="card-body">
+                    <div class="card-body" style="margin-left: 5vh;">
                         <div class="card border-light">
                             <h4 class="card-title bg-transparent display-4">Options</h4>
                             <div class="card-body">
                                 <form action="" method="POST" class="form-check">
                                     <div class="form-group row">
-                                        <h1 class="col-12 col-sm-3 display-4">
+                                        <h1 class="col-12 col-sm-5 display-4">
                                             Columns
                                         </h1>
                                         <div class="row col-12 col-sm-7">
@@ -102,24 +110,24 @@
                                                 <input type="checkbox" name="userid" class="custom-control-input"
                                                     id="opcheck1" value="true" <%= option.userid ? ' checked' : '' %>>
                                                 <label class="custom-control-label" for="opcheck1"
-                                                    style="font-size: large">ID</label>
+                                                    style="font-size: larger">ID</label>
                                             </div>
                                             <div class="custom-control custom-checkbox col-12 col-sm-7">
                                                 <input type="checkbox" name="fullname" class="custom-control-input"
                                                     id="opcheck2" value="true" <%= option.fullname ? ' checked' : '' %>>
                                                 <label class="custom-control-label" for="opcheck2"
-                                                    style="font-size: large">Name</label>
+                                                    style="font-size: larger">Name</label>
                                             </div>
                                             <div class="custom-control custom-checkbox col-12 col-sm-7">
                                                 <input type="checkbox" name="roles" class="custom-control-input"
                                                     id="opcheck3" value="true" <%= option.roles ? ' checked' : '' %>>
                                                 <label class="custom-control-label" for="opcheck3"
-                                                    style="font-size: large">Position</label>
+                                                    style="font-size: larger">Position</label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-10">
-                                        <button type="submit" class="btn btn-outline-info"><i class="fa fa-refresh"
+                                        <button type="submit" style="font-size: large;" class="btn btn-outline-info"><i class="fa fa-refresh"
                                                 aria-hidden="true"></i> Apply</button>
                                     </div>
                                 </form>
@@ -132,11 +140,11 @@
             <!-- ==================== TABLES ======================== -->
 
             <div class="card border-light mx-1">
-                <div class="card-body">
+                <div class="card-body" style="margin-left: 5vh;">
                     <div class="card border-light">
                         <div class="card-body">
-                            <div class="table-responsive table-responsive-sm table-responsive-md">
-                                <table class="table table-striped">
+                            <div class="table-responsive table-responsive-sm table-responsive-md" >
+                                <table class="table table-striped" style="font-size: x-large;">
                                     <thead>
                                         <tr>
                                             <%- option.userid ? '<th scope="col">User ID</th>' : '' %>
@@ -152,18 +160,37 @@
                                             <%- option.fullname ? '<td>' + item.fullname + '</td>' : '' %>
                                             <%- option.roles ? '<td>' + item.roles + '</td>' : '' %>
                                             <td>
-                                                <a href="/projects/edit" class="btn btn-outline-success"><i
+                                                <a href="/projects/edit" style="font-size: large;" class="btn btn-outline-success"><i
                                                         class="fa fa-pencil" aria-hidden="true"></i> EDIT</a>
-                                                <a href="/projects/delete %>" class="btn btn-outline-danger">
+                                                <a href="/projects/delete %>" style="font-size: large;" class="btn btn-outline-danger">
                                                     <i class="fa fa-trash-o fa-lg"></i> DELETE</a>
                                             </td>
                                         </tr>
                                         <% }) %>
                                     </tbody>
                                 </table>
+
+                                <!-- ================ PAGINATION ================== -->
+
+                                <nav aria-label="Page navigation example" style="font-size: large;">
+                                    <ul class="pagination">
+                                        <li class="page-item <%= page == 1 ? 'disabled': ''; %>"><a class="page-link"
+                                                href="/projects/members/<%=projectid%>?page=<%= parseInt(page) - 1%>"><i
+                                                    class="fa fa-arrow-left" aria-hidden="true"></i> Previous</a></li>
+                                        <% for (let i = 1; i <= pages; i++) { %>
+                                        <li class="page-item <%= page == i ? 'active': ''; %>"><a class="page-link"
+                                                href="/projects/members/<%=projectid%>?page=<%= i %>">
+                                                <%= i %></a></li>
+                                        <% }; %>
+                                        <li class="page-item <%= page == pages ? 'disabled': ''; %>"><a
+                                                class="page-link" href="/projects/members/<%=projectid%>?page=<%= parseInt(page) + 1%>"><i
+                                                    class="fa fa-arrow-right" aria-hidden="true"></i> Next</a></li>
+                                    </ul>
+                                </nav>
+
                                 <div class="col-sm-10">
-                                    <a href="/projects/add">
-                                        <button class="btn btn-outline-primary"><i class="fa fa-plus"
+                                    <a href="/projects/members/<%=projectid%>/add">
+                                        <button style="font-size: x-large;" class="btn btn-outline-primary"><i class="fa fa-plus"
                                                 aria-hidden="true"></i> Add Project
                                         </button>
                                     </a>
