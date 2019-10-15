@@ -18,7 +18,8 @@
     "http-errors": "~1.6.3",
     "moment": "^2.24.0",
     "morgan": "~1.9.1",
-    "pg": "^7.12.1"
+    "pg": "^7.12.1",
+    "sweetalert2": "^8.18.3"
   },
   "devDependencies": {
     "nodemon": "^1.19.2"
