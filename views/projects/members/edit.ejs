@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Edit Member</title>
+    <% include ../../partials/header%>
+    <link rel="stylesheet" href="/stylesheets/sidebar.css">
+</head>
+
+<body>
+    <% include ../../partials/sidebar%>
+    <% include ../../partials/navbar%>
+
+    <main role="main" class="col-md-11 ml-sm-auto col-lg-11">
+        <div class="card border-light mx-1">
+            <h1 class="card-header bg-transparent display-4" style="margin-top: 8vh;margin-left: 5vh; ">Edit Member to
+                Project
+                #<%=projectid%>
+                (<%=pjname%>)</h1>
+            <div class="card-body" style="margin-left: 3vh;">
+                <div class="card border-light">
+                    <div class="card-body">
+                        <form class="form-horizontal" action="" method="POST">
+                            <div class="panel-body form-control-sm">
+
+                                <!-- ========= MEMBER ========== -->
+
+                                <div class="form-group row">
+                                    <h1 class="col-sm-3 col-form-label-lg display-4" style="font-size:xx-large;">Members
+                                    </h1>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control form-control-lg" id="name"
+                                            placeholder="Projects Name" name="name" value="<%= item.fullname %>" disabled>
+                                    </div>
+                                </div>
+                                
+                                <!-- ================= POSITION ================ -->
+
+                                <fieldset class="form-group">
+                                    <div class="form-group row">
+                                        <h1 for="gridRadios" class="col-sm-3 col-form-label-lg display-4"
+                                            style="font-size: xx-large;">Position</h1>
+                                        <div class="col-sm-5" style="font-size: xx-large;">
+                                            <div class="custom-control custom-radio">
+                                                <input class="custom-control-input" type="radio" name="roles"
+                                                    id="gridRadios1" value="Manager" <%= item.roles == 'Manager' ? ' checked' : '' %> required>
+                                                <label class="custom-control-label" for="gridRadios1"
+                                                    style="font-size: large;">
+                                                    Manager
+                                                </label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input class="custom-control-input" type="radio" name="roles"
+                                                    id="gridRadios2" value="Software Developer" <%= item.roles == 'Software Developer' ? ' checked' : '' %> required>
+                                                <label class="custom-control-label" for="gridRadios2"
+                                                    style="font-size: large;">
+                                                    Software Developer
+                                                </label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input class="custom-control-input" type="radio" name="roles"
+                                                    id="gridRadios3" value="Quality Assurance" <%= item.roles == 'Quality Assurance' ? ' checked' : '' %> required>
+                                                <label class="custom-control-label" for="gridRadios3"
+                                                    style="font-size: large;">
+                                                    Quality Assurance
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <!-- BUTTON -->
+                                <div class="form-group row">
+                                    <div class="col-sm-10">
+                                        <button type="submit" class="btn btn-success" style="font-size: x-large;"><i
+                                                class="fa fa-check" aria-hidden="true"></i> Save</button>
+                                        <button style="font-size: x-large;" class="btn btn-white"><a
+                                                href="/projects/members/<%=projectid%>"><i class="fa fa-ban"
+                                                    aria-hidden="true"></i> Cancel</a></button>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <% include ../../partials/footer%>
+</body>
+
+</html>
