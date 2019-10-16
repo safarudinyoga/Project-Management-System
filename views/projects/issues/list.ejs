@@ -1,17 +1,372 @@
-<% include ../partials/header%>
-<% include ../partials/sidebar%>
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="container-fluid">
-    <div class="card border-light mx-1">
-        <h3 class="card-header bg-transparent display-3">Projects</h3>
-        <div class="card-body">
-            <div class="card border-light">
-                <h4 class="card-title bg-transparent display-4">Filters</h4>
-                <div class="card-body">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Detail Issues</title>
+    <% include ../../partials/header%>
+    <link rel="stylesheet" href="/stylesheets/sidebar.css">
+    <link rel="stylesheet" href="../../stylesheets/typography.css">
+    <img class="mb-4" src="../../images/icons/favicon-96x96.png" alt="">
+</head>
+
+<body>
+
+    <% include ../../partials/sidebar%>
+    <% include ../../partials/navbar%>
+    <div class="container-fluid">
+        <main role="main" class="col-md-10 ml-sm-auto col-lg-11">
+            <div class="card border-light mx-1">
+                <h3 class="card-header bg-transparent display-3" style="margin-top: 1vh; margin-left: 5vh;">Projects
+                </h3>
+                <div class="card-body" style="margin-left: 5vh;">
+                    <div class="card border-light">
+                        <h4 class="card-title bg-transparent display-4">Filters</h4>
+                        <div class="card-body">
+                            <form class="form-horizontal" action="" method="GET">
+                                <!-- ==================== FILTER ISSUE ID ======================== -->
+
+                                <div class="form-group row">
+                                    <div class="custom-control custom-checkbox col-12 col-sm-2">
+                                        <input type="checkbox" class="custom-control-input" aria-label="checkid" for=""
+                                            id="customCheck1" name="checkid">
+                                        <label class="custom-control-label" style="font-size: large" for="customCheck1"
+                                            id="">Issue ID</label>
+                                    </div>
+                                    <div class="col-12 col-sm-9">
+                                        <input type="text" style="font-size: large;" class="form-control" id="id"
+                                            placeholder="ID" name="issueid">
+                                    </div>
+                                </div>
+
+                                <!-- ==================== FILTER SUBJECT ======================== -->
+
+                                <div class="form-group row">
+                                    <div class="custom-control custom-checkbox col-12 col-sm-2">
+                                        <input type="checkbox" class="custom-control-input" for="" id="customCheck2"
+                                            name="checksubject">
+                                        <label class="custom-control-label" for="customCheck2" style="font-size: large"
+                                            id="name">Subject</label>
+                                    </div>
+                                    <div class="col-12 col-sm-9">
+                                        <input type="text" class="form-control" id="id" placeholder="Subject"
+                                            name="subject" style="font-size: large;">
+                                    </div>
+                                </div>
+
+                                <!-- ==================== FILTER TRACKER ======================== -->
+
+                                <div class="form-group row">
+                                    <div class="custom-control custom-checkbox col-12 col-sm-2">
+                                        <input type="checkbox" class="custom-control-input" for="" id="customCheck3"
+                                            name="checktracker">
+                                        <label class="custom-control-label" for="customCheck3" style="font-size: large"
+                                            id="name">Tracker</label>
+                                    </div>
+                                    <div class="col-12 col-sm-9">
+                                        <select class="form-control" id="role" name="tracker" style="font-size: large;">
+                                            <option disabled selected>Choose the Tracker ...</option>
+                                            <option value="Bug">
+                                                Bug
+                                            </option>
+                                            <option value="Feature">
+                                                Feature
+                                            </option>
+                                            <option value="Support">
+                                                Support
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- ==================== FILTER DONE ======================== -->
+
+                                <div class="form-group row">
+                                    <div class="custom-control custom-checkbox col-12 col-sm-2">
+                                        <input type="checkbox" class="custom-control-input" for="" id="customCheck4"
+                                            name="checkdone">
+                                        <label class="custom-control-label" for="customCheck4" style="font-size: large"
+                                            id="name">Done (%)</label>
+                                    </div>
+                                    <div class="col-12 col-sm-9">
+                                        <select class="form-control" id="role" name="done" style="font-size: large;">
+                                            <option disabled selected>Choose the Tracker ...</option>
+                                            <option value="0">
+                                                0
+                                            </option>
+                                            <option value="10">
+                                                10
+                                            </option>
+                                            <option value="20">
+                                                20
+                                            </option>
+                                            <option value="30">
+                                                30
+                                            </option>
+                                            <option value="40">
+                                                40
+                                            </option>
+                                            <option value="50">
+                                                50
+                                            </option>
+                                            <option value="60">
+                                                60
+                                            </option>
+                                            <option value="70">
+                                                70
+                                            </option>
+                                            <option value="80">
+                                                80
+                                            </option>
+                                            <option value="90">
+                                                90
+                                            </option>
+                                            <option value="100">
+                                                100
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-10">
+                                        <button type="submit" class="btn btn-outline-primary"
+                                            style="font-size: large;"><i class="fa fa-search" aria-hidden="true">
+                                                Search</i>
+                                        </button>
+                                        <button type="button" style="font-size: large;" class="btn btn-light"> <a
+                                                href="/projects/members/<%=projectid%>"><i class="fa fa-undo"
+                                                    aria-hidden="true"></i> Reset</a></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==================== OPTION ======================== -->
+
+                <div class="card border-light mx-1">
+                    <div class="card-body" style="margin-left: 5vh;">
+                        <div class="card border-light">
+                            <h4 class="card-title bg-transparent display-4">Options</h4>
+                            <div class="card-body">
+                                <form action="" method="POST" class="form-check">
+                                    <div class="form-group row">
+                                        <h1 class="col-12 col-sm-5 display-4">
+                                            Columns
+                                        </h1>
+                                        <div class="row col-12 col-sm-12">
+                                            <div class="custom-control custom-checkbox col-12 col-sm-3">
+                                                <input type="checkbox" name="issuesid" class="custom-control-input"
+                                                    id="opcheck1" value="true" <%= option.issuesid ? ' checked' : '' %>>
+                                                <label class="custom-control-label" for="opcheck1"
+                                                    style="font-size: larger">Issue ID</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox col-12 col-sm-3">
+                                                <input type="checkbox" name="tracker" class="custom-control-input"
+                                                    id="opcheck2" value="true" <%= option.tracker ? ' checked' : '' %>>
+                                                <label class="custom-control-label" for="opcheck2"
+                                                    style="font-size: larger">Tracker</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox col-12 col-sm-3">
+                                                <input type="checkbox" name="subject" class="custom-control-input"
+                                                    id="opcheck3" value="true" <%= option.subject ? ' checked' : '' %>>
+                                                <label class="custom-control-label" for="opcheck3"
+                                                    style="font-size: larger">Subject</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox col-12 col-sm-3">
+                                                <input type="checkbox" name="desciption" class="custom-control-input"
+                                                    id="opcheck4" value="true" <%= option.desciption ? ' checked' : '' %>>
+                                                <label class="custom-control-label" for="opcheck4"
+                                                    style="font-size: larger">Description</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox col-12 col-sm-3">
+                                                <input type="checkbox" name="status" class="custom-control-input"
+                                                    id="opcheck5" value="true" <%= option.status ? ' checked' : '' %>>
+                                                <label class="custom-control-label" for="opcheck5"
+                                                    style="font-size: larger">status</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox col-12 col-sm-3">
+                                                <input type="checkbox" name="priority" class="custom-control-input"
+                                                    id="opcheck6" value="true" <%= option.priority ? ' checked' : '' %>>
+                                                <label class="custom-control-label" for="opcheck6"
+                                                    style="font-size: larger">Priority</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox col-12 col-sm-3">
+                                                <input type="checkbox" name="assignee" class="custom-control-input"
+                                                    id="opcheck7" value="true" <%= option.assignee ? ' checked' : '' %>>
+                                                <label class="custom-control-label" for="opcheck7"
+                                                    style="font-size: larger">Assignee</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox col-12 col-sm-3">
+                                                <input type="checkbox" name="startdate" class="custom-control-input"
+                                                    id="opcheck8" value="true" <%= option.startdate ? ' checked' : '' %>>
+                                                <label class="custom-control-label" for="opcheck8"
+                                                    style="font-size: larger">Start Date</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox col-12 col-sm-3">
+                                                <input type="checkbox" name="duedate" class="custom-control-input"
+                                                    id="opcheck9" value="true" <%= option.duedate ? ' checked' : '' %>>
+                                                <label class="custom-control-label" for="opcheck9"
+                                                    style="font-size: larger">Due Date</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox col-12 col-sm-3">
+                                                <input type="checkbox" name="estimatedtime" class="custom-control-input"
+                                                    id="opcheck10" value="true" <%= option.estimatedtime ? ' checked' : '' %>>
+                                                <label class="custom-control-label" for="opcheck10"
+                                                    style="font-size: larger">Estimated Time (Hours)</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox col-12 col-sm-3">
+                                                <input type="checkbox" name="done" class="custom-control-input"
+                                                    id="opcheck11" value="true" <%= option.done ? ' checked' : '' %>>
+                                                <label class="custom-control-label" for="opcheck11"
+                                                    style="font-size: larger">Done (%)</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox col-12 col-sm-3">
+                                                <input type="checkbox" name="file" class="custom-control-input"
+                                                    id="opcheck12" value="true" <%= option.file ? ' checked' : '' %>>
+                                                <label class="custom-control-label" for="opcheck12"
+                                                    style="font-size: larger">File</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox col-12 col-sm-3">
+                                                <input type="checkbox" name="spenttime" class="custom-control-input"
+                                                    id="opcheck13" value="true" <%= option.spenttime ? ' checked' : '' %>>
+                                                <label class="custom-control-label" for="opcheck13"
+                                                    style="font-size: larger">Spent Time (Hours)</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox col-12 col-sm-3">
+                                                <input type="checkbox" name="targetversion" class="custom-control-input"
+                                                    id="opcheck14" value="true" <%= option.targetversion ? ' checked' : '' %>>
+                                                <label class="custom-control-label" for="opcheck14"
+                                                    style="font-size: larger">Target Version</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox col-12 col-sm-3">
+                                                <input type="checkbox" name="author" class="custom-control-input"
+                                                    id="opcheck15" value="true" <%= option.author ? ' checked' : '' %>>
+                                                <label class="custom-control-label" for="opcheck15"
+                                                    style="font-size: larger">Author</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox col-12 col-sm-3">
+                                                <input type="checkbox" name="createddate" class="custom-control-input"
+                                                    id="opcheck16" value="true" <%= option.createddate ? ' checked' : '' %>>
+                                                <label class="custom-control-label" for="opcheck16"
+                                                    style="font-size: larger">Created Date</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox col-12 col-sm-3">
+                                                <input type="checkbox" name="updateddate" class="custom-control-input"
+                                                    id="opcheck17" value="true" <%= option.updateddate ? ' checked' : '' %>>
+                                                <label class="custom-control-label" for="opcheck17"
+                                                    style="font-size: larger">Update Date</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox col-12 col-sm-3">
+                                                <input type="checkbox" name="closeddate" class="custom-control-input"
+                                                    id="opcheck18" value="true" <%= option.closeddate ? ' checked' : '' %>>
+                                                <label class="custom-control-label" for="opcheck18"
+                                                    style="font-size: larger">Closed Date</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox col-12 col-sm-3">
+                                                <input type="checkbox" name="parenttask" class="custom-control-input"
+                                                    id="opcheck19" value="true" <%= option.parenttask ? ' checked' : '' %>>
+                                                <label class="custom-control-label" for="opcheck19"
+                                                    style="font-size: larger">Parent Task</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <button type="submit" style="font-size: large;" class="btn btn-outline-info"><i
+                                                class="fa fa-refresh" aria-hidden="true"></i> Apply</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
 
-<% include ../partials/footer%>
+            <!-- ==================== TABLES ======================== -->
+
+            <div class="card border-light mx-1">
+                <div class="card-body" style="margin-left: 5vh;">
+                    <div class="card border-light">
+                        <div class="card-body">
+                            <div class="table-responsive table-responsive-sm table-responsive-md">
+                                <table class="table table-striped" style="font-size: x-large;">
+                                    <thead>
+                                        <tr>
+                                            <%- option.issuesid ? '<th scope="col">Issue ID</th>' : '' %>
+                                            <%- option.tracker ? '<th scope="col">Tracker</th>' : '' %>
+                                            <%- option.subject ? '<th scope="col">Subject</th>' : '' %>
+                                            <%- option.desciption ? '<th scope="col">Description</th>' : '' %>
+                                            <%- option.status ? '<th scope="col">Status</th>' : '' %>
+                                            <%- option.priority ? '<th scope="col">Priority</th>' : '' %>
+                                            <%- option.assignee ? '<th scope="col">Assignee</th>' : '' %>
+                                            <%- option.startdate ? '<th scope="col">Start Date</th>' : '' %>
+                                            <%- option.duedate ? '<th scope="col">Due Date</th>' : '' %>
+                                            <%- option.estimatedtime ? '<th scope="col">Estimated Time</th>' : '' %>
+                                            <%- option.done ? '<th scope="col">Done (%)</th>' : '' %>
+                                            <%- option.file ? '<th scope="col">File</th>' : '' %>
+                                            <%- option.spenttime ? '<th scope="col">Spent Time</th>' : '' %>
+                                            <%- option.targetversion ? '<th scope="col">Target Version</th>' : '' %>
+                                            <%- option.author ? '<th scope="col">Author</th>' : '' %>
+                                            <%- option.createddate ? '<th scope="col">Created Date</th>' : '' %>
+                                            <%- option.updateddate ? '<th scope="col">Updated Date</th>' : '' %>
+                                            <%- option.closeddate ? '<th scope="col">Closed Date</th>' : '' %>
+                                            <%- option.parenttask ? '<th scope="col">Parent Task</th>' : '' %>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% data.forEach((item) => { %>
+                                        <tr>
+                                            <%- option.issuesid ? '<td>' + item.issueid + '</td>' : '' %>
+                                            <%- option.tracker ? '<td>' + item.tracker + '</td>' : '' %>
+                                            <%- option.subject ? '<td>' + item.subject + '</td>' : '' %>
+                                            <%- option.desciption ? '<td>' + item.description + '</td>' : '' %>
+                                            <%- option.status ? '<td>' + item.status + '</td>' : '' %>
+                                            <%- option.priority ? '<td>' + item.priority + '</td>' : '' %>
+                                            <%- option.assignee ? '<td>' + item.assignee + '</td>' : '' %>
+                                            <%- option.startdate ? '<td>' + item.startdate + '</td>' : '' %>
+                                            <%- option.duedate ? '<td>' + item.duedate + '</td>' : '' %>
+                                            <%- option.estimatedtime ? '<td>' + item.estimatedtime + '</td>' : '' %>
+                                            <%- option.done ? '<td>' + item.done + '</td>' : '' %>
+                                            <%- option.file ? '<td>' + item.file + '</td>' : '' %>
+                                            <%- option.spenttime ? '<td>' + item.spenttime + '</td>' : '' %>
+                                            <%- option.targetversion ? '<td>' + item.targetversion + '</td>' : '' %>
+                                            <%- option.author ? '<td>' + item.author + '</td>' : '' %>
+                                            <%- option.createddate ? '<td>' + item.createddate + '</td>' : '' %>
+                                            <%- option.updateddate ? '<td>' + item.updateddate + '</td>' : '' %>
+                                            <%- option.closeddate ? '<td>' + item.closeddate + '</td>' : '' %>
+                                            <%- option.parenttask ? '<td>' + item.parenttask + '</td>' : '' %>
+                                            <td>
+                                                <a href="/projects/members/<%=projectid%>/edit/"
+                                                    style="font-size: large;" class="btn btn-outline-success"><i
+                                                        class="fa fa-pencil" aria-hidden="true"></i> EDIT</a>
+                                                <a href="/projects/members/<%=projectid%>/delete/"
+                                                    style="font-size: large;" class="btn btn-outline-danger">
+                                                    <i class="fa fa-trash-o fa-lg"></i> DELETE</a>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                    </tbody>
+                                </table>
+
+                                <div class="col-sm-10">
+                                    <a href="/projects/members/<%=projectid%>/add">
+                                        <button style="font-size: x-large;" class="btn btn-outline-primary"><i
+                                                class="fa fa-plus" aria-hidden="true"></i> Add Project
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
+
+</html>
