@@ -32,11 +32,11 @@
                                     <h1 class="col-sm-3 col-form-label-lg display-4" style="font-size:xx-large;">Members
                                     </h1>
                                     <div class="col-12 col-sm-8">
-                                        <select class="custom-select" style="font-size: x-large;">
+                                        <select class="custom-select" style="font-size: x-large;" name="addmember">
                                             <option selected disabled>Choose The Members ...</option>
-                                            <% datanama.forEach((item) => { %>
-                                            <option value="<%= item %>">
-                                                <%= item %>
+                                            <% datauserid.forEach((item, i) => { %>
+                                            <option value="<%=item%>">
+                                                <%= datanama[i] %>
                                             </option>
                                             <% }) %>
                                         </select>
