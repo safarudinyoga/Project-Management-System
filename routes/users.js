@@ -21,7 +21,7 @@ module.exports = (pool) => {
 
     let arr = [];
     let page = req.query.page || 1;
-    let limit = 3;
+    let limit = 8;
     let offset = (page - 1) * limit;
     let url = (req.url == '/') ? '/?page=1' : req.url;
 
@@ -158,7 +158,7 @@ module.exports = (pool) => {
     //let insert = [firstname, lastname, email, password, role, typejob];
     let sqladd = `INSERT INTO users(firstname, lastname, email, password, role`
     let sqlvalue = ` VALUES('${firstname}','${lastname}','${email}','${password}','${role}'`
-    let arr = [];
+    // let arr = [];
     if (Boolean(typejob) != undefined) {
       // arr.push(`'${Boolean(typejob)}'`)
       sqladd += `,typejob)`
