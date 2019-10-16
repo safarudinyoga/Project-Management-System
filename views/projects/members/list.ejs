@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Detail Projects Members</title>
     <% include ../../partials/header%>
     <link rel="stylesheet" href="/stylesheets/sidebar.css">
-    
+    <img class="mb-4" src="images/icons/favicon-96x96.png" alt="">
+
 </head>
 
 <body>
@@ -18,7 +19,8 @@
     <div class="container-fluid">
         <main role="main" class="col-md-10 ml-sm-auto col-lg-11">
             <div class="card border-light mx-1">
-                <h3 class="card-header bg-transparent display-3" style="margin-top: 8vh; margin-left: 5vh;">Projects</h3>
+                <h3 class="card-header bg-transparent display-3" style="margin-top: 8vh; margin-left: 5vh;">Projects
+                </h3>
                 <div class="card-body" style="margin-left: 5vh;">
                     <div class="card border-light">
                         <h4 class="card-title bg-transparent display-4">Filters</h4>
@@ -29,12 +31,13 @@
                                 <div class="form-group row">
                                     <div class="custom-control custom-checkbox col-12 col-sm-2">
                                         <input type="checkbox" class="custom-control-input" aria-label="checkid" for=""
-                                            id="customCheck1" name="checkid" >
+                                            id="customCheck1" name="checkid">
                                         <label class="custom-control-label" style="font-size: large" for="customCheck1"
-                                            id="" >ID</label>
+                                            id="">ID</label>
                                     </div>
                                     <div class="col-12 col-sm-9">
-                                        <input type="text" style="font-size: large;" class="form-control" id="id" placeholder="ID" name="userid">
+                                        <input type="text" style="font-size: large;" class="form-control" id="id"
+                                            placeholder="ID" name="userid">
                                     </div>
                                 </div>
 
@@ -80,8 +83,9 @@
 
                                 <div class="form-group row">
                                     <div class="col-sm-10">
-                                        <button type="submit" class="btn btn-outline-primary" style="font-size: large;"><i class="fa fa-search"
-                                                aria-hidden="true"> Search</i>
+                                        <button type="submit" class="btn btn-outline-primary"
+                                            style="font-size: large;"><i class="fa fa-search" aria-hidden="true">
+                                                Search</i>
                                         </button>
                                         <button type="button" style="font-size: large;" class="btn btn-light"> <a
                                                 href="/projects/members/<%=projectid%>"><i class="fa fa-undo"
@@ -127,8 +131,8 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-10">
-                                        <button type="submit" style="font-size: large;" class="btn btn-outline-info"><i class="fa fa-refresh"
-                                                aria-hidden="true"></i> Apply</button>
+                                        <button type="submit" style="font-size: large;" class="btn btn-outline-info"><i
+                                                class="fa fa-refresh" aria-hidden="true"></i> Apply</button>
                                     </div>
                                 </form>
                             </div>
@@ -143,7 +147,7 @@
                 <div class="card-body" style="margin-left: 5vh;">
                     <div class="card border-light">
                         <div class="card-body">
-                            <div class="table-responsive table-responsive-sm table-responsive-md" >
+                            <div class="table-responsive table-responsive-sm table-responsive-md">
                                 <table class="table table-striped" style="font-size: x-large;">
                                     <thead>
                                         <tr>
@@ -160,9 +164,11 @@
                                             <%- option.fullname ? '<td>' + item.fullname + '</td>' : '' %>
                                             <%- option.roles ? '<td>' + item.roles + '</td>' : '' %>
                                             <td>
-                                                <a href="/projects/edit" style="font-size: large;" class="btn btn-outline-success"><i
+                                                <a href="/projects/members/<%=projectid%>/edit/<%=item.userid%>"
+                                                    style="font-size: large;" class="btn btn-outline-success"><i
                                                         class="fa fa-pencil" aria-hidden="true"></i> EDIT</a>
-                                                <a href="/projects/delete %>" style="font-size: large;" class="btn btn-outline-danger">
+                                                <a href="/projects/members/<%=projectid%>/delete/<%=item.userid%> %>"
+                                                    style="font-size: large;" class="btn btn-outline-danger">
                                                     <i class="fa fa-trash-o fa-lg"></i> DELETE</a>
                                             </td>
                                         </tr>
@@ -183,15 +189,16 @@
                                                 <%= i %></a></li>
                                         <% }; %>
                                         <li class="page-item <%= page == pages ? 'disabled': ''; %>"><a
-                                                class="page-link" href="/projects/members/<%=projectid%>?page=<%= parseInt(page) + 1%>"><i
+                                                class="page-link"
+                                                href="/projects/members/<%=projectid%>?page=<%= parseInt(page) + 1%>"><i
                                                     class="fa fa-arrow-right" aria-hidden="true"></i> Next</a></li>
                                     </ul>
                                 </nav>
 
                                 <div class="col-sm-10">
                                     <a href="/projects/members/<%=projectid%>/add">
-                                        <button style="font-size: x-large;" class="btn btn-outline-primary"><i class="fa fa-plus"
-                                                aria-hidden="true"></i> Add Project
+                                        <button style="font-size: x-large;" class="btn btn-outline-primary"><i
+                                                class="fa fa-plus" aria-hidden="true"></i> Add Project
                                         </button>
                                     </a>
                                 </div>
@@ -200,7 +207,6 @@
                     </div>
                 </div>
             </div>
-
         </main>
     </div>
 
