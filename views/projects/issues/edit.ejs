@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add Issues</title>
+    <% include ../../partials/header%>
+    <link rel="stylesheet" href="/stylesheets/sidebar.css">
+</head>
+
+<body>
+
+    <% include ../../partials/sidebar%>
+    <% include ../../partials/navbar%>
+
+    <main role="main" class="col-md-11 ml-sm-auto col-lg-11">
+        <div class="card border-light mx-1">
+            <h1 class="card-header bg-transparent display-4" style="margin-top: 8vh;margin-left: 5vh; ">Edit Issues
+                #<%=issueid%> to
+                Project
+                #<%=projectid%> (<%=pjname%>) </h1>
+            <div class="card-body" style="margin-left: 3vh;">
+
+                <form class="form-horizontal" action="" method="POST">
+                    <div class="panel-body form-control-sm">
+
+                        <!-- ================= TRACKER ================ -->
+
+                        <fieldset class="form-group">
+                            <div class="form-group row">
+                                <h1 for="gridRadios" class="col-sm-3 col-form-label-lg display-4"
+                                    style="font-size: x-large;">Tracker</h1>
+                                <div class="col-sm-5" style="font-size: x-large;">
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="tracker" id="gridRadios1"
+                                            value="Bug" <%= data.tracker == 'Bug' ? ' checked' : '' %>">
+                                        <label class="custom-control-label" for="gridRadios1" style="font-size: large;">
+                                            Bug
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="tracker" id="gridRadios2"
+                                            value="Feature" <%= data.tracker == 'Feature' ? ' checked' : '' %>>
+                                        <label class="custom-control-label" for="gridRadios2" style="font-size: large;">
+                                            Feature
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="tracker" id="gridRadios3"
+                                            value="Support" <%= data.tracker == 'Support' ? ' checked' : '' %>>
+                                        <label class="custom-control-label" for="gridRadios3" style="font-size: large;">
+                                            Support
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <!-- ================= SUBJECT ================ -->
+                        <div class="form-group row">
+                            <h5 class="col-sm-3 col-form-label col-form-label display-4" style="font-size: x-large;">
+                                Subject</h5>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control form-control-lg" id="name"
+                                    placeholder="<%= data.subject %>" value="<%= data.subject %>" name="subject">
+                            </div>
+                        </div>
+
+                        <!-- ================= DESCRIPTION ================ -->
+                        <div class="form-group row">
+                            <h5 class="col-sm-3 col-form-label col-form-label display-4" style="font-size: x-large;">
+                                Description</h5>
+                            <div class="col-sm-5">
+                                <input type="textarea" class="form-control form-control-lg" id="name"
+                                    placeholder="<%= data.description %>" name="description"
+                                    value="<%= data.description %>" rows="5">
+                                </input>
+                            </div>
+                        </div>
+
+                        <!-- ================= STATUS ================ -->
+                        <fieldset class="form-group">
+                            <div class="form-group row">
+                                <h1 for="statusbutton" class="col-sm-3 col-form-label-lg display-4"
+                                    style="font-size: x-large;">Status</h1>
+                                <div class="col-sm-5" style="font-size: x-large;">
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" disabled type="radio" name="status"
+                                            id="statusbutton1" value="New"
+                                            <%= data.status == 'New' ? ' checked' : '' %>>
+                                        <label class="custom-control-label" for="statusbutton1"
+                                            style="font-size: large;">
+                                            New
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="status"
+                                            id="statusbutton2" value="In Progress"
+                                            <%= data.status == 'In Progress' ? ' checked' : '' %>>
+                                        <label class="custom-control-label" for="statusbutton2"
+                                            style="font-size: large;">
+                                            In Progress
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="status"
+                                            id="statusbutton3" value="Feedback"
+                                            <%= data.status == 'Feedback' ? ' checked' : '' %>>
+                                        <label class="custom-control-label" for="statusbutton3"
+                                            style="font-size: large;">
+                                            Feedback
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="status"
+                                            id="statusbutton4" value="Resolved"
+                                            <%= data.status == 'Resolved' ? ' checked' : '' %>>
+                                        <label class="custom-control-label" for="statusbutton4"
+                                            style="font-size: large;">
+                                            Resolved
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="status"
+                                            id="statusbutton5" value="Closed"
+                                            <%= data.status == 'Closed' ? ' checked' : '' %>>
+                                        <label class="custom-control-label" for="statusbutton5"
+                                            style="font-size: large;">
+                                            Closed
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="status"
+                                            id="statusbutton6" value="Rejected"
+                                            <%= data.status == 'Rejected' ? ' checked' : '' %>>
+                                        <label class="custom-control-label" for="statusbutton6"
+                                            style="font-size: large;">
+                                            Rejected
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <!-- ================= PRIORITY ================ -->
+                        <fieldset class="form-group">
+                            <div class="form-group row">
+                                <h1 for="prioritybutton" class="col-sm-3 col-form-label-lg display-4"
+                                    style="font-size: x-large;">Priority</h1>
+                                <div class="col-sm-5" style="font-size: x-large;">
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="priority"
+                                            id="prioritybutton1" value="Normal"
+                                            <%= data.priority == 'Normal' ? ' checked' : '' %>>
+                                        <label class="custom-control-label" for="prioritybutton1"
+                                            style="font-size: large;">
+                                            Normal
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="priority"
+                                            id="prioritybutton2" value="High"
+                                            <%= data.priority == 'High' ? ' checked' : '' %>>
+                                        <label class="custom-control-label" for="prioritybutton2"
+                                            style="font-size: large;">
+                                            High
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="priority"
+                                            id="prioritybutton3" value="Urgent"
+                                            <%= data.priority == 'Urgent' ? ' checked' : '' %>>
+                                        <label class="custom-control-label" for="prioritybutton3"
+                                            style="font-size: large;">
+                                            Urgent
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="priority"
+                                            id="prioritybutton4" value="Immerdiate"
+                                            <%= data.priority == 'Immerdiate' ? ' checked' : '' %>>
+                                        <label class="custom-control-label" for="prioritybutton4"
+                                            style="font-size: large;">
+                                            Immerdiate
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <!-- ========= Assignee ========== -->
+                        <div class="form-group row">
+                            <h1 class="col-sm-3 col-form-label-lg display-4" style="font-size:x-large;">Assignee
+                            </h1>
+                            <div class="col-12 col-sm-5">
+                                <input type="text" class="form-control form-control" style="font-size: x-large;"
+                                    placeholder="<%= data.fullname %>" name="assignee" disabled readonly>
+                            </div>
+                        </div>
+
+                        <!-- ========= START DATE ========== -->
+                        <div class="form-group row">
+                            <h1 class="col-sm-3 col-form-label-lg display-4" style="font-size:x-large;">Start Date
+                            </h1>
+                            <div class="col-12 col-sm-5">
+                                <input type="date" class="form-control form-control" style="font-size: x-large;"
+                                    placeholder="" name="startdate"
+                                    value="<%= moment(data.startdate).format('YYYY-MM-DD') %>" disabled readonly>
+                            </div>
+                        </div>
+
+                        <!-- ========= DUE DATE ========== -->
+                        <div class="form-group row">
+                            <h1 class="col-sm-3 col-form-label-lg display-4" style="font-size:x-large;">Due Date
+                            </h1>
+                            <div class="col-12 col-sm-5">
+                                <input type="date" class="form-control form-control" style="font-size: x-large;"
+                                    placeholder="" name="duedate"
+                                    value="<%= moment(data.duedate).format('YYYY-MM-DD') %>" required>
+                            </div>
+                        </div>
+
+                        <!-- ================= ESTIMATED TIME ================ -->
+                        <div class="form-group row">
+                            <h5 class="col-sm-3 col-form-label col-form-label display-4" style="font-size: x-large;">
+                                Estimated Time</h5>
+                            <div class="col-sm-5">
+                                <input type="number" style="font-size: x-large;" class="form-control form-control"
+                                    id="name" placeholder="<%= data.estimatedtime %> Hours" name="estimatedtime"
+                                    disabled readonly>
+                            </div>
+                        </div>
+
+                        <!-- ================= DONE ================ -->
+                        <div class="form-group row">
+                            <h5 class="col-sm-3 col-form-label col-form-label display-4" style="font-size: x-large;">
+                                Done (%)</h5>
+                            <div class="col-sm-5">
+                                <select style="font-size: 1.5vh ;" class="form-control" name="done" id="">
+                                    <option value="0" <%= data.done == 0 ? ' selected' : '' %>>
+                                        0%
+                                    </option>
+                                    <option value="10" <%= data.done == 10 ? ' selected' : '' %>>
+                                        10%
+                                    </option>
+                                    <option value="20" <%= data.done == 20 ? ' selected' : '' %>>
+                                        20%
+                                    </option>
+                                    <option value="30" <%= data.done == 30 ? ' selected' : '' %>>
+                                        30%
+                                    </option>
+                                    <option value="40" <%= data.done == 40 ? ' selected' : '' %>>
+                                        40%
+                                    </option>
+                                    <option value="50" <%= data.done == 50 ? ' selected' : '' %>>
+                                        50%
+                                    </option>
+                                    <option value="60" <%= data.done == 60 ? ' selected' : '' %>>
+                                        60%
+                                    </option>
+                                    <option value="70" <%= data.done == 70 ? ' selected' : '' %>>
+                                        70%
+                                    </option>
+                                    <option value="80" <%= data.done == 80 ? ' selected' : '' %>>
+                                        80%
+                                    </option>
+                                    <option value="90" <%= data.done == 90 ? ' selected' : '' %>>
+                                        90%
+                                    </option>
+                                    <option value="100" <%= data.done == 100 ? ' selected' : '' %>>
+                                        100%
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- ================= FILE UPLOAD ================ -->
+                        <div class="form-group row">
+                            <h5 class="col-sm-3 col-form-label col-form-label display-4" style="font-size: x-large;">
+                                File</h5>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <input name="files" style="font-size: large;" type="file" class="form-control-file"
+                                        id="exampleFormControlFile1" value="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ================= SPENT TIME ================ -->
+                        <div class="form-group row">
+                            <h5 class="col-sm-3 col-form-label col-form-label display-4" style="font-size: x-large;">
+                                Spent Time</h5>
+                            <div class="col-sm-5">
+                                <input type="number" style="font-size: x-large;" class="form-control form-control" id=""
+                                    placeholder="<%= data.spenttime %> (hours)" name="spenttime"
+                                    value="<%= data.spenttime %>" required>
+                            </div>
+                        </div>
+
+                        <!-- ================= TARGET VERSION ================ -->
+                        <div class="form-group row">
+                            <h5 class="col-sm-3 col-form-label col-form-label display-4" style="font-size: x-large;">
+                                Target Version </h5>
+                            <div class="col-sm-5">
+                                <input type="text" style="font-size: x-large;" class="form-control form-control-lg"
+                                    id="" value="<%= data.targetversion %>" placeholder="<%= data.targetversion %>"
+                                    name="targetversion" required>
+                            </div>
+                        </div>
+
+                        <!-- ================= AUTHOR ================ -->
+                        <div class="form-group row">
+                            <h5 class="col-sm-3 col-form-label col-form-label display-4" style="font-size: x-large;">
+                                Author </h5>
+                            <div class="col-12 col-sm-5">
+                                <select class="custom-select" style="font-size: x-large;" name="author"
+                                    aria-describedby="passwordHelpInline" required>
+                                    <option selected disabled>Choose The Assignee ...</option>
+                                    <% iduser.forEach((item, i) => {  %>
+                                    <option value="<%=item%>">
+                                        <%= namauser[i] %>
+                                    </option>
+                                    <% }) %>
+                                </select>
+                                <small style="font-size: 1.5vh; color: red !important;" id="passwordHelpInline" class="text-muted">
+                                    This Field Cant be Empty!.
+                                </small>
+                            </div>
+                        </div>
+
+                        <!-- ========= PARENT TASK ========== -->
+                        <div class="form-group row">
+                            <h1 class="col-sm-3 col-form-label-lg display-4" style="font-size:x-large;">Parent Task
+                            </h1>
+                            <div class="col-12 col-sm-5">
+                                <select class="custom-select" style="font-size: x-large;" name="parenttask"
+                                    aria-describedby="passwordHelpInline1">
+                                    <option selected disabled>Choose The Parent Task ...</option>
+                                    <% idIssue.forEach((item, i) => { %>
+                                    <option value="<%=item%>">
+                                        <%= namaSubject[i] %>
+                                    </option>
+                                    <% }) %>
+                                </select>
+                                <small style="font-size: 1.5vh; color: red !important;" id="passwordHelpInline1" class="text-muted">
+                                    This Field Cant be Empty!.
+                                </small>
+                            </div>
+                        </div>
+
+                        <!-- ================= BUTTON ================ -->
+                        <div class="form-group row">
+                            <div class="col-sm-10">
+                                <button style="font-size: large;" type="submit" class="btn btn-outline-success"><i
+                                        class="fa fa-check" aria-hidden="true"></i> Save</button>
+                                <button style="font-size: large;" type="button" class="btn btn-outline-light"><a
+                                        href="/projects/issues/<%=projectid%>"><i class="fa fa-ban"
+                                            aria-hidden="true"></i>
+                                        Cancel</a></button>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <% include ../../partials/footer%>
+</body>
+
+</html>
