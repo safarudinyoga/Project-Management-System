@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add Issues</title>
+    <% include ../../partials/header%>
+    <link rel="stylesheet" href="/stylesheets/sidebar.css">
+</head>
+
+<body>
+
+    <% include ../../partials/sidebar%>
+    <% include ../../partials/navbar%>
+
+    <main role="main" class="col-md-11 ml-sm-auto col-lg-11">
+        <div class="card border-light mx-1">
+            <h1 class="card-header bg-transparent display-4" style="margin-top: 8vh;margin-left: 5vh; ">Add Issues to
+                Project
+                #<%=projectid%> (<%=pjname%>) </h1>
+            <div class="card-body" style="margin-left: 3vh;">
+
+                <form class="form-horizontal" action="" method="POST">
+                    <div class="panel-body form-control-sm">
+
+                        <!-- ================= TRACKER ================ -->
+
+                        <fieldset class="form-group">
+                            <div class="form-group row">
+                                <h1 for="gridRadios" class="col-sm-3 col-form-label-lg display-4"
+                                    style="font-size: x-large;">Tracker</h1>
+                                <div class="col-sm-5" style="font-size: x-large;">
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="tracker" id="gridRadios1"
+                                            value="Bug" required>
+                                        <label class="custom-control-label" for="gridRadios1" style="font-size: large;">
+                                            Bug
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="tracker" id="gridRadios2"
+                                            value="Feature" required>
+                                        <label class="custom-control-label" for="gridRadios2" style="font-size: large;">
+                                            Feature
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="tracker" id="gridRadios3"
+                                            value="Support" required>
+                                        <label class="custom-control-label" for="gridRadios3" style="font-size: large;">
+                                            Support
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <!-- ================= SUBJECT ================ -->
+                        <div class="form-group row">
+                            <h5 class="col-sm-3 col-form-label col-form-label display-4" style="font-size: x-large;">
+                                Subject</h5>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control form-control-lg" id="name" placeholder="Subject"
+                                    name="subject" required>
+                            </div>
+                        </div>
+
+                        <!-- ================= DESCRIPTION ================ -->
+                        <div class="form-group row">
+                            <h5 class="col-sm-3 col-form-label col-form-label display-4" style="font-size: x-large;">
+                                Description</h5>
+                            <div class="col-sm-5">
+                                <textarea type="text" class="form-control form-control-lg" id="name"
+                                    placeholder="Description" name="description" rows="5" required>
+                                        </textarea>
+                            </div>
+                        </div>
+
+                        <!-- ================= STATUS ================ -->
+                        <fieldset class="form-group">
+                            <div class="form-group row">
+                                <h1 for="statusbutton" class="col-sm-3 col-form-label-lg display-4"
+                                    style="font-size: x-large;">Status</h1>
+                                <div class="col-sm-5" style="font-size: x-large;">
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="status"
+                                            id="statusbutton1" value="New" required>
+                                        <label class="custom-control-label" for="statusbutton1"
+                                            style="font-size: large;">
+                                            New
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="status"
+                                            id="statusbutton2" value="In Progress" disabled>
+                                        <label class="custom-control-label" for="statusbutton2"
+                                            style="font-size: large;">
+                                            In Progress
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="status"
+                                            id="statusbutton3" value="Feedback" disabled>
+                                        <label class="custom-control-label" for="statusbutton3"
+                                            style="font-size: large;">
+                                            Feedback
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="status"
+                                            id="statusbutton4" value="Resolved" disabled>
+                                        <label class="custom-control-label" for="statusbutton4"
+                                            style="font-size: large;">
+                                            Resolved
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="status"
+                                            id="statusbutton5" value="Closed" disabled>
+                                        <label class="custom-control-label" for="statusbutton5"
+                                            style="font-size: large;">
+                                            Closed
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="status"
+                                            id="statusbutton6" value="Rejected" disabled>
+                                        <label class="custom-control-label" for="statusbutton6"
+                                            style="font-size: large;">
+                                            Rejected
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <!-- ================= PRIORITY ================ -->
+                        <fieldset class="form-group">
+                            <div class="form-group row">
+                                <h1 for="prioritybutton" class="col-sm-3 col-form-label-lg display-4"
+                                    style="font-size: x-large;">Priority</h1>
+                                <div class="col-sm-5" style="font-size: x-large;">
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="priority"
+                                            id="prioritybutton1" value="Normal" required>
+                                        <label class="custom-control-label" for="prioritybutton1"
+                                            style="font-size: large;">
+                                            Normal
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="priority"
+                                            id="prioritybutton2" value="High" required>
+                                        <label class="custom-control-label" for="prioritybutton2"
+                                            style="font-size: large;">
+                                            High
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="priority"
+                                            id="prioritybutton3" value="Urgent" required>
+                                        <label class="custom-control-label" for="prioritybutton3"
+                                            style="font-size: large;">
+                                            Urgent
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="priority"
+                                            id="prioritybutton4" value="Immerdiate" required>
+                                        <label class="custom-control-label" for="prioritybutton4"
+                                            style="font-size: large;">
+                                            Immerdiate
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <!-- ========= Assignee ========== -->
+                        <div class="form-group row">
+                            <h1 class="col-sm-3 col-form-label-lg display-4" style="font-size:x-large;">Assignee
+                            </h1>
+                            <div class="col-12 col-sm-5">
+                                <select class="custom-select" style="font-size: x-large;" name="assignee" required>
+                                    <option selected disabled>Choose The Assignee ...</option>
+                                    <% idassignee.forEach((item, i) => {  %>
+                                    <option value="<%=item%>">
+                                        <%= namaassignee[i] %>
+                                    </option>
+                                    <% }) %>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- ========= START DATE ========== -->
+                        <div class="form-group row">
+                            <h1 class="col-sm-3 col-form-label-lg display-4" style="font-size:x-large;">Start Date
+                            </h1>
+                            <div class="col-12 col-sm-5">
+                                <input type="date" class="form-control form-control" style="font-size: x-large;"
+                                    placeholder="Start Date" name="startdate" required>
+                            </div>
+                        </div>
+
+                        <!-- ========= DUE DATE ========== -->
+                        <div class="form-group row">
+                            <h1 class="col-sm-3 col-form-label-lg display-4" style="font-size:x-large;">Due Date
+                            </h1>
+                            <div class="col-12 col-sm-5">
+                                <input type="date" class="form-control form-control" style="font-size: x-large;"
+                                    placeholder="Due Date" name="duedate" required>
+                            </div>
+                        </div>
+
+                        <!-- ================= ESTIMATED TIME ================ -->
+                        <div class="form-group row">
+                            <h5 class="col-sm-3 col-form-label col-form-label display-4" style="font-size: x-large;">
+                                Estimated Time</h5>
+                            <div class="col-sm-5">
+                                <input type="number" style="font-size: x-large;" class="form-control form-control"
+                                    id="name" placeholder="Estimated Time (hours)" name="estimatedtime" required>
+                            </div>
+                        </div>
+
+                        <!-- ================= DONE ================ -->
+                        <div class="form-group row">
+                            <h5 class="col-sm-3 col-form-label col-form-label display-4" style="font-size: x-large;">
+                                Done (%)</h5>
+                            <div class="col-sm-5">
+                                <select style="font-size: 1.5vh ;" class="form-control" name="done" id="" required>
+                                    <option disabled selected>Choose the Percentage (%)...</option>
+                                    <option value="0">
+                                        0%
+                                    </option>
+                                    <option value="10">
+                                        10%
+                                    </option>
+                                    <option value="20">
+                                        20%
+                                    </option>
+                                    <option value="30">
+                                        30%
+                                    </option>
+                                    <option value="40">
+                                        40%
+                                    </option>
+                                    <option value="50">
+                                        50%
+                                    </option>
+                                    <option value="60">
+                                        60%
+                                    </option>
+                                    <option value="70">
+                                        70%
+                                    </option>
+                                    <option value="80">
+                                        80%
+                                    </option>
+                                    <option value="90">
+                                        90%
+                                    </option>
+                                    <option value="100">
+                                        100%
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- ================= FILE UPLOAD ================ -->
+                        <div class="form-group row">
+                            <h5 class="col-sm-3 col-form-label col-form-label display-4" style="font-size: x-large;">
+                                File</h5>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <input name="files" style="font-size: large;" type="file" class="form-control-file"
+                                        id="exampleFormControlFile1" value="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ================= BUTTON ================ -->
+                        <div class="form-group row">
+                            <div class="col-sm-10">
+                                <button style="font-size: large;" type="submit" class="btn btn-outline-success"><i
+                                        class="fa fa-check" aria-hidden="true"></i> Save</button>
+                                <button style="font-size: large;" type="button" class="btn btn-outline-light"><a
+                                        href="/projects/issues/<%=projectid%>"><i class="fa fa-ban"
+                                            aria-hidden="true"></i>
+                                        Cancel</a></button>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <% include ../../partials/footer%>
+</body>
+
+</html>
