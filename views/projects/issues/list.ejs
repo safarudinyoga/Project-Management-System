@@ -37,7 +37,7 @@
                                     </div>
                                     <div class="col-12 col-sm-9">
                                         <input type="text" style="font-size: large;" class="form-control" id="id"
-                                            placeholder="ID" name="issueid">
+                                            placeholder="ID" name="issuesid">
                                     </div>
                                 </div>
 
@@ -315,6 +315,7 @@
                                             <%- option.updateddate ? '<th scope="col">Updated Date</th>' : '' %>
                                             <%- option.closeddate ? '<th scope="col">Closed Date</th>' : '' %>
                                             <%- option.parenttask ? '<th scope="col">Parent Task</th>' : '' %>
+                                            <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -326,24 +327,24 @@
                                             <%- option.desciption ? '<td>' + item.description + '</td>' : '' %>
                                             <%- option.status ? '<td>' + item.status + '</td>' : '' %>
                                             <%- option.priority ? '<td>' + item.priority + '</td>' : '' %>
-                                            <%- option.assignee ? '<td>' + item.assignee + '</td>' : '' %>
-                                            <%- option.startdate ? '<td>' + item.startdate + '</td>' : '' %>
-                                            <%- option.duedate ? '<td>' + item.duedate + '</td>' : '' %>
+                                            <%- option.assignee ? '<td>' + item.fullname + '</td>' : '' %>
+                                            <%- option.startdate ? '<td>' + moment(item.startdate).format('DD-MM-YYYY') + '</td>' : '' %>
+                                            <%- option.duedate ? '<td>' + moment(item.duedate).format('DD-MM-YYYY') + '</td>' : '' %>
                                             <%- option.estimatedtime ? '<td>' + item.estimatedtime + '</td>' : '' %>
                                             <%- option.done ? '<td>' + item.done + '</td>' : '' %>
                                             <%- option.file ? '<td>' + item.file + '</td>' : '' %>
                                             <%- option.spenttime ? '<td>' + item.spenttime + '</td>' : '' %>
                                             <%- option.targetversion ? '<td>' + item.targetversion + '</td>' : '' %>
-                                            <%- option.author ? '<td>' + item.author + '</td>' : '' %>
+                                            <%- option.author ? '<td>' + item.authorname + '</td>' : '' %>
                                             <%- option.createddate ? '<td>' + item.createddate + '</td>' : '' %>
                                             <%- option.updateddate ? '<td>' + item.updateddate + '</td>' : '' %>
                                             <%- option.closeddate ? '<td>' + item.closeddate + '</td>' : '' %>
-                                            <%- option.parenttask ? '<td>' + item.parenttask + '</td>' : '' %>
+                                            <%- option.parenttask ? '<td>' + item.namaparentissue + '</td>' : '' %>
                                             <td>
-                                                <a href="/projects/members/<%=projectid%>/edit/"
+                                                <a href="/projects/issues/<%=projectid%>/edit/<%=item.issueid%>"
                                                     style="font-size: large;" class="btn btn-outline-success"><i
                                                         class="fa fa-pencil" aria-hidden="true"></i> EDIT</a>
-                                                <a href="/projects/members/<%=projectid%>/delete/"
+                                                <a href="/projects/issues/<%=projectid%>/delete/<%=item.issueid%>"
                                                     style="font-size: large;" class="btn btn-outline-danger">
                                                     <i class="fa fa-trash-o fa-lg"></i> DELETE</a>
                                             </td>
@@ -353,7 +354,7 @@
                                 </table>
 
                                 <div class="col-sm-10">
-                                    <a href="/projects/members/<%=projectid%>/add">
+                                    <a href="/projects/issues/<%=projectid%>/add">
                                         <button style="font-size: x-large;" class="btn btn-outline-primary"><i
                                                 class="fa fa-plus" aria-hidden="true"></i> Add Project
                                         </button>
