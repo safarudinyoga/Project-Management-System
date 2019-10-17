@@ -461,12 +461,11 @@ module.exports = (pool) => {
     router.get('/members/:projectid/edit/:userid', isLoggedIn, (req, res, next) => {
         let projectid = req.params.projectid;
 
-        // ===== QUERY UNTUK GET MEMBER NOT IN PROJECTS ===== \\
-
+        // ===== QUERY UNTUK GET MEMBER IN PROJECTS ===== \\
         const sqlgetedit = `SELECT MAX(members.userid) userid, MAX(members.roles) roles,
         STRING_AGG(CONCAT(users.firstname,' ',users.lastname), ', ') fullname 
         FROM members INNER JOIN users USING (userid) 
-		WHERE projectid=1 GROUP BY userid ORDER BY userid `
+		WHERE projectid=${projectid} GROUP BY userid ORDER BY userid `
 
         // ====== QUERY UNTUK DAPAT NAMA PROJECTS ====== \\
         const sqlpjname = `SELECT members.projectid, MAX(projects.name) projectname 
@@ -507,6 +506,19 @@ module.exports = (pool) => {
         }).catch(err => console.log(err))
     })
 
+    router.get('/members/:projectid/delete/:userid', isLoggedIn, (req, res, next) => {
+        const { projectid, userid } = req.params;
+        const sqldelete = `DELETE FROM members WHERE projectid=${projectid} AND userid=${userid}`
+
+        pool.query(sqldelete).then(result => {
+            res.redirect(`/projects/members/${projectid}`)
+        })
+            .catch(err => console.log(err))
+    })
+
+
+
+
     // ================== GET ISSUES =============== \\
     router.get('/issues/:projectid', isLoggedIn, (req, res, next) => {
         let projectid = req.params.projectid;
@@ -540,7 +552,7 @@ module.exports = (pool) => {
         }
         sqlcount += `  `;
         console.log(sqlcount);
-        
+
         pool.query(sqlcount).then(result => {
             let total = result.rows[0].total; // TOTAL DATA PAGE FROM QUERY
             let pages = Math.ceil(total / limit)
@@ -616,8 +628,55 @@ module.exports = (pool) => {
             req.session.user.issueopt = postOption;
             res.redirect(`${projectid}`)
         })
+            .catch(err => console.log(err))
+    })
+
+    router.get('/issues/:projectid/add', isLoggedIn, (req, res, next) => {
+        const projectid = req.params.projectid;
+
+        // ====== QUERY UNTUK DAPAT NAMA PROJECTS ====== \\
+        let sqlpjname = `SELECT members.projectid, MAX(projects.name) projectname 
+        FROM members INNER JOIN projects USING (projectid) 
+        INNER JOIN users USING (userid) WHERE projectid=${projectid} GROUP BY projectid ORDER BY projectid`
+
+        // ===== QUERY UNTUK GET MEMBER IN PROJECTS ===== \\
+        let sqlgetadd = `SELECT MAX(members.userid) userid,
+        STRING_AGG(CONCAT(users.firstname,' ',users.lastname), ', ') fullname 
+        FROM members INNER JOIN users USING (userid) 
+		WHERE projectid=${projectid} GROUP BY userid ORDER BY userid`
+
+        Promise.all([pool.query(sqlpjname), pool.query(sqlgetadd)]).then(results => {
+            const datapjname = results[0].rows
+            const data = results[1].rows
+            let pjname = datapjname.map(x => x.projectname)
+            let namaassignee = data.map(x => x.fullname)
+            let idassignee = data.map(x => x.userid)
+            console.log(data);
+            console.log(results[1].rows[0]);
+            console.log(namaassignee);
+            console.log(idassignee);
+            
+            res.render(`projects/issues/add`, { path: '/projects/issues', projectid, data, pjname,namaassignee, idassignee })
+        })
+            .catch(err => console.log(err))
+    })
+
+    router.post('/issues/:projectid/add', isLoggedIn, (req,res, next) => {
+        const projectid = req.params.projectid;
+        let {
+            tracker, subject, status, description, priority, assignee, startdate, duedate, estimatedtime, done, files
+        } = req.body;
+        startdate = moment(startdate).format("YYYY-MM-DD");
+        duedate = moment(duedate).format("YYYY-MM-DD");
+        let sqlpostadd = `INSERT INTO issues(projectid, tracker, subject, description, status, priority, assignee, startdate, duedate, estimatedtime, done, files) VALUES (${projectid}, '${tracker}', '${subject}', '${description}', '${status}', '${priority}', ${assignee}, '${startdate}', '${duedate}', ${estimatedtime}, ${done}, '${files}')`
+        console.log(sqlpostadd);
+        
+        pool.query(sqlpostadd).then(result => {
+            res.redirect(`/projects/issues/${projectid}`)
+        })
         .catch(err => console.log(err))
     })
+
 
     return router;
 }
