@@ -522,8 +522,9 @@ module.exports = (pool) => {
     // ================== GET ISSUES =============== \\
     router.get('/issues/:projectid', isLoggedIn, (req, res, next) => {
         let projectid = req.params.projectid;
+        // console.log(req.params.issueid);
 
-        const { checkid, issueid, checksubject, subject, checktracker, tracker, checkdone, done } = req.query;
+        const { checkid, issuesid, checksubject, subject, checktracker, tracker, checkdone, done } = req.query;
 
         let arr = [];
         let page = req.query.page || 1;
@@ -531,8 +532,8 @@ module.exports = (pool) => {
         let offset = (page - 1) * limit;
         let url = (req.url == `/issues/${projectid}`) ? `/issues/${projectid}/?page=1` : req.url;
 
-        if (checkid && issueid) {
-            arr.push(`issueid=${issueid}`)
+        if (checkid && issuesid) {
+            arr.push(`issueid=${issuesid}`)
         }
         if (checksubject && subject) {
             arr.push(`LOWER(subject) LIKE '%${subject.toLowerCase()}%'`)
@@ -551,15 +552,33 @@ module.exports = (pool) => {
             sqlcount += ` WHERE ${arr.join(' AND ')}`
         }
         sqlcount += `  `;
-        console.log(sqlcount);
+        // console.log(sqlcount);
 
         pool.query(sqlcount).then(result => {
             let total = result.rows[0].total; // TOTAL DATA PAGE FROM QUERY
             let pages = Math.ceil(total / limit)
-            console.log(total);
+            // console.log(total);
 
             // ============== SQL TABLE ============= \\
-            let sqltable = `SELECT * FROM issues WHERE projectid=${projectid}`
+            // let sqltable = `SELECT users.userid, CONCAT(users.firstname,' ',users.lastname) fullname,
+            // issues.issueid, projectid, tracker, subject, description, status, priority,
+            // assignee, startdate, duedate, estimatedtime, done, files, spenttime, targetversion,
+            // author, createddate, updateddate, closeddate, parenttask
+            // FROM issues LEFT JOIN users
+            // ON issues.assignee=users.userid WHERE projectid=${projectid}`
+
+            // ============== SQL TABLE2 ============ \\
+            let sqltable = `SELECT users.userid, CONCAT(users.firstname,' ',users.lastname) fullname,
+            i1.issueid, i1.projectid, i1.tracker, i1.subject, i1.description, i1.status, i1.priority,
+            i1.assignee, i1.startdate, i1.duedate, i1.estimatedtime, i1.done, i1.files, i1.spenttime,i1.targetversion, i1.author, CONCAT(u2.firstname, ' ', u2.lastname) authorname, 
+			i1.createddate, i1.updateddate, i1.closeddate, i1.parenttask, i2.subject namaparentissue
+            FROM issues i1 LEFT JOIN users
+            ON i1.assignee=users.userid
+			LEFT JOIN users u2
+			ON i1.author=u2.userid
+			LEFT JOIN issues i2
+			ON i1.parenttask = i2.issueid
+			WHERE i1.projectid=${projectid}`
 
             if (arr.length > 0) {
                 sqltable += ` WHERE ${arr.join(' AND ')}`
@@ -571,12 +590,20 @@ module.exports = (pool) => {
             // ============== SQL GET OPTION =============== \\
             let sqloption = `SELECT issueopt FROM users WHERE userid=${req.session.user.userid}`
 
+            //     let issueid = req.params.issueid
+            // console.log(issueid);
+
             const getTable = pool.query(sqltable)
             const getOption = pool.query(sqloption)
 
             Promise.all([getTable, getOption]).then(results => {
                 const data = results[0].rows;
                 const dataOption = results[1].rows;
+                // const dataIssue = results[2].rows;
+                // const issueid = data.map(x => x.issueid)
+                // console.log(issueid[0]);
+
+
                 const option = dataOption[0].issueopt
 
                 console.log(data);
@@ -589,7 +616,8 @@ module.exports = (pool) => {
                     option,
                     pages,
                     page,
-                    url
+                    url,
+                    moment
                 })
             })
                 .catch(err => console.log(err))
@@ -655,26 +683,112 @@ module.exports = (pool) => {
             console.log(results[1].rows[0]);
             console.log(namaassignee);
             console.log(idassignee);
-            
-            res.render(`projects/issues/add`, { path: '/projects/issues', projectid, data, pjname,namaassignee, idassignee })
+
+            res.render(`projects/issues/add`, { path: '/projects/issues', projectid, data, pjname, namaassignee, idassignee })
         })
             .catch(err => console.log(err))
     })
 
-    router.post('/issues/:projectid/add', isLoggedIn, (req,res, next) => {
+    router.post('/issues/:projectid/add', isLoggedIn, (req, res, next) => {
         const projectid = req.params.projectid;
         let {
             tracker, subject, status, description, priority, assignee, startdate, duedate, estimatedtime, done, files
         } = req.body;
-        startdate = moment(startdate).format("YYYY-MM-DD");
-        duedate = moment(duedate).format("YYYY-MM-DD");
-        let sqlpostadd = `INSERT INTO issues(projectid, tracker, subject, description, status, priority, assignee, startdate, duedate, estimatedtime, done, files) VALUES (${projectid}, '${tracker}', '${subject}', '${description}', '${status}', '${priority}', ${assignee}, '${startdate}', '${duedate}', ${estimatedtime}, ${done}, '${files}')`
+        startdate = moment(startdate).format("DD-MM-YYYY");
+        duedate = moment(duedate).format("DD-MM-YYYY");
+        let sqlpostadd = `INSERT INTO issues(projectid, tracker, subject, description, status, priority, assignee, startdate, duedate, estimatedtime, done, files, createddate) VALUES (${projectid}, '${tracker}', '${subject}', '${description}', '${status}', '${priority}', ${assignee}, '${startdate}', '${duedate}', ${estimatedtime}, ${done}, '${files}', now())`
         console.log(sqlpostadd);
-        
+
         pool.query(sqlpostadd).then(result => {
             res.redirect(`/projects/issues/${projectid}`)
         })
-        .catch(err => console.log(err))
+            .catch(err => console.log(err))
+    })
+
+    router.get('/issues/:projectid/edit/:issueid', isLoggedIn, (req, res, next) => {
+        const { projectid, issueid } = req.params
+        const thisAuthor = req.session.user.userid;
+        console.log(thisAuthor);
+        // ====== QUERY UNTUK DAPAT NAMA PROJECTS ====== \\
+        let sqlpjname = `SELECT members.projectid, MAX(projects.name) projectname 
+        FROM members INNER JOIN projects USING (projectid) 
+        INNER JOIN users USING (userid) WHERE projectid=${projectid} GROUP BY projectid ORDER BY projectid`
+
+        // ====== QUERY UNTUK DAPAT ISSUES PROJECTS ====== \\
+        let sqlissues = `SELECT users.userid, CONCAT(users.firstname,' ',users.lastname) fullname,
+        issues.issueid, projectid, tracker, subject, description, status, priority,
+        assignee, startdate, duedate, estimatedtime, done, files, spenttime, targetversion,
+        author, createddate, updateddate, closeddate, parenttask
+        FROM issues LEFT JOIN users
+        ON issues.assignee=users.userid WHERE projectid=${projectid} AND issueid=${issueid}`
+
+        // ====== QUERY UNTUK DAPAT AUTHOR PROJECTS ====== \\
+        // let sqlauthor = `SELECT users.userid, CONCAT(users.firstname,' ',users.lastname) fullname,
+        // issues.issueid, projectid, author
+        // FROM issues LEFT JOIN users
+        // ON issues.author=users.userid WHERE projectid=${projectid} AND issueid=${issueid}`
+
+        // ====== QUERY UNTUK DAPAT AUTHOR PROJECTS ====== \\
+        let sqlauthor = `SELECT users.userid, CONCAT(users.firstname,' ',users.lastname) fullname
+        FROM users WHERE userid=${thisAuthor}`
+
+        // ===== QUERY UNTUK DAPAT PARENTTASK ISSUES ===== \\
+        const subquery = `SELECT issues.issueid
+        FROM issues WHERE projectid=${projectid} AND issueid=${issueid}`
+        let sqlparent = `SELECT issues.issueid, subject FROM issues WHERE issueid NOT IN (${subquery})`
+
+        Promise.all([pool.query(sqlpjname), pool.query(sqlissues), pool.query(sqlauthor), pool.query(sqlparent)]).then(results => {
+            const datapj = results[0].rows
+            const data = results[1].rows
+            const dataAuthor = results[2].rows
+            const dataParent = results[3].rows
+            let pjname = datapj.map(x => x.projectname)
+            // console.log(data[0]);
+            // console.log(dataParent);
+            let iduser = dataAuthor.map(x => x.userid)
+            let namauser = dataAuthor.map(x => x.fullname)
+            let idIssue = dataParent.map(x => x.issueid)
+            let namaSubject = dataParent.map(x => x.subject)
+            // console.log(idIssue, namaParent);
+
+            res.render('projects/issues/edit', {
+                path: '/projects/issues',
+                data: data[0],
+                pjname,
+                projectid,
+                issueid,
+                moment,
+                iduser,
+                namauser,
+                idIssue,
+                namaSubject
+            })
+        })
+
+    })
+
+    router.post('/issues/:projectid/edit/:issueid', isLoggedIn, (req, res, next) => {
+        const { projectid, issueid } = req.params
+        const { tracker, subject, description, status, priority, duedate, done, files, targetversion, spenttime, parenttask } = req.body;
+
+        if (status == 'Closed') {
+            sqlpostedit = `UPDATE issues SET tracker='${tracker}', subject='${subject}', description='${description}', status='${status}', priority='${priority}', duedate='${duedate}', done='${done}', files='${files}', spenttime=${spenttime}, targetversion='${targetversion}', author=${req.session.user.userid}, updateddate=now(), closeddate=now(), parenttask=${parenttask} WHERE issueid=${issueid} AND projectid=${projectid}`
+        } else {
+            sqlpostedit = `UPDATE issues SET tracker='${tracker}', subject='${subject}', description='${description}', status='${status}', priority='${priority}', duedate='${duedate}', done='${done}', files='${files}', spenttime=${spenttime}, targetversion='${targetversion}', author=${req.session.user.userid}, updateddate=now(), parenttask=${parenttask} WHERE issueid=${issueid} AND projectid=${projectid}`
+        }
+
+        pool.query(sqlpostedit).then(result => {
+            res.redirect(`/projects/issues/${projectid}`)
+        })
+            .catch(err => console.log(err))
+    })
+
+    router.get('/issues/:projectid/delete/:issueid', isLoggedIn, (req, res, next) => {
+        const { projectid, issueid } = req.params;
+        const sqldelete = `DELETE FROM issues WHERE issueid=${issueid}`
+        pool.query(sqldelete).then(result => {
+            res.redirect(`/projects/issues/${projectid}`)
+        }).catch(err => console.log(err))
     })
 
 
