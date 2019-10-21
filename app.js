@@ -3,10 +3,20 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const flash = require("connect-flash");
 var session = require('express-session');
+const fileUpload = require('express-fileupload')
 const { Pool } = require('pg');
 
 var app = express();
+
+// view engine setup
+
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+// 
 
 const pool = new Pool({
   user: 'postgres',
@@ -22,29 +32,25 @@ var profileRouter = require('./routes/profile')(pool);
 var usersRouter = require('./routes/users')(pool);
 
 
-// view engine setup
 
-app.use(function (req, res, next) {
-  res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
-  next();
-});
-
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
+//use session login
+app.use(session({
+  secret: 'keyboard cat',
+  resave: true,
+  saveUninitialized: true
+}))
+app.use(fileUpload());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-//use session login
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true
-}))
-
+app.use(flash());
+app.set("etag", false);
+app.use(function (req, res, next) {
+  res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+  next();
+});
 app.use('/', indexRouter);
 app.use('/projects', projectRouter);
 app.use('/profile', profileRouter);
