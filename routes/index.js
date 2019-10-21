@@ -17,28 +17,48 @@ module.exports = (pool) => {
   router.get('/', isLoggedOut, (req, res, next) => {
     //console.log(req.session.user);
     //console.log(req.session.latestUrl);
-    res.render('login', { title: 'Login', latestUrl: req.session.latestUrl });
+    res.render('login', { 
+      title: 'Login', 
+      latestUrl: req.session.latestUrl,
+      error: req.flash('error')[0],
+      // isAdmin: req.session.user.isadmin
+    });
 
   });
 
   router.post('/login', (req, res, next) => {
     let sql = `SELECT * FROM users WHERE email=$1 AND password=$2`;
     //console.log(sql);
-    let { email, password,latestUrl } = req.body;
+    let { email, password, latestUrl } = req.body;
     //console.log(latestUrl);
     //console.log(email, password);
     //let { user } = req.session;
     pool.query(sql, [email, password], (err, row) => {
       if (err) throw err;
       console.log(row.rows[0]);
-      if (row == undefined || row.rows.length == 0){
-        res.redirect('login')
+      // console.log(row.rows[0].email);
+      // console.log(row.rows[0].password);
+      if (row.rows[0]) {
+        let isEmail = row.rows[0].email
+        let isPassword = row.rows[0].password
+        if (email == isEmail && password == isPassword){
+          req.session.user = row.rows[0];
+          latestUrl = latestUrl || '/projects';
+          res.redirect(latestUrl);
+        }
       } else {
-        //console.log(req.session);
-        req.session.user = row.rows[0];
-        latestUrl = latestUrl || '/projects';
-        res.redirect(latestUrl);
+        req.flash('error', 'Username or Password is Wrong')
+        res.redirect('/')
       }
+      // if (row == undefined || row.rows.length == 0){
+      //   res.redirect('/login')
+      // } else {
+      //   //console.log(req.session);
+      //   req.session.user = row.rows[0];
+      //   latestUrl = latestUrl || '/projects';
+      //   req.flash('error', 'Username or Password is Wrong')
+      //   res.redirect(latestUrl);
+      // }
     })
   });
 
