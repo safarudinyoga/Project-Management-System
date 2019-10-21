@@ -15,11 +15,19 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+// const pool = new Pool({
+//   user: 'postgres',
+//   host: 'localhost',
+//   database: 'pms',
+//   password: '12345',
+//   port: 5432
+// });
+
 const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'pms',
-  password: '12345',
+  user: 'lgiqebipuvrtkm',
+  host: 'ec2-174-129-253-101.compute-1.amazonaws.com',
+  database: 'd3e0m4rb0v0ni',
+  password: 'cb1452c9eb6904d7a3f1f3e0058de663272aece54793566dad4b5fd7c4d4b19f',
   port: 5432
 });
 
