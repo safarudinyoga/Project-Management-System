@@ -17,13 +17,23 @@
     <div class="container-fluid">
         <main role="main" class="col-md-10 ml-sm-auto col-lg-11">
             <div class="card border-light mx-1">
-                <h3 class="card-header bg-transparent display-4" style="margin-top: 8vh; margin-left: 5vh;" >Overview</h3>
+                <h3 class="card-header bg-transparent display-4" style="margin-top: 8vh; margin-left: 5vh;">Overview
+                </h3>
                 <div class="card-body" style="margin-left: 5vh;">
-                    <h4 class="card-title display-4" style="font-size: xx-large;">Project (<%=pjname%>)</h4>
+                    <h4 class="card-title display-4" style="font-size: xx-large;">Project #<%=projectid%> (<%=pjname%>)
+                    </h4>
                     <div class="card mt-2">
                         <div class="card-body">
                             <h5 class="card-title" style="font-size: x-large;">Issue Tracking</h5>
                             <ul class="list-group" style="font-size: large;">
+                                <% issuesData.forEach(item => { %>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <%=item.tracker%>
+                                    <span class="" >
+                                        <%=item.open%> Open / <%= item.total %> Total
+                                    </span>
+                                </li>
+                                <% }) %>
                             </ul>
                         </div>
                     </div>

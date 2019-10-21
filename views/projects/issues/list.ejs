@@ -19,7 +19,7 @@
     <div class="container-fluid">
         <main role="main" class="col-md-10 ml-sm-auto col-lg-11">
             <div class="card border-light mx-1">
-                <h3 class="card-header bg-transparent display-3" style="margin-top: 1vh; margin-left: 5vh;">Projects
+                <h3 class="card-header bg-transparent display-3" style="margin-top: 1vh; margin-left: 5vh;">Issues
                 </h3>
                 <div class="card-body" style="margin-left: 5vh;">
                     <div class="card border-light">
@@ -31,13 +31,14 @@
                                 <div class="form-group row">
                                     <div class="custom-control custom-checkbox col-12 col-sm-2">
                                         <input type="checkbox" class="custom-control-input" aria-label="checkid" for=""
-                                            id="customCheck1" name="checkid">
+                                            id="customCheck1" name="checkid" <%= query.checkid ? ' checked' : '' %>>
                                         <label class="custom-control-label" style="font-size: large" for="customCheck1"
                                             id="">Issue ID</label>
                                     </div>
                                     <div class="col-12 col-sm-9">
                                         <input type="text" style="font-size: large;" class="form-control" id="id"
-                                            placeholder="ID" name="issuesid">
+                                            placeholder="ID" name="issuesid"
+                                            value="<%= query.checkid ? query.issuesid : '' %>">
                                     </div>
                                 </div>
 
@@ -46,13 +47,14 @@
                                 <div class="form-group row">
                                     <div class="custom-control custom-checkbox col-12 col-sm-2">
                                         <input type="checkbox" class="custom-control-input" for="" id="customCheck2"
-                                            name="checksubject">
+                                            name="checksubject" <%= query.checksubject ? ' checked' : '' %>>
                                         <label class="custom-control-label" for="customCheck2" style="font-size: large"
                                             id="name">Subject</label>
                                     </div>
                                     <div class="col-12 col-sm-9">
                                         <input type="text" class="form-control" id="id" placeholder="Subject"
-                                            name="subject" style="font-size: large;">
+                                            name="subject" style="font-size: large;"
+                                            value="<%= query.checksubject ? query.subject : '' %>">
                                     </div>
                                 </div>
 
@@ -61,20 +63,23 @@
                                 <div class="form-group row">
                                     <div class="custom-control custom-checkbox col-12 col-sm-2">
                                         <input type="checkbox" class="custom-control-input" for="" id="customCheck3"
-                                            name="checktracker">
+                                            name="checktracker" <%= query.checktracker ? ' checked' : '' %>>
                                         <label class="custom-control-label" for="customCheck3" style="font-size: large"
                                             id="name">Tracker</label>
                                     </div>
                                     <div class="col-12 col-sm-9">
                                         <select class="form-control" id="role" name="tracker" style="font-size: large;">
                                             <option disabled selected>Choose the Tracker ...</option>
-                                            <option value="Bug">
+                                            <option value="Bug"
+                                                <%= query.checktracker ? (query.tracker =='Bug' ? ' selected' : '') : '' %>>
                                                 Bug
                                             </option>
-                                            <option value="Feature">
+                                            <option value="Feature"
+                                                <%= query.checktracker ? (query.tracker =='Feature' ? ' selected' : '') : '' %>>
                                                 Feature
                                             </option>
-                                            <option value="Support">
+                                            <option value="Support"
+                                                <%= query.checktracker ? (query.tracker =='Support' ? ' selected' : '') : '' %>>
                                                 Support
                                             </option>
                                         </select>
@@ -93,43 +98,49 @@
                                     <div class="col-12 col-sm-9">
                                         <select class="form-control" id="role" name="done" style="font-size: large;">
                                             <option disabled selected>Choose the Tracker ...</option>
-                                            <option value="0">
+                                            <option value="0"
+                                                <%= query.checkdone ? (query.done =='0' ? ' selected' : '') : '' %>>
                                                 0
                                             </option>
-                                            <option value="10">
+                                            <option value="10"
+                                                <%= query.checkdone ? (query.done =='10' ? ' selected' : '') : '' %>>
                                                 10
                                             </option>
-                                            <option value="20">
+                                            <option value="20"
+                                                <%= query.checkdone ? (query.done =='20' ? ' selected' : '') : '' %>>
                                                 20
                                             </option>
-                                            <option value="30">
+                                            <option value="30"
+                                                <%= query.checkdone ? (query.done =='30' ? ' selected' : '') : '' %>>
                                                 30
                                             </option>
-                                            <option value="40">
+                                            <option value="40"
+                                                <%= query.checkdone ? (query.done =='40' ? ' selected' : '') : '' %>>
                                                 40
                                             </option>
-                                            <option value="50">
+                                            <option value="50"
+                                                <%= query.checkdone ? (query.done =='50' ? ' selected' : '') : '' %>>
                                                 50
                                             </option>
-                                            <option value="60">
+                                            <option value="60"
+                                                <%= query.checkdone ? (query.done =='60' ? ' selected' : '') : '' %>>
                                                 60
                                             </option>
-                                            <option value="70">
-                                                70
-                                            </option>
-                                            <option value="80">
-                                                80
-                                            </option>
-                                            <option value="90">
-                                                90
-                                            </option>
-                                            <option value="100">
-                                                100
-                                            </option>
+                                            <option value="70"
+                                                <%= query.checkdone ? (query.done =='70' ? ' selected' : '') : '' %>>
+                                                70 </option>
+                                            <option value="80"
+                                                <%= query.checkdone ? (query.done =='80' ? ' selected' : '') : '' %>>
+                                                80 </option>
+                                            <option value="90"
+                                                <%= query.checkdone ? (query.done =='90' ? ' selected' : '') : '' %>>
+                                                90 </option>
+                                            <option value="100"
+                                                <%= query.checkdone ? (query.done =='100' ? ' selected' : '') : '' %>>
+                                                100 </option>
                                         </select>
                                     </div>
                                 </div>
-
                                 <div class="form-group row">
                                     <div class="col-sm-10">
                                         <button type="submit" class="btn btn-outline-primary"
@@ -137,7 +148,7 @@
                                                 Search</i>
                                         </button>
                                         <button type="button" style="font-size: large;" class="btn btn-light"> <a
-                                                href="/projects/members/<%=projectid%>"><i class="fa fa-undo"
+                                                href="/projects/issues/<%=projectid%>"><i class="fa fa-undo"
                                                     aria-hidden="true"></i> Reset</a></button>
                                     </div>
                                 </div>
@@ -179,7 +190,8 @@
                                             </div>
                                             <div class="custom-control custom-checkbox col-12 col-sm-3">
                                                 <input type="checkbox" name="desciption" class="custom-control-input"
-                                                    id="opcheck4" value="true" <%= option.desciption ? ' checked' : '' %>>
+                                                    id="opcheck4" value="true"
+                                                    <%= option.desciption ? ' checked' : '' %>>
                                                 <label class="custom-control-label" for="opcheck4"
                                                     style="font-size: larger">Description</label>
                                             </div>
@@ -203,7 +215,8 @@
                                             </div>
                                             <div class="custom-control custom-checkbox col-12 col-sm-3">
                                                 <input type="checkbox" name="startdate" class="custom-control-input"
-                                                    id="opcheck8" value="true" <%= option.startdate ? ' checked' : '' %>>
+                                                    id="opcheck8" value="true"
+                                                    <%= option.startdate ? ' checked' : '' %>>
                                                 <label class="custom-control-label" for="opcheck8"
                                                     style="font-size: larger">Start Date</label>
                                             </div>
@@ -215,7 +228,8 @@
                                             </div>
                                             <div class="custom-control custom-checkbox col-12 col-sm-3">
                                                 <input type="checkbox" name="estimatedtime" class="custom-control-input"
-                                                    id="opcheck10" value="true" <%= option.estimatedtime ? ' checked' : '' %>>
+                                                    id="opcheck10" value="true"
+                                                    <%= option.estimatedtime ? ' checked' : '' %>>
                                                 <label class="custom-control-label" for="opcheck10"
                                                     style="font-size: larger">Estimated Time (Hours)</label>
                                             </div>
@@ -233,13 +247,15 @@
                                             </div>
                                             <div class="custom-control custom-checkbox col-12 col-sm-3">
                                                 <input type="checkbox" name="spenttime" class="custom-control-input"
-                                                    id="opcheck13" value="true" <%= option.spenttime ? ' checked' : '' %>>
+                                                    id="opcheck13" value="true"
+                                                    <%= option.spenttime ? ' checked' : '' %>>
                                                 <label class="custom-control-label" for="opcheck13"
                                                     style="font-size: larger">Spent Time (Hours)</label>
                                             </div>
                                             <div class="custom-control custom-checkbox col-12 col-sm-3">
                                                 <input type="checkbox" name="targetversion" class="custom-control-input"
-                                                    id="opcheck14" value="true" <%= option.targetversion ? ' checked' : '' %>>
+                                                    id="opcheck14" value="true"
+                                                    <%= option.targetversion ? ' checked' : '' %>>
                                                 <label class="custom-control-label" for="opcheck14"
                                                     style="font-size: larger">Target Version</label>
                                             </div>
@@ -251,25 +267,29 @@
                                             </div>
                                             <div class="custom-control custom-checkbox col-12 col-sm-3">
                                                 <input type="checkbox" name="createddate" class="custom-control-input"
-                                                    id="opcheck16" value="true" <%= option.createddate ? ' checked' : '' %>>
+                                                    id="opcheck16" value="true"
+                                                    <%= option.createddate ? ' checked' : '' %>>
                                                 <label class="custom-control-label" for="opcheck16"
                                                     style="font-size: larger">Created Date</label>
                                             </div>
                                             <div class="custom-control custom-checkbox col-12 col-sm-3">
                                                 <input type="checkbox" name="updateddate" class="custom-control-input"
-                                                    id="opcheck17" value="true" <%= option.updateddate ? ' checked' : '' %>>
+                                                    id="opcheck17" value="true"
+                                                    <%= option.updateddate ? ' checked' : '' %>>
                                                 <label class="custom-control-label" for="opcheck17"
                                                     style="font-size: larger">Update Date</label>
                                             </div>
                                             <div class="custom-control custom-checkbox col-12 col-sm-3">
                                                 <input type="checkbox" name="closeddate" class="custom-control-input"
-                                                    id="opcheck18" value="true" <%= option.closeddate ? ' checked' : '' %>>
+                                                    id="opcheck18" value="true"
+                                                    <%= option.closeddate ? ' checked' : '' %>>
                                                 <label class="custom-control-label" for="opcheck18"
                                                     style="font-size: larger">Closed Date</label>
                                             </div>
                                             <div class="custom-control custom-checkbox col-12 col-sm-3">
                                                 <input type="checkbox" name="parenttask" class="custom-control-input"
-                                                    id="opcheck19" value="true" <%= option.parenttask ? ' checked' : '' %>>
+                                                    id="opcheck19" value="true"
+                                                    <%= option.parenttask ? ' checked' : '' %>>
                                                 <label class="custom-control-label" for="opcheck19"
                                                     style="font-size: larger">Parent Task</label>
                                             </div>
@@ -305,10 +325,10 @@
                                             <%- option.assignee ? '<th scope="col">Assignee</th>' : '' %>
                                             <%- option.startdate ? '<th scope="col">Start Date</th>' : '' %>
                                             <%- option.duedate ? '<th scope="col">Due Date</th>' : '' %>
-                                            <%- option.estimatedtime ? '<th scope="col">Estimated Time</th>' : '' %>
+                                            <%- option.estimatedtime ? '<th scope="col">Estimated Time (Hours)</th>' : '' %>
                                             <%- option.done ? '<th scope="col">Done (%)</th>' : '' %>
                                             <%- option.file ? '<th scope="col">File</th>' : '' %>
-                                            <%- option.spenttime ? '<th scope="col">Spent Time</th>' : '' %>
+                                            <%- option.spenttime ? '<th scope="col">Spent Time (Hours)</th>' : '' %>
                                             <%- option.targetversion ? '<th scope="col">Target Version</th>' : '' %>
                                             <%- option.author ? '<th scope="col">Author</th>' : '' %>
                                             <%- option.createddate ? '<th scope="col">Created Date</th>' : '' %>
@@ -332,31 +352,55 @@
                                             <%- option.duedate ? '<td>' + moment(item.duedate).format('DD-MM-YYYY') + '</td>' : '' %>
                                             <%- option.estimatedtime ? '<td>' + item.estimatedtime + '</td>' : '' %>
                                             <%- option.done ? '<td>' + item.done + '</td>' : '' %>
-                                            <%- option.file ? '<td>' + item.file + '</td>' : '' %>
+                                            <%- option.file ? '<td>' + item.files + '</td>' : '' %>
                                             <%- option.spenttime ? '<td>' + item.spenttime + '</td>' : '' %>
                                             <%- option.targetversion ? '<td>' + item.targetversion + '</td>' : '' %>
                                             <%- option.author ? '<td>' + item.authorname + '</td>' : '' %>
-                                            <%- option.createddate ? '<td>' + item.createddate + '</td>' : '' %>
-                                            <%- option.updateddate ? '<td>' + item.updateddate + '</td>' : '' %>
-                                            <%- option.closeddate ? '<td>' + item.closeddate + '</td>' : '' %>
+                                            <%- option.createddate ? '<td>' + moment(item.createddate).format('DD-MM-YYYY') + '</td>' : '' %>
+                                            <%- option.updateddate ? '<td>' + moment(item.updateddate).format('DD-MM-YYYY') + '</td>' : '' %>
+                                            <%- option.closeddate ? '<td>' + moment(item.closeddate).format('DD-MM-YYYY') + '</td>' : '' %>
                                             <%- option.parenttask ? '<td>' + item.namaparentissue + '</td>' : '' %>
                                             <td>
                                                 <a href="/projects/issues/<%=projectid%>/edit/<%=item.issueid%>"
                                                     style="font-size: large;" class="btn btn-outline-success"><i
                                                         class="fa fa-pencil" aria-hidden="true"></i> EDIT</a>
+                                                <% if (isAdmin == true) { %>
                                                 <a href="/projects/issues/<%=projectid%>/delete/<%=item.issueid%>"
+                                                    data-id="<%= `${projectid}-${item.issueid}` %>"
                                                     style="font-size: large;" class="btn btn-outline-danger">
                                                     <i class="fa fa-trash-o fa-lg"></i> DELETE</a>
+                                                <% } %>
                                             </td>
                                         </tr>
                                         <% }) %>
                                     </tbody>
                                 </table>
-
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination">
+                                        <li class="page-item <%= page == 1 ? 'disabled': ''; %>"><a
+                                                style="font-size: larger;" class="page-link"
+                                                href="<%= url.replace(`page=${page}`, `page=${parseInt(page) - 1}`)%>"><i
+                                                    class="fa fa-arrow-left" aria-hidden="true"></i>
+                                                Previous</a></li>
+                                        <% for (let i = 1; i <= pages; i++) { %>
+                                        <li style="font-size: larger;"
+                                            class="page-item <%= page == i ? 'active': ''; %>"><a class="page-link"
+                                                href="<%= url.replace(`page=${page}`, `page=${i}`)%>">
+                                                <%= i %></a></li>
+                                        <% }; %>
+                                        <li style="font-size: larger;"
+                                            class="page-item <%= page == pages ? 'disabled': ''; %>"><a
+                                                class="page-link"
+                                                href="<%= url.replace(`page=${page}`, `page=${parseInt(page) + 1}`)%>"><i
+                                                    class="fa fa-arrow-right" aria-hidden="true"></i>
+                                                Next</a>
+                                        </li>
+                                    </ul>
+                                </nav>
                                 <div class="col-sm-10">
                                     <a href="/projects/issues/<%=projectid%>/add">
                                         <button style="font-size: x-large;" class="btn btn-outline-primary"><i
-                                                class="fa fa-plus" aria-hidden="true"></i> Add Project
+                                                class="fa fa-plus" aria-hidden="true"></i> Add Issue
                                         </button>
                                     </a>
                                 </div>
@@ -368,6 +412,67 @@
         </main>
     </div>
 
+    <% include ../../partials/footer %>
+    <%_ if (error){-%>
+    <script type="text/javascript">
+        $(document).ready(() => {
+
+            let error = '<%=error%>';
+            Swal.fire({
+                title: error,
+                type: "error",
+                timer: 2000
+            })
+        })
+    </script>
+    <%_ } else if (berhasil){ -%>
+    <script type="text/javascript">
+        $(document).ready(() => {
+
+            let berhasil = '<%=berhasil%>';
+            Swal.fire({
+                title: berhasil,
+                type: "success",
+                timer: 2000
+            })
+        })
+    </script>
+    <% } %>
+    <script type="text/javascript">
+        // di eksekusi ketika semua dom (html) ter-load
+        $(document).ready(() => {
+            function myfunction(del) {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'You will not be able to recover this file!',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'No, keep it'
+                }).then((result) => {
+                    if (result.value) {
+                        window.location = `/projects/issues/${del[0]}/delete/${del[1]}`
+                        // setTimeout(() => {  }, 2000);
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                        Swal.fire(
+                            'Cancelled',
+                            'Your file is safe :)',
+                            'error',
+                            '500'
+                        )
+                        setTimeout(() => { window.location = `/projects/issues/${del[0]}` }, 2000);
+                    }
+                });
+            }
+
+            $(".btn-outline-danger").click(function (e) {
+                e.preventDefault();
+                let del = $(this).attr("data-id").split('-'); //del[0] del[1]
+                console.log(del);
+                myfunction(del);
+            })
+        })
+    </script>
 </body>
 
 </html>

@@ -1,31 +1,48 @@
-<div class="d-md-flex bg-light sidebar collapse navbar-collapse" id="sidebar" style="font-size: x-large;">
-    <div class="sidebar-sticky">
-        <ul class="nav flex-column nav-pills">
-            <li class="nav-item" >
-                <a class="nav-link <%= path=='/projects/overview' ? 'active' : ''%>"
-                    href="/projects/overview/<%=projectid%>" style="font-family:Verdana, Geneva, Tahoma, sans-serif">
-                    Overview
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link <%= path=='/projects/activity' ? 'active' : ''%>"
-                    href="/projects/activity/<%=projectid%>" style="font-family:Verdana, Geneva, Tahoma, sans-serif">
-                    Activity
-                </a>
-            </li>
-        </ul>
-        <ul class="nav flex-column nav-pills">
-            <li class="nav-item">
-                <a class="nav-link <%= path=='/projects/members' ? 'active' : ''%>"
-                    href="/projects/members/<%=projectid%>" style="font-family:Verdana, Geneva, Tahoma, sans-serif">
-                    Members
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link <%= path=='/projects/issues' ? 'active' : ''%>" href="/projects/issues/<%=projectid%>" style="font-family:Verdana, Geneva, Tahoma, sans-serif">
-                    Issues
-                </a>
-            </li>
-        </ul>
-    </div>
+<div
+  class="d-md-flex bg-light sidebar collapse navbar-collapse"
+  id="sidebar"
+  style="font-size: x-large;"
+>
+  <div class="sidebar-sticky">
+    <ul class="nav flex-column nav-pills">
+      <li class="nav-item">
+        <a
+          class="nav-link <%= path=='/projects/overview' ? 'active' : ''%>"
+          href="/projects/overview/<%=projectid%>"
+          style="font-family:Verdana, Geneva, Tahoma, sans-serif"
+        >
+          Overview
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link <%= path=='/projects/activity' ? 'active' : ''%>"
+          href="/projects/activity/<%=projectid%>"
+          style="font-family:Verdana, Geneva, Tahoma, sans-serif"
+        >
+          Activity
+        </a>
+      </li>
+    </ul>
+    <ul class="nav flex-column nav-pills">
+      <li class="nav-item">
+        <a
+          class="nav-link <%= path=='/projects/members' ? 'active' : ''%>"
+          href="/projects/members/<%=projectid%>"
+          style="font-family:Verdana, Geneva, Tahoma, sans-serif"
+        >
+          Members
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link <%= path=='/projects/issues' ? 'active' : ''%>"
+          href="/projects/issues/<%=projectid%>"
+          style="font-family:Verdana, Geneva, Tahoma, sans-serif"
+        >
+          Issues
+        </a>
+      </li>
+    </ul>
+  </div>
 </div>

@@ -22,7 +22,7 @@
                 #<%=projectid%> (<%=pjname%>) </h1>
             <div class="card-body" style="margin-left: 3vh;">
 
-                <form class="form-horizontal" action="" method="POST">
+                <form class="form-horizontal" enctype="multipart/form-data" action="" method="POST">
                     <div class="panel-body form-control-sm">
 
                         <!-- ================= TRACKER ================ -->
@@ -275,7 +275,7 @@
                             <div class="col-sm-5">
                                 <div class="form-group">
                                     <input name="files" style="font-size: large;" type="file" class="form-control-file"
-                                        id="exampleFormControlFile1" value="">
+                                        id="exampleFormControlFile1" >
                                 </div>
                             </div>
                         </div>

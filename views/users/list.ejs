@@ -27,13 +27,14 @@
                                 <div class="form-group row">
                                     <div class="custom-control custom-checkbox col-12 col-sm-2">
                                         <input type="checkbox" class="custom-control-input" for="" id="customCheck1"
-                                            name="checkuserid">
+                                            name="checkuserid" <%= query.checkuserid ? ' checked' : '' %>>
                                         <label style="font-size: larger;" class="custom-control-label"
-                                            for="customCheck1" <%= query.checkuserid ? ' checked' : '' %>>ID</label>
+                                            for="customCheck1">ID</label>
                                     </div>
                                     <div class="col-12 col-sm-9">
                                         <input style="font-size: large;" type="text" class="form-control" id="userId"
-                                            placeholder="User ID" name="userid">
+                                            placeholder="User ID" name="userid"
+                                            value="<%= query.checkuserid ? query.userid : '' %>">
                                     </div>
                                 </div>
 
@@ -42,15 +43,15 @@
                                 <div class="form-group row">
                                     <div class="custom-control custom-checkbox col-12 col-sm-2">
                                         <input type="checkbox" class="custom-control-input" for="" id="customCheck2"
-                                            name="checkuseremail">
+                                            name="checkuseremail" <%= query.checkuseremail ? ' checked' : '' %>>
                                         <label style="font-size: larger;" class="custom-control-label"
-                                            for="customCheck2"
-                                            <%= query.checkuseremail ? ' checked' : '' %>>Email</label>
+                                            for="customCheck2">Email</label>
                                     </div>
                                     <div class="col-12 col-sm-9">
                                         <input type="text" class="form-control" id="userEmail" style="font-size: large;"
                                             placeholder="example => admin@gmail.com" name="email"
-                                            style="font-style: italic">
+                                            style="font-style: italic"
+                                            value="<%= query.checkuseremail ? query.email : '' %>">
                                     </div>
                                 </div>
 
@@ -59,14 +60,15 @@
                                 <div class="form-group row">
                                     <div class="custom-control custom-checkbox col-12 col-sm-2">
                                         <input type="checkbox" class="custom-control-input" for="" id="customCheck3"
-                                            name="checkfullname">
+                                            name="checkfullname" <%= query.checkfullname ? ' checked' : '' %>>
                                         <label style="font-size: larger;" class="custom-control-label"
-                                            for="customCheck3" <%= query.checkfullname ? ' checked' : '' %>>Name
+                                            for="customCheck3">Name
                                         </label>
                                     </div>
                                     <div class="col-12 col-sm-9">
                                         <input type="text" class="form-control" id="userName" style="font-size: large;"
-                                            placeholder="Name" name="fullname">
+                                            placeholder="Name" name="fullname"
+                                            value="<%= query.checkfullname ? query.fullname : '' %>">
                                     </div>
                                 </div>
 
@@ -75,21 +77,23 @@
                                 <div class="form-group row">
                                     <div class="custom-control custom-checkbox col-12 col-sm-2">
                                         <input type="checkbox" class="custom-control-input" for="" id="customCheck4"
-                                            name="checkuserrole">
+                                            name="checkuserrole" <%= query.checkuserrole ? ' checked' : '' %>>
                                         <label class="custom-control-label" for="customCheck4"
-                                            style="font-size: larger;"
-                                            <%= query.checkuserrole ? ' checked' : '' %>>Position </label>
+                                            style="font-size: larger;">Position </label>
                                     </div>
                                     <div class="col-12 col-sm-9" style="font-size: larger;">
                                         <select class="form-control" name="userrole" style="font-size: large;">
                                             <option disabled selected>Choose the Position ...</option>
-                                            <option value="Manager">
+                                            <option value="Manager"
+                                                <%= query.checkuserrole ? (query.userrole =='Manager' ? ' selected' : '') : '' %>>
                                                 Manager
                                             </option>
-                                            <option value="Software Developer">
+                                            <option value="Software Developer"
+                                                <%= query.checkuserrole ? (query.userrole =='Software Developer' ? ' selected' : '') : '' %>>
                                                 Software Developer
                                             </option>
-                                            <option value="Quality Assurance">
+                                            <option value="Quality Assurance"
+                                                <%= query.checkuserrole ? (query.userrole =='Quality Assurance' ? ' selected' : '') : '' %>>
                                                 Quality Assurance
                                             </option>
                                         </select>
@@ -101,18 +105,20 @@
                                 <div class="form-group row">
                                     <div class="custom-control custom-checkbox col-12 col-sm-2">
                                         <input type="checkbox" class="custom-control-input" id="customCheck5"
-                                            name="checkusertypejob">
+                                            name="checkusertypejob" <%= query.checkusertypejob ? ' checked' : '' %>>
                                         <label style="font-size: larger;" class="custom-control-label"
-                                            for="customCheck5" <%= query.checkusertypejob ? ' checked' : '' %>>Type
+                                            for="customCheck5">Type
                                             Job</label>
                                     </div>
                                     <div class="col-12 col-sm-9" style="font-size: larger;">
                                         <select class="form-control" name="typejob" style="font-size: large;">
                                             <option disabled selected>Choose the Type Job ...</option>
-                                            <option value="true">
+                                            <option value="true"
+                                                <%= query.checkusertypejob ? (query.typejob=='true' ? ' selected' : '') : '' %>>
                                                 Full-Time
                                             </option>
-                                            <option value="false">
+                                            <option value="false"
+                                                <%= query.checkusertypejob ? (query.typejob=='false' ? ' selected' : '') : '' %>>
                                                 Part-Time
                                             </option>
                                         </select>
@@ -179,7 +185,8 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-10">
-                                            <button type="submit" style="font-size: larger;" class="btn btn-outline-info"><i class="fa fa-refresh"
+                                            <button type="submit" style="font-size: larger;"
+                                                class="btn btn-outline-info"><i class="fa fa-refresh"
                                                     aria-hidden="true"></i> Apply</button>
                                         </div>
                                     </form>
@@ -190,7 +197,8 @@
                         <!-- ==================== TABLES ======================== -->
                         <div class="card border-light mx-1">
                             <div class="card-body">
-                                <div class="table-responsive table-responsive-sm table-responsive-md" style="font-size: larger;">
+                                <div class="table-responsive table-responsive-sm table-responsive-md"
+                                    style="font-size: larger;">
                                     <table class="table table-striped" style="font-size: larger;">
                                         <thead>
                                             <tr>
@@ -214,9 +222,11 @@
                                                     <a href="/users/edit/<%= item.userid %>" style="font-size: large;"
                                                         class="btn btn-outline-success"><i class="fa fa-pencil"
                                                             aria-hidden="true"></i> EDIT</a>
-                                                    <a href="/users/delete/<%= item.userid %>" style="font-size: large;"
-                                                        class="btn btn-outline-danger">
+                                                    <% if (isAdmin == true) { %>
+                                                    <a href="" style="font-size: large;" class="btn btn-outline-danger"
+                                                        data-id="<%=item.userid%>">
                                                         <i class="fa fa-trash-o fa-lg"></i> DELETE</a>
+                                                    <% } %>
                                                 </td>
                                             </tr>
                                             <% }) %>
@@ -224,39 +234,97 @@
                                     </table>
                                     <nav aria-label="Page navigation example">
                                         <ul class="pagination">
-                                            <li class="page-item <%= page == 1 ? 'disabled': ''; %>"><a style="font-size: larger;"
-                                                    class="page-link" href="/users?page=<%= parseInt(page) - 1%>"><i
+                                            <li class="page-item <%= page == 1 ? 'disabled': ''; %>"><a
+                                                    style="font-size: larger;" class="page-link"
+                                                    href="<%= url.replace(`page=${page}`, `page=${parseInt(page) - 1}`)%>"><i
                                                         class="fa fa-arrow-left" aria-hidden="true"></i>
                                                     Previous</a></li>
                                             <% for (let i = 1; i <= pages; i++) { %>
-                                            <li style="font-size: larger;" class="page-item <%= page == i ? 'active': ''; %>"><a class="page-link"
-                                                    href="/users?page=<%= i %>">
+                                            <li style="font-size: larger;"
+                                                class="page-item <%= page == i ? 'active': ''; %>"><a class="page-link"
+                                                    href="<%= url.replace(`page=${page}`, `page=${i}`)%>">
                                                     <%= i %></a></li>
                                             <% }; %>
-                                            <li style="font-size: larger;" class="page-item <%= page == pages ? 'disabled': ''; %>"><a
-                                                    class="page-link" href="/users?page=<%= parseInt(page) + 1%>"><i
+                                            <li style="font-size: larger;"
+                                                class="page-item <%= page == pages ? 'disabled': ''; %>"><a
+                                                    class="page-link"
+                                                    href="<%= url.replace(`page=${page}`, `page=${parseInt(page) + 1}`)%>"><i
                                                         class="fa fa-arrow-right" aria-hidden="true"></i>
                                                     Next</a>
                                             </li>
                                         </ul>
                                     </nav>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-10">
-                                        <!-- <a href="/users/add" type="button" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> ADD USER</a> -->
-                                        <a href="/users/add"><button class="btn btn-outline-primary" style="font-size: larger;"><i
-                                                    class="fa fa-plus" aria-hidden="true"></i> ADD
-                                                USER</button></a>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-10">
+                                            <!-- <a href="/users/add" type="button" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> ADD USER</a> -->
+                                            <a href="/users/add"><button class="btn btn-outline-primary"
+                                                    style="font-size: larger;"><i class="fa fa-plus"
+                                                        aria-hidden="true"></i>
+                                                    ADD
+                                                    USER</button></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
         </main>
     </div>
     <% include ../partials/footer%>
+    <script type="text/javascript">
+        $(document).ready(() => {
+            function myfunction(userid) {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'You will not be able to recover this file!',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'No, keep it'
+                }).then((result) => {
+                    if (result.value) {
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success',
+                            '500'
+                        )
+                        setTimeout(() => { window.location = `/users/delete/${userid}` }, 2000);
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                        Swal.fire(
+                            'Cancelled, File is Forgiven!',
+                            'Your file is safe :)',
+                            'error',
+                            '500'
+                        )
+                        setTimeout(() => { window.location = '/users' }, 2000);
+                    }
+                });
+            }
+
+            $(".btn-outline-danger").click(function (e) {
+                e.preventDefault();
+                let userid = $(this).attr("data-id");
+                console.log(userid);
+                myfunction(userid);
+            })
+        })
+    </script>
+    <%_ if (berhasil){-%>
+    <script type="text/javascript">
+        $(document).ready(() => {
+
+            let berhasil = '<%=berhasil%>';
+            Swal.fire({
+                title: berhasil,
+                type: "success",
+                timer: 2000
+            })
+        })
+    </script>
+    <%_ } -%>
 </body>
 
 </html>

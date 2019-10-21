@@ -23,7 +23,7 @@
                 #<%=projectid%> (<%=pjname%>) </h1>
             <div class="card-body" style="margin-left: 3vh;">
 
-                <form class="form-horizontal" action="" method="POST">
+                <form class="form-horizontal" enctype="multipart/form-data" action="" method="POST">
                     <div class="panel-body form-control-sm">
 
                         <!-- ================= TRACKER ================ -->
@@ -35,21 +35,23 @@
                                 <div class="col-sm-5" style="font-size: x-large;">
                                     <div class="custom-control custom-radio">
                                         <input class="custom-control-input" type="radio" name="tracker" id="gridRadios1"
-                                            value="Bug" <%= data.tracker == 'Bug' ? ' checked' : '' %>">
+                                            value="Bug" <%= disabledtracker == 'Bug' ? ' checked' : ' disabled' %>>
                                         <label class="custom-control-label" for="gridRadios1" style="font-size: large;">
                                             Bug
                                         </label>
                                     </div>
                                     <div class="custom-control custom-radio">
                                         <input class="custom-control-input" type="radio" name="tracker" id="gridRadios2"
-                                            value="Feature" <%= data.tracker == 'Feature' ? ' checked' : '' %>>
+                                            value="Feature"
+                                            <%= disabledtracker == 'Feature' ? ' checked' : ' disabled' %>>
                                         <label class="custom-control-label" for="gridRadios2" style="font-size: large;">
                                             Feature
                                         </label>
                                     </div>
                                     <div class="custom-control custom-radio">
                                         <input class="custom-control-input" type="radio" name="tracker" id="gridRadios3"
-                                            value="Support" <%= data.tracker == 'Support' ? ' checked' : '' %>>
+                                            value="Support"
+                                            <%= disabledtracker == 'Support' ? ' checked' : ' disabled' %>>
                                         <label class="custom-control-label" for="gridRadios3" style="font-size: large;">
                                             Support
                                         </label>
@@ -280,10 +282,26 @@
                         <div class="form-group row">
                             <h5 class="col-sm-3 col-form-label col-form-label display-4" style="font-size: x-large;">
                                 File</h5>
-                            <div class="col-sm-5">
-                                <div class="form-group">
-                                    <input name="files" style="font-size: large;" type="file" class="form-control-file"
-                                        id="exampleFormControlFile1" value="">
+                            <div class="col-sm-5 ml-3">
+                                <div class="row">
+                                    <div class="form-group">
+                                        <input name="files" style="font-size: large;" type="file"
+                                            class="form-control-file" id="exampleFormControlFile1"
+                                            value="<%=data.files%>">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <a href="<%=data.files%>">
+                                        <%_ if (data.files) { -%>
+                                        <% if(data.files.toLocaleLowerCase().match('((.png)|(.jpg)|(.jpeg)|(.ico))$')) { %>
+                                        <a href=<%=data.files%>><img class="img-responsive" src="<%=data.files %>"
+                                                alt="" width="100" /></a>`
+                                        <% } else { %>
+                                        <a href=<%=data.files%>><%=data.files%></a>
+                                        <%_ } -%>
+                                        <%_ } -%>
+
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -292,10 +310,14 @@
                         <div class="form-group row">
                             <h5 class="col-sm-3 col-form-label col-form-label display-4" style="font-size: x-large;">
                                 Spent Time</h5>
-                            <div class="col-sm-5">
+                            <div class="col-12 col-sm-5">
                                 <input type="number" style="font-size: x-large;" class="form-control form-control" id=""
                                     placeholder="<%= data.spenttime %> (hours)" name="spenttime"
                                     value="<%= data.spenttime %>" required>
+                                <small style="font-size: 1.5vh; color: red !important;" id="passwordHelpInline1"
+                                    class="text-muted">
+                                    This Field Cant be Empty!.
+                                </small>
                             </div>
                         </div>
 
@@ -303,10 +325,14 @@
                         <div class="form-group row">
                             <h5 class="col-sm-3 col-form-label col-form-label display-4" style="font-size: x-large;">
                                 Target Version </h5>
-                            <div class="col-sm-5">
+                            <div class="col-12 col-sm-5">
                                 <input type="text" style="font-size: x-large;" class="form-control form-control-lg"
                                     id="" value="<%= data.targetversion %>" placeholder="<%= data.targetversion %>"
                                     name="targetversion" required>
+                                <small style="font-size: 1.5vh; color: red !important;" id="passwordHelpInline1"
+                                    class="text-muted">
+                                    This Field Cant be Empty!.
+                                </small>
                             </div>
                         </div>
 
@@ -324,7 +350,8 @@
                                     </option>
                                     <% }) %>
                                 </select>
-                                <small style="font-size: 1.5vh; color: red !important;" id="passwordHelpInline" class="text-muted">
+                                <small style="font-size: 1.5vh; color: red !important;" id="passwordHelpInline"
+                                    class="text-muted">
                                     This Field Cant be Empty!.
                                 </small>
                             </div>
@@ -339,12 +366,13 @@
                                     aria-describedby="passwordHelpInline1">
                                     <option selected disabled>Choose The Parent Task ...</option>
                                     <% idIssue.forEach((item, i) => { %>
-                                    <option value="<%=item%>">
+                                    <option value="<%= item=='undefined' ? '' : item %>">
                                         <%= namaSubject[i] %>
                                     </option>
                                     <% }) %>
                                 </select>
-                                <small style="font-size: 1.5vh; color: red !important;" id="passwordHelpInline1" class="text-muted">
+                                <small style="font-size: 1.5vh; color: red !important;" id="passwordHelpInline1"
+                                    class="text-muted">
                                     This Field Cant be Empty!.
                                 </small>
                             </div>

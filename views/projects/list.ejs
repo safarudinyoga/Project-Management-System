@@ -27,13 +27,13 @@
                                 <div class="form-group row">
                                     <div class="custom-control custom-checkbox col-12 col-sm-2">
                                         <input type="checkbox" class="custom-control-input" aria-label="checkid" for=""
-                                            id="customCheck1" name="checkid">
+                                            id="customCheck1" name="checkid" <%= query.checkid ? ' checked' : '' %>>
                                         <label class="custom-control-label" style="font-size: large" for="customCheck1"
-                                            id="" <%= query.checkid ? ' checked' : '' %>>ID</label>
+                                            id="">ID</label>
                                     </div>
                                     <div class="col-12 col-sm-9">
                                         <input type="text" class="form-control" id="id" placeholder="ID"
-                                            name="projectid">
+                                            name="projectid" value="<%= query.checkid ?query.projectid : '' %>">
                                     </div>
                                 </div>
 
@@ -42,13 +42,13 @@
                                 <div class="form-group row">
                                     <div class="custom-control custom-checkbox col-12 col-sm-2">
                                         <input type="checkbox" class="custom-control-input" for="" id="customCheck2"
-                                            name="checkname">
+                                            name="checkname" <%= query.checkname ? ' checked' : '' %>>
                                         <label class="custom-control-label" style="font-size: large" for="customCheck2"
-                                            id="name" <%= query.checkname ? ' checked' : '' %>>Name</label>
+                                            id="name">Name</label>
                                     </div>
                                     <div class="col-12 col-sm-9">
                                         <input type="text" class="form-control" id="id" placeholder="Name"
-                                            name="projectname">
+                                            name="projectname" value="<%= query.checkname ? query.projectname : '' %>">
                                     </div>
                                 </div>
 
@@ -57,15 +57,16 @@
                                 <div class="form-group row">
                                     <div class="custom-control custom-checkbox col-12 col-sm-2">
                                         <input type="checkbox" class="custom-control-input" for="" id="customCheck3"
-                                            name="checkmember">
+                                            name="checkmember" <%= query.checkmember ? ' checked' : '' %>>
                                         <label class="custom-control-label" for="customCheck3" style="font-size: large"
-                                            id="name" <%= query.checkmember ? ' checked' : '' %>>Member</label>
+                                            id="name">Member</label>
                                     </div>
                                     <div class="col-12 col-sm-9">
                                         <select class="form-control" id="member" name="member">
                                             <option disabled selected>Choose the Member ...</option>
                                             <% elemen.forEach((item, i) => { %>
-                                            <option value="<%= item %>">
+                                            <option value="<%= item %>"
+                                                <%= query.checkmember ? (query.member == item ? ' selected' : '') : '' %>>
                                                 <%= flname[i] %>
                                             </option>
                                             <% }) %>
@@ -153,18 +154,21 @@
                                     <tbody>
                                         <% data.forEach((item) => { %>
                                         <tr>
-                                            <!-- <%- option.projectid ? '<td>' + item.projectid + '</td>' : '' %> -->
                                             <% if(option.projectid) { %>
-                                            <td><a href="projects/overview/<%=item.projectid%>" </a><%=item.projectid%>
+                                            <td><a role="button" class="btn btn-outline-info"
+                                                    style="font-size: 2.5vh; font-weight: bold;"
+                                                    href="projects/overview/<%=item.projectid%>" </a><%=item.projectid%>
                                                     </td> <% } %>
                                                     <%- option.projectname ? '<td>' + item.projectname + '</td>' : '' %>
                                                     <%- option.members ? '<td>' + item.fullname + '</td>' : '' %> <td>
                                                     <a href="/projects/edit/<%= item.projectid %>"
                                                         class="btn btn-outline-success" style="font-size: large;"><i
                                                             class="fa fa-pencil" aria-hidden="true"></i> EDIT</a>
+                                                    <% if (isAdmin == true) { %>
                                                     <a href="" style="font-size: large;" class="btn btn-outline-danger"
                                                         data-id="<%=item.projectid%>">
                                                         <i class="fa fa-trash-o fa-lg"></i> DELETE</a>
+                                                    <% } %>
                                             </td>
                                         </tr>
                                         <% }) %>
@@ -177,26 +181,29 @@
                                     <ul class="pagination">
                                         <li style="font-size: large;"
                                             class="page-item <%= page == 1 ? 'disabled': ''; %>"><a class="page-link"
-                                                href="/projects?page=<%= parseInt(page) - 1%>"><i
+                                                href="<%= url.replace(`page=${page}`, `page=${parseInt(page) - 1}`)%>"><i
                                                     class="fa fa-arrow-left" aria-hidden="true"></i> Previous</a></li>
                                         <% for (let i = 1; i <= pages; i++) { %>
                                         <li style="font-size: large;"
                                             class="page-item <%= page == i ? 'active': ''; %>"><a class="page-link"
-                                                href="/projects?page=<%= i %>">
+                                                href="<%= url.replace(`page=${page}`, `page=${i}`)%>">
                                                 <%= i %></a></li>
                                         <% }; %>
                                         <li style="font-size: large;"
                                             class="page-item <%= page == pages ? 'disabled': ''; %>"><a
-                                                class="page-link" href="/projects?page=<%= parseInt(page) + 1%>"><i
+                                                class="page-link"
+                                                href="<%= url.replace(`page=${page}`, `page=${parseInt(page) + 1}`)%>"><i
                                                     class="fa fa-arrow-right" aria-hidden="true"></i> Next</a></li>
                                     </ul>
                                 </nav>
                                 <div class="col-sm-10">
+                                    <% if(isAdmin == true) {%>
                                     <a href="/projects/add">
                                         <button style="font-size: large;" class="btn btn-outline-primary"><i
                                                 class="fa fa-plus" aria-hidden="true"></i> Add Project
                                         </button>
                                     </a>
+                                    <% } %>
                                 </div>
                             </div>
                         </div>
@@ -247,17 +254,17 @@
                             'success',
                             '500'
                         )
-                        setTimeout(() => { window.location = `/projects/delete/${projectid}`}, 1000);
+                        setTimeout(() => { window.location = `/projects/delete/${projectid}` }, 2000);
                         // window.location = `/projects`;
                         // window.location = `/projects/delete/${projectid}`;
                     } else if (result.dismiss === Swal.DismissReason.cancel) {
                         Swal.fire(
-                            'Cancelled',
+                            'Cancelled, File is Forgiven!',
                             'Your file is safe :)',
                             'error',
                             '500'
                         )
-                        setTimeout(() => { window.location = '/projects' }, 1000);
+                        setTimeout(() => { window.location = '/projects' }, 2000);
                         // window.location = `/projects`;
                     }
                 });
@@ -265,13 +272,26 @@
 
             $(".btn-outline-danger").click(function (e) {
                 e.preventDefault();
-                // console.log($(this));
                 let projectid = $(this).attr("data-id");
                 console.log(projectid);
                 myfunction(projectid);
             })
         })
     </script>
+    <%_ if (berhasil){-%>
+    <script type="text/javascript">
+        $(document).ready(() => {
+
+            let berhasil = '<%=berhasil%>';
+            Swal.fire({
+                title: berhasil,
+                type: "success",
+                timer: 2000
+            })
+        })
+    </script>
+    <%_ } -%>
+
 </body>
 
 </html>
