@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const moment = require('moment');
 const bodyParser = require('body-parser');
-var { isLoggedOut , isLoggedIn } = require('../helpers/util');
+var { isLoggedOut, isLoggedIn } = require('../helpers/util');
 moment().format();
 
 // parse application/x-www-form-urlencoded
@@ -17,8 +17,8 @@ module.exports = (pool) => {
   router.get('/', isLoggedOut, (req, res, next) => {
     //console.log(req.session.user);
     //console.log(req.session.latestUrl);
-    res.render('login', { 
-      title: 'Login', 
+    res.render('login', {
+      title: 'Login',
       latestUrl: req.session.latestUrl,
       error: req.flash('error')[0],
       // isAdmin: req.session.user.isadmin
@@ -41,7 +41,7 @@ module.exports = (pool) => {
       if (row.rows[0]) {
         let isEmail = row.rows[0].email
         let isPassword = row.rows[0].password
-        if (email == isEmail && password == isPassword){
+        if (email == isEmail && password == isPassword) {
           req.session.user = row.rows[0];
           latestUrl = latestUrl || '/projects';
           res.redirect(latestUrl);

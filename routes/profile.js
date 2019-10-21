@@ -6,12 +6,12 @@ module.exports = pool => {
   // ============== GET PROFIL USER LISTING ===============//
   router.get("/", isLoggedIn, (req, res, next) => {
     let sql = `SELECT * FROM users WHERE userid=$1`;
-    pool.query(sql, [req.session.user.userid], (err, data) => {
+    pool.query(sql, [req.session.user.userid], (err, item) => {
       if (err) throw err;
-      let isAdmin = data.rows[0].isadmin;
+      let isAdmin = item.rows[0].isadmin;
+      let data = item.rows[0]
       res.render("profile/view", {
-        title: "Profile",
-        data: data.rows[0],
+        data,
         path: "/profile",
         isAdmin
       });
@@ -46,4 +46,4 @@ module.exports = pool => {
     });
   });
   return router;
-}; 
+};
