@@ -15,6 +15,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+// PG ADMIN
 // const pool = new Pool({
 //   user: 'postgres',
 //   host: 'localhost',
@@ -23,6 +24,7 @@ app.set('view engine', 'ejs');
 //   port: 5432
 // });
 
+// PG ADMIN HEROKUUUU
 const pool = new Pool({
   user: 'lgiqebipuvrtkm',
   host: 'ec2-174-129-253-101.compute-1.amazonaws.com',
