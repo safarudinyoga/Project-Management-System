@@ -10,28 +10,29 @@ const { Pool } = require('pg');
 
 var app = express();
 
+
 // view engine setup
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // // PG ADMIN
-// const pool = new Pool({
-//   user: 'postgres',
-//   host: 'localhost',
-//   database: 'pms',
-//   password: '12345',
-//   port: 5432
-// });
-
-// PG ADMIN HEROKUUUU
 const pool = new Pool({
-  user: 'lgiqebipuvrtkm',
-  host: 'ec2-174-129-253-101.compute-1.amazonaws.com',
-  database: 'd3e0m4rb0v0ni',
-  password: 'cb1452c9eb6904d7a3f1f3e0058de663272aece54793566dad4b5fd7c4d4b19f',
+  user: 'postgres',
+  host: 'localhost',
+  database: 'pms',
+  password: '12345',
   port: 5432
 });
+
+// PG ADMIN HEROKUUUU
+// const pool = new Pool({
+//   user: 'lgiqebipuvrtkm',
+//   host: 'ec2-174-129-253-101.compute-1.amazonaws.com',
+//   database: 'd3e0m4rb0v0ni',
+//   password: 'cb1452c9eb6904d7a3f1f3e0058de663272aece54793566dad4b5fd7c4d4b19f',
+//   port: 5432
+// });
 
 var indexRouter = require('./routes/index')(pool);
 var projectRouter = require('./routes/projects')(pool);
