@@ -15,7 +15,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// PG ADMIN
+// // PG ADMIN
 // const pool = new Pool({
 //   user: 'postgres',
 //   host: 'localhost',
@@ -37,8 +37,6 @@ var indexRouter = require('./routes/index')(pool);
 var projectRouter = require('./routes/projects')(pool);
 var profileRouter = require('./routes/profile')(pool);
 var usersRouter = require('./routes/users')(pool);
-
-
 
 //use session login
 app.use(session({

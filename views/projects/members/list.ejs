@@ -32,11 +32,11 @@
                                     <div class="custom-control custom-checkbox col-12 col-sm-2">
                                         <input type="checkbox" class="custom-control-input" aria-label="checkid" for=""
                                             id="customCheck1" name="checkid" <%= query.checkid ? ' checked' : '' %>>
-                                        <label class="custom-control-label" style="font-size: large" for="customCheck1"
+                                        <label class="custom-control-label" for="customCheck1"
                                             id="">ID</label>
                                     </div>
                                     <div class="col-12 col-sm-9">
-                                        <input type="text" style="font-size: large;" class="form-control" id="id"
+                                        <input type="text" class="form-control" id="id"
                                             placeholder="ID" name="userid"
                                             value="<%= query.checkid ? query.userid : '' %>">
                                     </div>
@@ -48,12 +48,12 @@
                                     <div class="custom-control custom-checkbox col-12 col-sm-2">
                                         <input type="checkbox" class="custom-control-input" for="" id="customCheck2"
                                             name="checkname" <%= query.checkname ? ' checked' : '' %>>
-                                        <label class="custom-control-label" for="customCheck2" style="font-size: large"
+                                        <label class="custom-control-label" for="customCheck2"
                                             id="name">Name</label>
                                     </div>
                                     <div class="col-12 col-sm-9">
                                         <input type="text" class="form-control" id="id" placeholder="Name"
-                                            name="fullname" style="font-size: large;"
+                                            name="fullname"
                                             value="<%= query.checkname ? query.fullname : '' %>">
                                     </div>
                                 </div>
@@ -64,11 +64,11 @@
                                     <div class="custom-control custom-checkbox col-12 col-sm-2">
                                         <input type="checkbox" class="custom-control-input" for="" id="customCheck3"
                                             name="checkroles" <%= query.checkroles ? ' checked' : '' %>>
-                                        <label class="custom-control-label" for="customCheck3" style="font-size: large"
+                                        <label class="custom-control-label" for="customCheck3"
                                             id="name">Position</label>
                                     </div>
                                     <div class="col-12 col-sm-9">
-                                        <select class="form-control" id="role" name="roles" style="font-size: large;">
+                                        <select class="form-control" id="role" name="roles">
                                             <option disabled selected>Choose the Position ...</option>
                                             <option value="Manager"
                                                 <%= query.checkroles ? (query.roles=='Manager' ? ' selected' : '') : '' %>>
@@ -89,10 +89,10 @@
                                 <div class="form-group row">
                                     <div class="col-sm-10">
                                         <button type="submit" class="btn btn-outline-primary"
-                                            style="font-size: large;"><i class="fa fa-search" aria-hidden="true">
+                                        ><i class="fa fa-search" aria-hidden="true">
                                                 Search</i>
                                         </button>
-                                        <button type="button" style="font-size: large;" class="btn btn-light"> <a
+                                        <button type="button" class="btn btn-light"> <a
                                                 href="/projects/members/<%=projectid%>"><i class="fa fa-undo"
                                                     aria-hidden="true"></i> Reset</a></button>
                                     </div>
@@ -136,7 +136,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-10">
-                                        <button type="submit" style="font-size: large;" class="btn btn-outline-info"><i
+                                        <button type="submit" class="btn btn-outline-info"><i
                                                 class="fa fa-refresh" aria-hidden="true"></i> Apply</button>
                                     </div>
                                 </form>
@@ -170,10 +170,10 @@
                                             <%- option.roles ? '<td>' + item.roles + '</td>' : '' %>
                                             <td>
                                                 <a href="/projects/members/<%=projectid%>/edit/<%=item.userid%>"
-                                                    style="font-size: large;" class="btn btn-outline-success"><i
+                                                 class="btn btn-outline-success"><i
                                                         class="fa fa-pencil" aria-hidden="true"></i> EDIT</a>
                                                 <a href="" data-id="<%=`${projectid}-${item.userid}`%>"
-                                                    style="font-size: large;" class="btn btn-outline-danger">
+                                                 class="btn btn-outline-danger">
                                                     <i class="fa fa-trash-o fa-lg"></i> DELETE</a>
                                             </td>
                                         </tr>
@@ -183,7 +183,7 @@
 
                                 <!-- ================ PAGINATION ================== -->
 
-                                <nav aria-label="Page navigation example" style="font-size: large;">
+                                <nav aria-label="Page navigation example">
                                     <ul class="pagination">
                                         <li class="page-item <%= page == 1 ? 'disabled': ''; %>"><a class="page-link"
                                                 href="<%= url.replace(`page=${page}`, `page=${parseInt(page) - 1}`)%>"><i

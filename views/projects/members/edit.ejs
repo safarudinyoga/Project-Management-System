@@ -16,10 +16,10 @@
 
     <main role="main" class="col-md-11 ml-sm-auto col-lg-11">
         <div class="card border-light mx-1">
-            <h1 class="card-header bg-transparent display-4" style="margin-top: 8vh;margin-left: 5vh; ">Edit Member to
+            <h3 class="card-header bg-transparent display-4" style="margin-top: 8vh;margin-left: 5vh; ">Edit Member to
                 Project
                 #<%=projectid%>
-                (<%=pjname%>)</h1>
+                (<%=pjname%>)</h3>
             <div class="card-body" style="margin-left: 3vh;">
                 <div class="card border-light">
                     <div class="card-body">
@@ -29,8 +29,8 @@
                                 <!-- ========= MEMBER ========== -->
 
                                 <div class="form-group row">
-                                    <h1 class="col-sm-3 col-form-label-lg display-4" style="font-size:xx-large;">Members
-                                    </h1>
+                                    <h4 class="col-sm-3 col-form-label-lg display-4">Members
+                                    </h4>
                                     <div class="col-sm-5">
                                         <input type="text" class="form-control form-control-lg" id="name"
                                             placeholder="Projects Name" name="name" value="<%= item.fullname %>" disabled>
@@ -41,30 +41,26 @@
 
                                 <fieldset class="form-group">
                                     <div class="form-group row">
-                                        <h1 for="gridRadios" class="col-sm-3 col-form-label-lg display-4"
-                                            style="font-size: xx-large;">Position</h1>
-                                        <div class="col-sm-5" style="font-size: xx-large;">
+                                        <h1 for="gridRadios" class="col-sm-3 col-form-label-lg display-4">Position</h1>
+                                        <div class="col-sm-5">
                                             <div class="custom-control custom-radio">
                                                 <input class="custom-control-input" type="radio" name="roles"
                                                     id="gridRadios1" value="Manager" <%= item.roles == 'Manager' ? ' checked' : '' %> required>
-                                                <label class="custom-control-label" for="gridRadios1"
-                                                    style="font-size: large;">
+                                                <label class="custom-control-label" for="gridRadios1">
                                                     Manager
                                                 </label>
                                             </div>
                                             <div class="custom-control custom-radio">
                                                 <input class="custom-control-input" type="radio" name="roles"
                                                     id="gridRadios2" value="Software Developer" <%= item.roles == 'Software Developer' ? ' checked' : '' %> required>
-                                                <label class="custom-control-label" for="gridRadios2"
-                                                    style="font-size: large;">
+                                                <label class="custom-control-label" for="gridRadios2">
                                                     Software Developer
                                                 </label>
                                             </div>
                                             <div class="custom-control custom-radio">
                                                 <input class="custom-control-input" type="radio" name="roles"
                                                     id="gridRadios3" value="Quality Assurance" <%= item.roles == 'Quality Assurance' ? ' checked' : '' %> required>
-                                                <label class="custom-control-label" for="gridRadios3"
-                                                    style="font-size: large;">
+                                                <label class="custom-control-label" for="gridRadios3">
                                                     Quality Assurance
                                                 </label>
                                             </div>
@@ -75,9 +71,9 @@
                                 <!-- BUTTON -->
                                 <div class="form-group row">
                                     <div class="col-sm-10">
-                                        <button type="submit" class="btn btn-success" style="font-size: x-large;"><i
+                                        <button type="submit" class="btn btn-success"><i
                                                 class="fa fa-check" aria-hidden="true"></i> Save</button>
-                                        <button style="font-size: x-large;" class="btn btn-white"><a
+                                        <button class="btn btn-white"><a
                                                 href="/projects/members/<%=projectid%>"><i class="fa fa-ban"
                                                     aria-hidden="true"></i> Cancel</a></button>
                                         </button>

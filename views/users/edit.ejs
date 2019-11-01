@@ -27,9 +27,9 @@
                                     <!-- ================= FIRST NAME ================ -->
 
                                     <div class="form-group row">
-                                        <h5 class="col-sm-2 col-form-label col-form-label display-4" style="font-size: x-large;">Firstname</h5>
+                                        <h5 class="col-sm-2 col-form-label col-form-label display-4">Firstname</h5>
                                         <div class="col-sm-5">
-                                            <input type="text" style="font-size: x-large;" class="form-control form-control-lg" id="name"
+                                            <input type="text" class="form-control form-control-lg" id="name"
                                                 placeholder="Firstname" name="firstname" value="<%= item.firstname %>"
                                                 required>
                                         </div>
@@ -38,9 +38,9 @@
                                     <!-- ================= LAST NAME ================ -->
 
                                     <div class="form-group row">
-                                        <h5 class="col-sm-2 col-form-label col-form-label display-4" style="font-size: x-large;">Last Name</h5>
+                                        <h5 class="col-sm-2 col-form-label col-form-label display-4">Last Name</h5>
                                         <div class="col-sm-5">
-                                            <input type="text" style="font-size: x-large;" class="form-control form-control-lg" id="name"
+                                            <input type="text" class="form-control form-control-lg" id="name"
                                                 placeholder="Lastname" name="lastname" value="<%= item.lastname %>"
                                                 required>
                                         </div>
@@ -49,9 +49,9 @@
                                     <!-- ================= EMAIL ================ -->
 
                                     <div class="form-group row">
-                                        <h5 class="col-sm-2 col-form-label col-form-label display-4" style="font-size: x-large;">Email</h5>
+                                        <h5 class="col-sm-2 col-form-label col-form-label display-4">Email</h5>
                                         <div class="col-sm-5">
-                                            <input type="email" style="font-size: x-large;" class="form-control form-control-lg" id="name"
+                                            <input type="email" class="form-control form-control-lg" id="name"
                                                 placeholder="example => admin@rubicamp.com" name="email"
                                                 style="font-style: italic" value="<%= item.email %>" required>
                                         </div>
@@ -60,9 +60,9 @@
                                     <!-- ================= PASSWORD ================ -->
 
                                     <div class="form-group row">
-                                        <h5 class="col-sm-2 col-form-label col-form-label display-4" style="font-size: x-large;">Password</h5>
+                                        <h5 class="col-sm-2 col-form-label col-form-label display-4">Password</h5>
                                         <div class="col-sm-5">
-                                            <input type="password" style="font-size: x-large;" class="form-control form-control-lg" id="name"
+                                            <input type="password" class="form-control form-control-lg" id="name"
                                                 placeholder="Password" name="password" value="">
                                         </div>
                                     </div>
@@ -71,8 +71,9 @@
 
                                     <fieldset class="form-group">
                                         <div class="form-group row">
-                                            <h5 for="gridRadios" class="col-sm-2 col-form-label col-form-label display-4" style="font-size: x-large;">Position</h5>
-                                            <div class="col-sm-5" style="font-size: large;">
+                                            <h5 for="gridRadios"
+                                                class="col-sm-2 col-form-label col-form-label display-4">Position</h5>
+                                            <div class="col-sm-5">
                                                 <div class="custom-control custom-radio">
                                                     <input class="custom-control-input" type="radio" name="role"
                                                         id="gridRadios1" value="Manager"
@@ -104,12 +105,12 @@
                                     <!-- ================= TYPE JOB ================ -->
 
                                     <div class="form-group row">
-                                        <h5 class="col-sm-2 col-form-label col-form-label display-4" style="font-size: x-large;">Type</h5>
+                                        <h5 class="col-sm-2 col-form-label col-form-label display-4">Type</h5>
                                         <div class="col-12 col-sm-7">
                                             <div class="custom-control custom-checkbox">
                                                 <input class="custom-control-input" name="typejob" type="checkbox"
                                                     id="typejob" value="true" <%= item.typejob ? ' checked' : '' %>>
-                                                <label style="font-size: large;" class="custom-control-label" for="typejob">
+                                                <label class="custom-control-label" for="typejob">
                                                     Full-Time
                                                 </label>
                                             </div>
@@ -118,10 +119,11 @@
 
                                     <div class="form-group row">
                                         <div class="col-sm-10">
-                                            <button type="submit" style="font-size: large;" class="btn btn-outline-success"><i class="fa fa-check"
+                                            <button type="submit" class="btn btn-outline-success"><i class="fa fa-check"
                                                     aria-hidden="true"></i> Save</button>
-                                            <button type="button" style="font-size: large;" class="btn btn-white"><a href="/users"><i
-                                                        class="fa fa-ban" aria-hidden="true"></i> Cancel</a></button>
+                                            <button type="button" class="btn btn-white"><a href="/users"><i
+                                                        class="fa fa-ban" aria-hidden="true"></i>
+                                                    Cancel</a></button>
                                             </button>
                                         </div>
                                     </div>

@@ -1,6 +1,8 @@
 var express = require("express");
 var router = express.Router();
 const { isLoggedIn } = require("../helpers/util");
+const bcrypt = require('bcrypt');
+const saltRounds = 8;
 
 module.exports = pool => {
   /* GET users listing. */
@@ -153,22 +155,27 @@ module.exports = pool => {
   // =============== POST ADD DATA USERS ============== \\
   router.post("/add", isLoggedIn, (req, res, next) => {
     let { firstname, lastname, email, password, role, typejob } = req.body;
-    let sqladd = `INSERT INTO users(firstname, lastname, email, password, role`;
-    let sqlvalue = ` VALUES('${firstname}','${lastname}','${email}','${password}','${role}'`;
-    if (Boolean(typejob) != undefined) {
-      sqladd += `,typejob)`;
-      sqlvalue += `, ${Boolean(typejob)})`;
-    } else {
-      sqladd += `)`;
-      sqlvalue += `)`;
-    }
-    let sql = sqladd + sqlvalue;
-    pool.query(sql, err => {
-      if (err) throw err;
-      req.flash("berhasil", "DUARR!, Success Added New User");
-      res.redirect("/users");
+    let sqladd = `INSERT INTO users(firstname, lastname, email, role`;
+    let sqlvalue = ` VALUES('${firstname}','${lastname}','${email}','${role}'`;
+    bcrypt.hash(password, saltRounds, (err, hash) => {
+      sqladd += `,password`
+      sqlvalue += `,'${hash}'`
+      if (Boolean(typejob) != undefined) {
+        sqladd += `,typejob)`;
+        sqlvalue += `, ${Boolean(typejob)})`;
+      } else {
+        sqladd += `)`;
+        sqlvalue += `)`;
+      }
+      let sql = sqladd + sqlvalue;
+      pool.query(sql, err => {
+        if (err) throw err;
+        req.flash("berhasil", "DUARR!, Success Added New User");
+        res.redirect("/users");
+      });
     });
-  });
+  })
+
 
   // =============== GET EDIT DATA USERS ============== \\
   router.get("/edit/:id", isLoggedIn, (req, res, next) => {
@@ -198,46 +205,45 @@ module.exports = pool => {
     let { firstname, lastname, email, password, role, typejob } = req.body;
     let result = [];
     let check = false;
-    if (firstname) {
-      check = true;
-      result.push(`firstname='${firstname}'`);
-    }
-    if (lastname) {
-      check = true;
-      result.push(`lastname='${lastname}'`);
-    }
-    if (email) {
-      check = true;
-      result.push(`email='${email}'`);
-    }
-    if (password) {
-      check = true;
-      result.push(`password='${password}'`);
-    }
-    if (role) {
-      check = true;
-      result.push(`role='${role}'`);
-    }
-    if (Boolean(typejob) != undefined) {
-      check = true;
-      result.push(`typejob='${Boolean(typejob)}'`);
-    }
-    let sqledit = `UPDATE users `;
-    if (check) {
-      sqledit += `SET ${result.join(", ")} WHERE userid=${userid}`;
-    }
-    console.log(sqledit);
-
-    pool
-      .query(sqledit)
-      .then(response => {
+    bcrypt.hash(password, saltRounds, (err, hash) => {
+      if (firstname) {
+        check = true;
+        result.push(`firstname='${firstname}'`);
+      }
+      if (lastname) {
+        check = true;
+        result.push(`lastname='${lastname}'`);
+      }
+      if (email) {
+        check = true;
+        result.push(`email='${email}'`);
+      }
+      if (password) {
+        check = true;
+        result.push(`password='${hash}'`);
+      }
+      if (role) {
+        check = true;
+        result.push(`role='${role}'`);
+      }
+      if (Boolean(typejob) != undefined) {
+        check = true;
+        result.push(`typejob='${Boolean(typejob)}'`);
+      }
+      let sqledit = `UPDATE users `;
+      if (check) {
+        sqledit += `SET ${result.join(", ")} WHERE userid=${userid}`;
+      }
+      pool.query(sqledit).then(response => {
         req.flash("berhasil", "DUARR!!, Edited User Success");
         res.redirect("/users");
       })
-      .catch(err => {
-        throw err;
-      });
-  });
+        .catch(err => {
+          throw err;
+        });
+    });
+  })
+
 
   router.get("/delete/:id", isLoggedIn, (req, res, next) => {
     let userid = req.params.id;

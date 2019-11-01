@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-info fixed-top">
-  <a class="navbar-brand" style="font-size: 3vh !important" href="/projects"
+  <a class="navbar-brand" style="font-size: 1vh !important" href="/projects"
     >Project Management System</a
   >
   <button
@@ -34,7 +34,6 @@
       <li class="nav-item <%= path=='/projects' ? ' active' : '' %>">
         <a
           class="nav-link mb-0 display-4"
-          style="font-size:x-large"
           href="/projects"
           >Projects</a
         >
@@ -42,16 +41,14 @@
       <li class="nav-item <%= path=='/profile' ? ' active' : '' %>">
         <a
           class="nav-link mb-0 display-4"
-          style="font-size:x-large"
           href="/profile"
           >Profile</a
         >
       </li>
-      <% if(isAdmin == true) { %>
+      <% if(isAdmin) { %>
       <li class="nav-item <%= path=='/users' ? ' active' : '' %>">
         <a
           class="nav-link mb-0 display-4"
-          style="font-size:x-large"
           href="/users"
           >Users</a
         >

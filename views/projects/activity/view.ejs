@@ -22,31 +22,31 @@
             Activity
           </h3>
           <div class="card-body" style="margin-left: 5vh;">
-            <h4 class="card-title display-4" style="font-size: xx-large;">
+            <h4 class="card-title display-4" style="font-size: large;">
               Project #<%=projectid%> (<%=pjname%>)
             </h4>
             <div class="card mt-2">
               <% actperdate.forEach((item) => { %>
               <div class="card-body mb-5">
-                <h5 class="card-header" style="font-size: 3vh;">
+                <h5 class="card-header" style="font-size: 2vh;">
                   <%= item.date %>
                 </h5>
                 <% item.data.forEach((anu) => { %>
                 <div class="card mt-1">
                   <div class="card-body">
-                    <div class="btn btn-primary mb-3" style="font-size: 2vh;">
+                    <div class="btn btn-primary mb-3" style="font-size: 1vh;">
                       <%= anu.timedoang %> WIB
                     </div>
                     <h2
                       class="card-title"
-                      style="font-weight: bold; font-size: 4vh;"
+                      style="font-weight: bold; font-size: 3vh;"
                     >
                       <%= anu.title %>
                     </h2>
-                    <p class="card-text" style="font-size: 2vh;">
+                    <p class="card-text" style="font-size: 1vh;">
                       Progress: <%= anu.description %>
                     </p>
-                    <h6 class="card-text" style="font-size: 3vh;">
+                    <h6 class="card-text" style="font-size: 2vh;">
                       Author: <%= anu.author %>
                     </h6>
                   </div>

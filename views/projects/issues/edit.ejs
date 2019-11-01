@@ -17,10 +17,10 @@
 
     <main role="main" class="col-md-11 ml-sm-auto col-lg-11">
         <div class="card border-light mx-1">
-            <h1 class="card-header bg-transparent display-4" style="margin-top: 8vh;margin-left: 5vh; ">Edit Issues
+            <h4 class="card-header bg-transparent display-4" style="margin-top: 8vh;margin-left: 5vh; ">Edit Issues
                 #<%=issueid%> to
                 Project
-                #<%=projectid%> (<%=pjname%>) </h1>
+                #<%=projectid%> (<%=pjname%>) </h4>
             <div class="card-body" style="margin-left: 3vh;">
 
                 <form class="form-horizontal" enctype="multipart/form-data" action="" method="POST">
@@ -31,12 +31,12 @@
                         <fieldset class="form-group">
                             <div class="form-group row">
                                 <h1 for="gridRadios" class="col-sm-3 col-form-label-lg display-4"
-                                    style="font-size: x-large;">Tracker</h1>
-                                <div class="col-sm-5" style="font-size: x-large;">
+                                >Tracker</h1>
+                                <div class="col-sm-5">
                                     <div class="custom-control custom-radio">
                                         <input class="custom-control-input" type="radio" name="tracker" id="gridRadios1"
                                             value="Bug" <%= disabledtracker == 'Bug' ? ' checked' : ' disabled' %>>
-                                        <label class="custom-control-label" for="gridRadios1" style="font-size: large;">
+                                        <label class="custom-control-label" for="gridRadios1">
                                             Bug
                                         </label>
                                     </div>
@@ -44,7 +44,7 @@
                                         <input class="custom-control-input" type="radio" name="tracker" id="gridRadios2"
                                             value="Feature"
                                             <%= disabledtracker == 'Feature' ? ' checked' : ' disabled' %>>
-                                        <label class="custom-control-label" for="gridRadios2" style="font-size: large;">
+                                        <label class="custom-control-label" for="gridRadios2">
                                             Feature
                                         </label>
                                     </div>
@@ -52,7 +52,7 @@
                                         <input class="custom-control-input" type="radio" name="tracker" id="gridRadios3"
                                             value="Support"
                                             <%= disabledtracker == 'Support' ? ' checked' : ' disabled' %>>
-                                        <label class="custom-control-label" for="gridRadios3" style="font-size: large;">
+                                        <label class="custom-control-label" for="gridRadios3">
                                             Support
                                         </label>
                                     </div>
@@ -62,7 +62,7 @@
 
                         <!-- ================= SUBJECT ================ -->
                         <div class="form-group row">
-                            <h5 class="col-sm-3 col-form-label col-form-label display-4" style="font-size: x-large;">
+                            <h5 class="col-sm-3 col-form-label col-form-label display-4">
                                 Subject</h5>
                             <div class="col-sm-5">
                                 <input type="text" class="form-control form-control-lg" id="name"
@@ -72,7 +72,7 @@
 
                         <!-- ================= DESCRIPTION ================ -->
                         <div class="form-group row">
-                            <h5 class="col-sm-3 col-form-label col-form-label display-4" style="font-size: x-large;">
+                            <h5 class="col-sm-3 col-form-label col-form-label display-4">
                                 Description</h5>
                             <div class="col-sm-5">
                                 <input type="textarea" class="form-control form-control-lg" id="name"
@@ -86,14 +86,14 @@
                         <fieldset class="form-group">
                             <div class="form-group row">
                                 <h1 for="statusbutton" class="col-sm-3 col-form-label-lg display-4"
-                                    style="font-size: x-large;">Status</h1>
-                                <div class="col-sm-5" style="font-size: x-large;">
+                                >Status</h1>
+                                <div class="col-sm-5">
                                     <div class="custom-control custom-radio">
                                         <input class="custom-control-input" disabled type="radio" name="status"
                                             id="statusbutton1" value="New"
                                             <%= data.status == 'New' ? ' checked' : '' %>>
                                         <label class="custom-control-label" for="statusbutton1"
-                                            style="font-size: large;">
+                                        >
                                             New
                                         </label>
                                     </div>
@@ -102,7 +102,7 @@
                                             id="statusbutton2" value="In Progress"
                                             <%= data.status == 'In Progress' ? ' checked' : '' %>>
                                         <label class="custom-control-label" for="statusbutton2"
-                                            style="font-size: large;">
+                                        >
                                             In Progress
                                         </label>
                                     </div>
@@ -111,7 +111,7 @@
                                             id="statusbutton3" value="Feedback"
                                             <%= data.status == 'Feedback' ? ' checked' : '' %>>
                                         <label class="custom-control-label" for="statusbutton3"
-                                            style="font-size: large;">
+                                        >
                                             Feedback
                                         </label>
                                     </div>
@@ -120,7 +120,7 @@
                                             id="statusbutton4" value="Resolved"
                                             <%= data.status == 'Resolved' ? ' checked' : '' %>>
                                         <label class="custom-control-label" for="statusbutton4"
-                                            style="font-size: large;">
+                                        >
                                             Resolved
                                         </label>
                                     </div>
@@ -129,7 +129,7 @@
                                             id="statusbutton5" value="Closed"
                                             <%= data.status == 'Closed' ? ' checked' : '' %>>
                                         <label class="custom-control-label" for="statusbutton5"
-                                            style="font-size: large;">
+                                        >
                                             Closed
                                         </label>
                                     </div>
@@ -138,7 +138,7 @@
                                             id="statusbutton6" value="Rejected"
                                             <%= data.status == 'Rejected' ? ' checked' : '' %>>
                                         <label class="custom-control-label" for="statusbutton6"
-                                            style="font-size: large;">
+                                        >
                                             Rejected
                                         </label>
                                     </div>
@@ -150,14 +150,14 @@
                         <fieldset class="form-group">
                             <div class="form-group row">
                                 <h1 for="prioritybutton" class="col-sm-3 col-form-label-lg display-4"
-                                    style="font-size: x-large;">Priority</h1>
-                                <div class="col-sm-5" style="font-size: x-large;">
+                                >Priority</h1>
+                                <div class="col-sm-5">
                                     <div class="custom-control custom-radio">
                                         <input class="custom-control-input" type="radio" name="priority"
                                             id="prioritybutton1" value="Normal"
                                             <%= data.priority == 'Normal' ? ' checked' : '' %>>
                                         <label class="custom-control-label" for="prioritybutton1"
-                                            style="font-size: large;">
+                                        >
                                             Normal
                                         </label>
                                     </div>
@@ -166,7 +166,7 @@
                                             id="prioritybutton2" value="High"
                                             <%= data.priority == 'High' ? ' checked' : '' %>>
                                         <label class="custom-control-label" for="prioritybutton2"
-                                            style="font-size: large;">
+                                        >
                                             High
                                         </label>
                                     </div>
@@ -175,7 +175,7 @@
                                             id="prioritybutton3" value="Urgent"
                                             <%= data.priority == 'Urgent' ? ' checked' : '' %>>
                                         <label class="custom-control-label" for="prioritybutton3"
-                                            style="font-size: large;">
+                                        >
                                             Urgent
                                         </label>
                                     </div>
@@ -184,7 +184,7 @@
                                             id="prioritybutton4" value="Immerdiate"
                                             <%= data.priority == 'Immerdiate' ? ' checked' : '' %>>
                                         <label class="custom-control-label" for="prioritybutton4"
-                                            style="font-size: large;">
+                                        >
                                             Immerdiate
                                         </label>
                                     </div>
@@ -197,7 +197,7 @@
                             <h1 class="col-sm-3 col-form-label-lg display-4" style="font-size:x-large;">Assignee
                             </h1>
                             <div class="col-12 col-sm-5">
-                                <input type="text" class="form-control form-control" style="font-size: x-large;"
+                                <input type="text" class="form-control form-control"
                                     placeholder="<%= data.fullname %>" name="assignee" disabled readonly>
                             </div>
                         </div>
@@ -207,7 +207,7 @@
                             <h1 class="col-sm-3 col-form-label-lg display-4" style="font-size:x-large;">Start Date
                             </h1>
                             <div class="col-12 col-sm-5">
-                                <input type="date" class="form-control form-control" style="font-size: x-large;"
+                                <input type="date" class="form-control form-control"
                                     placeholder="" name="startdate"
                                     value="<%= moment(data.startdate).format('YYYY-MM-DD') %>" disabled readonly>
                             </div>
@@ -218,7 +218,7 @@
                             <h1 class="col-sm-3 col-form-label-lg display-4" style="font-size:x-large;">Due Date
                             </h1>
                             <div class="col-12 col-sm-5">
-                                <input type="date" class="form-control form-control" style="font-size: x-large;"
+                                <input type="date" class="form-control form-control"
                                     placeholder="" name="duedate"
                                     value="<%= moment(data.duedate).format('YYYY-MM-DD') %>" required>
                             </div>
@@ -226,10 +226,10 @@
 
                         <!-- ================= ESTIMATED TIME ================ -->
                         <div class="form-group row">
-                            <h5 class="col-sm-3 col-form-label col-form-label display-4" style="font-size: x-large;">
+                            <h5 class="col-sm-3 col-form-label col-form-label display-4">
                                 Estimated Time</h5>
                             <div class="col-sm-5">
-                                <input type="number" style="font-size: x-large;" class="form-control form-control"
+                                <input type="number" class="form-control form-control"
                                     id="name" placeholder="<%= data.estimatedtime %> Hours" name="estimatedtime"
                                     disabled readonly>
                             </div>
@@ -237,7 +237,7 @@
 
                         <!-- ================= DONE ================ -->
                         <div class="form-group row">
-                            <h5 class="col-sm-3 col-form-label col-form-label display-4" style="font-size: x-large;">
+                            <h5 class="col-sm-3 col-form-label col-form-label display-4">
                                 Done (%)</h5>
                             <div class="col-sm-5">
                                 <select style="font-size: 1.5vh ;" class="form-control" name="done" id="">
@@ -280,12 +280,12 @@
 
                         <!-- ================= FILE UPLOAD ================ -->
                         <div class="form-group row">
-                            <h5 class="col-sm-3 col-form-label col-form-label display-4" style="font-size: x-large;">
+                            <h5 class="col-sm-3 col-form-label col-form-label display-4">
                                 File</h5>
                             <div class="col-sm-5 ml-3">
                                 <div class="row">
                                     <div class="form-group">
-                                        <input name="files" style="font-size: large;" type="file"
+                                        <input name="files" type="file"
                                             class="form-control-file" id="exampleFormControlFile1"
                                             value="<%=data.files%>">
                                     </div>
@@ -308,10 +308,10 @@
 
                         <!-- ================= SPENT TIME ================ -->
                         <div class="form-group row">
-                            <h5 class="col-sm-3 col-form-label col-form-label display-4" style="font-size: x-large;">
+                            <h5 class="col-sm-3 col-form-label col-form-label display-4">
                                 Spent Time</h5>
                             <div class="col-12 col-sm-5">
-                                <input type="number" style="font-size: x-large;" class="form-control form-control" id=""
+                                <input type="number" class="form-control form-control" id=""
                                     placeholder="<%= data.spenttime %> (hours)" name="spenttime"
                                     value="<%= data.spenttime %>" required>
                                 <small style="font-size: 1.5vh; color: red !important;" id="passwordHelpInline1"
@@ -323,10 +323,10 @@
 
                         <!-- ================= TARGET VERSION ================ -->
                         <div class="form-group row">
-                            <h5 class="col-sm-3 col-form-label col-form-label display-4" style="font-size: x-large;">
+                            <h5 class="col-sm-3 col-form-label col-form-label display-4">
                                 Target Version </h5>
                             <div class="col-12 col-sm-5">
-                                <input type="text" style="font-size: x-large;" class="form-control form-control-lg"
+                                <input type="text" class="form-control form-control-lg"
                                     id="" value="<%= data.targetversion %>" placeholder="<%= data.targetversion %>"
                                     name="targetversion" required>
                                 <small style="font-size: 1.5vh; color: red !important;" id="passwordHelpInline1"
@@ -338,10 +338,10 @@
 
                         <!-- ================= AUTHOR ================ -->
                         <div class="form-group row">
-                            <h5 class="col-sm-3 col-form-label col-form-label display-4" style="font-size: x-large;">
+                            <h5 class="col-sm-3 col-form-label col-form-label display-4">
                                 Author </h5>
                             <div class="col-12 col-sm-5">
-                                <select class="custom-select" style="font-size: x-large;" name="author"
+                                <select class="custom-select" name="author"
                                     aria-describedby="passwordHelpInline" required>
                                     <option selected disabled>Choose The Assignee ...</option>
                                     <% iduser.forEach((item, i) => {  %>
@@ -362,7 +362,7 @@
                             <h1 class="col-sm-3 col-form-label-lg display-4" style="font-size:x-large;">Parent Task
                             </h1>
                             <div class="col-12 col-sm-5">
-                                <select class="custom-select" style="font-size: x-large;" name="parenttask"
+                                <select class="custom-select" name="parenttask"
                                     aria-describedby="passwordHelpInline1">
                                     <option selected disabled>Choose The Parent Task ...</option>
                                     <% idIssue.forEach((item, i) => { %>
@@ -381,9 +381,9 @@
                         <!-- ================= BUTTON ================ -->
                         <div class="form-group row">
                             <div class="col-sm-10">
-                                <button style="font-size: large;" type="submit" class="btn btn-outline-success"><i
+                                <button type="submit" class="btn btn-outline-success"><i
                                         class="fa fa-check" aria-hidden="true"></i> Save</button>
-                                <button style="font-size: large;" type="button" class="btn btn-outline-light"><a
+                                <button type="button" class="btn btn-outline-light"><a
                                         href="/projects/issues/<%=projectid%>"><i class="fa fa-ban"
                                             aria-hidden="true"></i>
                                         Cancel</a></button>

@@ -17,11 +17,10 @@
 
     <main role="main" class="col-md-11 ml-sm-auto col-lg-11">
         <div class="card border-light mx-1">
-            <h1 class="card-header bg-transparent display-4" style="margin-top: 8vh;margin-left: 5vh; ">Add Issues to
+            <h4 class="card-header bg-transparent display-4" style="margin-top: 8vh;margin-left: 5vh; ">Add Issues to
                 Project
-                #<%=projectid%> (<%=pjname%>) </h1>
+                #<%=projectid%> (<%=pjname%>) </h4>
             <div class="card-body" style="margin-left: 3vh;">
-
                 <form class="form-horizontal" enctype="multipart/form-data" action="" method="POST">
                     <div class="panel-body form-control-sm">
 
@@ -30,8 +29,8 @@
                         <fieldset class="form-group">
                             <div class="form-group row">
                                 <h1 for="gridRadios" class="col-sm-3 col-form-label-lg display-4"
-                                    style="font-size: x-large;">Tracker</h1>
-                                <div class="col-sm-5" style="font-size: x-large;">
+                                >Tracker</h1>
+                                <div class="col-sm-5">
                                     <div class="custom-control custom-radio">
                                         <input class="custom-control-input" type="radio" name="tracker" id="gridRadios1"
                                             value="Bug" required>
@@ -59,7 +58,7 @@
 
                         <!-- ================= SUBJECT ================ -->
                         <div class="form-group row">
-                            <h5 class="col-sm-3 col-form-label col-form-label display-4" style="font-size: x-large;">
+                            <h5 class="col-sm-3 col-form-label col-form-label display-4">
                                 Subject</h5>
                             <div class="col-sm-5">
                                 <input type="text" class="form-control form-control-lg" id="name" placeholder="Subject"
@@ -69,7 +68,7 @@
 
                         <!-- ================= DESCRIPTION ================ -->
                         <div class="form-group row">
-                            <h5 class="col-sm-3 col-form-label col-form-label display-4" style="font-size: x-large;">
+                            <h5 class="col-sm-3 col-form-label col-form-label display-4">
                                 Description</h5>
                             <div class="col-sm-5">
                                 <textarea type="text" class="form-control form-control-lg" id="name"
@@ -82,8 +81,8 @@
                         <fieldset class="form-group">
                             <div class="form-group row">
                                 <h1 for="statusbutton" class="col-sm-3 col-form-label-lg display-4"
-                                    style="font-size: x-large;">Status</h1>
-                                <div class="col-sm-5" style="font-size: x-large;">
+                                >Status</h1>
+                                <div class="col-sm-5">
                                     <div class="custom-control custom-radio">
                                         <input class="custom-control-input" type="radio" name="status"
                                             id="statusbutton1" value="New" required>
@@ -140,8 +139,8 @@
                         <fieldset class="form-group">
                             <div class="form-group row">
                                 <h1 for="prioritybutton" class="col-sm-3 col-form-label-lg display-4"
-                                    style="font-size: x-large;">Priority</h1>
-                                <div class="col-sm-5" style="font-size: x-large;">
+                                >Priority</h1>
+                                <div class="col-sm-5">
                                     <div class="custom-control custom-radio">
                                         <input class="custom-control-input" type="radio" name="priority"
                                             id="prioritybutton1" value="Normal" required>
@@ -183,7 +182,7 @@
                             <h1 class="col-sm-3 col-form-label-lg display-4" style="font-size:x-large;">Assignee
                             </h1>
                             <div class="col-12 col-sm-5">
-                                <select class="custom-select" style="font-size: x-large;" name="assignee" required>
+                                <select class="custom-select" name="assignee" required>
                                     <option selected disabled>Choose The Assignee ...</option>
                                     <% idassignee.forEach((item, i) => {  %>
                                     <option value="<%=item%>">
@@ -199,7 +198,7 @@
                             <h1 class="col-sm-3 col-form-label-lg display-4" style="font-size:x-large;">Start Date
                             </h1>
                             <div class="col-12 col-sm-5">
-                                <input type="date" class="form-control form-control" style="font-size: x-large;"
+                                <input type="date" class="form-control form-control"
                                     placeholder="Start Date" name="startdate" required>
                             </div>
                         </div>
@@ -209,24 +208,24 @@
                             <h1 class="col-sm-3 col-form-label-lg display-4" style="font-size:x-large;">Due Date
                             </h1>
                             <div class="col-12 col-sm-5">
-                                <input type="date" class="form-control form-control" style="font-size: x-large;"
+                                <input type="date" class="form-control form-control"
                                     placeholder="Due Date" name="duedate" required>
                             </div>
                         </div>
 
                         <!-- ================= ESTIMATED TIME ================ -->
                         <div class="form-group row">
-                            <h5 class="col-sm-3 col-form-label col-form-label display-4" style="font-size: x-large;">
+                            <h5 class="col-sm-3 col-form-label col-form-label display-4">
                                 Estimated Time</h5>
                             <div class="col-sm-5">
-                                <input type="number" style="font-size: x-large;" class="form-control form-control"
+                                <input type="number" class="form-control form-control"
                                     id="name" placeholder="Estimated Time (hours)" name="estimatedtime" required>
                             </div>
                         </div>
 
                         <!-- ================= DONE ================ -->
                         <div class="form-group row">
-                            <h5 class="col-sm-3 col-form-label col-form-label display-4" style="font-size: x-large;">
+                            <h5 class="col-sm-3 col-form-label col-form-label display-4">
                                 Done (%)</h5>
                             <div class="col-sm-5">
                                 <select style="font-size: 1.5vh ;" class="form-control" name="done" id="" required>
@@ -270,7 +269,7 @@
 
                         <!-- ================= FILE UPLOAD ================ -->
                         <div class="form-group row">
-                            <h5 class="col-sm-3 col-form-label col-form-label display-4" style="font-size: x-large;">
+                            <h5 class="col-sm-3 col-form-label display-4">
                                 File</h5>
                             <div class="col-sm-5">
                                 <div class="form-group">

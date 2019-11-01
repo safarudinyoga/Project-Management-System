@@ -32,11 +32,11 @@
                                     <div class="custom-control custom-checkbox col-12 col-sm-2">
                                         <input type="checkbox" class="custom-control-input" aria-label="checkid" for=""
                                             id="customCheck1" name="checkid" <%= query.checkid ? ' checked' : '' %>>
-                                        <label class="custom-control-label" style="font-size: large" for="customCheck1"
+                                        <label class="custom-control-label" for="customCheck1"
                                             id="">Issue ID</label>
                                     </div>
                                     <div class="col-12 col-sm-9">
-                                        <input type="text" style="font-size: large;" class="form-control" id="id"
+                                        <input type="text" class="form-control" id="id"
                                             placeholder="ID" name="issuesid"
                                             value="<%= query.checkid ? query.issuesid : '' %>">
                                     </div>
@@ -48,12 +48,12 @@
                                     <div class="custom-control custom-checkbox col-12 col-sm-2">
                                         <input type="checkbox" class="custom-control-input" for="" id="customCheck2"
                                             name="checksubject" <%= query.checksubject ? ' checked' : '' %>>
-                                        <label class="custom-control-label" for="customCheck2" style="font-size: large"
+                                        <label class="custom-control-label" for="customCheck2"
                                             id="name">Subject</label>
                                     </div>
                                     <div class="col-12 col-sm-9">
                                         <input type="text" class="form-control" id="id" placeholder="Subject"
-                                            name="subject" style="font-size: large;"
+                                            name="subject"
                                             value="<%= query.checksubject ? query.subject : '' %>">
                                     </div>
                                 </div>
@@ -64,11 +64,11 @@
                                     <div class="custom-control custom-checkbox col-12 col-sm-2">
                                         <input type="checkbox" class="custom-control-input" for="" id="customCheck3"
                                             name="checktracker" <%= query.checktracker ? ' checked' : '' %>>
-                                        <label class="custom-control-label" for="customCheck3" style="font-size: large"
+                                        <label class="custom-control-label" for="customCheck3"
                                             id="name">Tracker</label>
                                     </div>
                                     <div class="col-12 col-sm-9">
-                                        <select class="form-control" id="role" name="tracker" style="font-size: large;">
+                                        <select class="form-control" id="role" name="tracker">
                                             <option disabled selected>Choose the Tracker ...</option>
                                             <option value="Bug"
                                                 <%= query.checktracker ? (query.tracker =='Bug' ? ' selected' : '') : '' %>>
@@ -92,11 +92,11 @@
                                     <div class="custom-control custom-checkbox col-12 col-sm-2">
                                         <input type="checkbox" class="custom-control-input" for="" id="customCheck4"
                                             name="checkdone">
-                                        <label class="custom-control-label" for="customCheck4" style="font-size: large"
+                                        <label class="custom-control-label" for="customCheck4"
                                             id="name">Done (%)</label>
                                     </div>
                                     <div class="col-12 col-sm-9">
-                                        <select class="form-control" id="role" name="done" style="font-size: large;">
+                                        <select class="form-control" id="role" name="done">
                                             <option disabled selected>Choose the Tracker ...</option>
                                             <option value="0"
                                                 <%= query.checkdone ? (query.done =='0' ? ' selected' : '') : '' %>>
@@ -144,10 +144,10 @@
                                 <div class="form-group row">
                                     <div class="col-sm-10">
                                         <button type="submit" class="btn btn-outline-primary"
-                                            style="font-size: large;"><i class="fa fa-search" aria-hidden="true">
+                                        ><i class="fa fa-search" aria-hidden="true">
                                                 Search</i>
                                         </button>
-                                        <button type="button" style="font-size: large;" class="btn btn-light"> <a
+                                        <button type="button" class="btn btn-light"> <a
                                                 href="/projects/issues/<%=projectid%>"><i class="fa fa-undo"
                                                     aria-hidden="true"></i> Reset</a></button>
                                     </div>
@@ -296,7 +296,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-10">
-                                        <button type="submit" style="font-size: large;" class="btn btn-outline-info"><i
+                                        <button type="submit" class="btn btn-outline-info"><i
                                                 class="fa fa-refresh" aria-hidden="true"></i> Apply</button>
                                     </div>
                                 </form>
@@ -362,12 +362,12 @@
                                             <%- option.parenttask ? '<td>' + item.namaparentissue + '</td>' : '' %>
                                             <td>
                                                 <a href="/projects/issues/<%=projectid%>/edit/<%=item.issueid%>"
-                                                    style="font-size: large;" class="btn btn-outline-success"><i
+                                                 class="btn btn-outline-success"><i
                                                         class="fa fa-pencil" aria-hidden="true"></i> EDIT</a>
                                                 <% if (isAdmin == true) { %>
                                                 <a href="/projects/issues/<%=projectid%>/delete/<%=item.issueid%>"
                                                     data-id="<%= `${projectid}-${item.issueid}` %>"
-                                                    style="font-size: large;" class="btn btn-outline-danger">
+                                                 class="btn btn-outline-danger">
                                                     <i class="fa fa-trash-o fa-lg"></i> DELETE</a>
                                                 <% } %>
                                             </td>
