@@ -1,14 +1,16 @@
-<nav class="navbar navbar-expand navbar-light bg-info fixed-top" style="height: 8vh;">
+<nav class="navbar navbar-expand-lg navbar-light bg-info fixed-top" style="height: 7vh;">
   <a class="navbar-brand" style="font-size: 2.5vh !important" href="/projects">Project Management System</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
+  <% if (path.split('/').length >= 3) { %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+  <% } %>
 
   <div class="collapse navbar-collapse align-middle" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">

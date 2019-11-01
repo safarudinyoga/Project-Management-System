@@ -1,65 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Activity</title>
-    <% include ../../partials/header%>
-    <link rel="stylesheet" href="/stylesheets/sidebar.css" />
-  </head>
 
-  <body>
-    <% include ../../partials/sidebar%> <% include ../../partials/navbar%>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Activity</title>
+  <% include ../../partials/header%>
+  <link rel="stylesheet" href="/stylesheets/sidebar.css" />
+</head>
 
-    <div class="container-fluid">
-      <main role="main" class="col-md-10 ml-sm-auto col-lg-11">
-        <div class="card border-light mx-1">
-          <h3
-            class="card-header bg-transparent display-4"
-            style="margin-top: 8vh; margin-left: 5vh;"
-          >
-            Activity
-          </h3>
-          <div class="card-body" style="margin-left: 5vh;">
-            <h4 class="card-title display-4" style="font-size: large;">
-              Project #<%=projectid%> (<%=pjname%>)
-            </h4>
-            <div class="card mt-2">
-              <% actperdate.forEach((item) => { %>
-              <div class="card-body mb-5">
-                <h5 class="card-header" style="font-size: 2vh;">
-                  <%= item.date %>
-                </h5>
-                <% item.data.forEach((anu) => { %>
-                <div class="card mt-1">
-                  <div class="card-body">
-                    <div class="btn btn-primary mb-3" style="font-size: 1vh;">
-                      <%= anu.timedoang %> WIB
-                    </div>
-                    <h2
-                      class="card-title"
-                      style="font-weight: bold; font-size: 3vh;"
-                    >
-                      <%= anu.title %>
-                    </h2>
-                    <p class="card-text" style="font-size: 1vh;">
-                      Progress: <%= anu.description %>
-                    </p>
-                    <h6 class="card-text" style="font-size: 2vh;">
-                      Author: <%= anu.author %>
-                    </h6>
+<body>
+  <% include ../../partials/sidebar%> <% include ../../partials/navbar%>
+
+  <div class="container-fluid">
+    <main role="main" class="col-md-10 ml-sm-auto col-lg-11">
+      <div class="card border-light mx-1">
+        <h3 class="card-header bg-transparent display-4 font-responsive" style="margin-top: 8vh; margin-left: 5vh;">
+          Activity
+        </h3>
+        <div class="card-body" style="margin-left: 5vh;">
+          <h4 class="card-title display-4" style="font-size: x-large;">
+            Project #<%=projectid%> (<%=pjname%>)
+          </h4>
+          <div class="card mt-2">
+            <% actperdate.forEach((item) => { %>
+            <div class="card-body mb-5">
+              <h5 class="card-header" style="font-size: 2vh;">
+                <%= item.date %>
+              </h5>
+              <% item.data.forEach((anu) => { %>
+              <div class="card mt-1">
+                <div class="card-body">
+                  <div class="btn btn-primary mb-3" style="font-size: 1vh;">
+                    <%= anu.timedoang %> WIB
                   </div>
+                  <h2 class="card-title" style="font-weight: bold; font-size: 3vh;">
+                    <%= anu.title %>
+                  </h2>
+                  <p class="card-text" style="font-size: 1vh;">
+                    Progress: <%= anu.description %>
+                  </p>
+                  <h6 class="card-text" style="font-size: 2vh;">
+                    Author: <%= anu.author %>
+                  </h6>
                 </div>
-                <% }) %>
               </div>
               <% }) %>
             </div>
+            <% }) %>
           </div>
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
+  </div>
 
-    <% include ../../partials/footer%>
-  </body>
+  <% include ../../partials/footer%>
+</body>
+
 </html>

@@ -17,7 +17,7 @@
 
     <main role="main" class="col-md-11 ml-sm-auto col-lg-11">
         <div class="card border-light mx-1">
-            <h4 class="card-header bg-transparent display-4" style="margin-top: 8vh;margin-left: 5vh; ">Edit Issues
+            <h4 class="card-header bg-transparent display-4 font-responsive" style="margin-top: 8vh;margin-left: 5vh; ">Edit Issues
                 #<%=issueid%> to
                 Project
                 #<%=projectid%> (<%=pjname%>) </h4>
@@ -30,8 +30,7 @@
 
                         <fieldset class="form-group">
                             <div class="form-group row">
-                                <h1 for="gridRadios" class="col-sm-3 col-form-label-lg display-4"
-                                >Tracker</h1>
+                                <h1 for="gridRadios" class="col-sm-3 col-form-label-lg display-4">Tracker</h1>
                                 <div class="col-sm-5">
                                     <div class="custom-control custom-radio">
                                         <input class="custom-control-input" type="radio" name="tracker" id="gridRadios1"
@@ -85,15 +84,13 @@
                         <!-- ================= STATUS ================ -->
                         <fieldset class="form-group">
                             <div class="form-group row">
-                                <h1 for="statusbutton" class="col-sm-3 col-form-label-lg display-4"
-                                >Status</h1>
+                                <h1 for="statusbutton" class="col-sm-3 col-form-label-lg display-4">Status</h1>
                                 <div class="col-sm-5">
                                     <div class="custom-control custom-radio">
                                         <input class="custom-control-input" disabled type="radio" name="status"
                                             id="statusbutton1" value="New"
                                             <%= data.status == 'New' ? ' checked' : '' %>>
-                                        <label class="custom-control-label" for="statusbutton1"
-                                        >
+                                        <label class="custom-control-label" for="statusbutton1">
                                             New
                                         </label>
                                     </div>
@@ -101,8 +98,7 @@
                                         <input class="custom-control-input" type="radio" name="status"
                                             id="statusbutton2" value="In Progress"
                                             <%= data.status == 'In Progress' ? ' checked' : '' %>>
-                                        <label class="custom-control-label" for="statusbutton2"
-                                        >
+                                        <label class="custom-control-label" for="statusbutton2">
                                             In Progress
                                         </label>
                                     </div>
@@ -110,8 +106,7 @@
                                         <input class="custom-control-input" type="radio" name="status"
                                             id="statusbutton3" value="Feedback"
                                             <%= data.status == 'Feedback' ? ' checked' : '' %>>
-                                        <label class="custom-control-label" for="statusbutton3"
-                                        >
+                                        <label class="custom-control-label" for="statusbutton3">
                                             Feedback
                                         </label>
                                     </div>
@@ -119,8 +114,7 @@
                                         <input class="custom-control-input" type="radio" name="status"
                                             id="statusbutton4" value="Resolved"
                                             <%= data.status == 'Resolved' ? ' checked' : '' %>>
-                                        <label class="custom-control-label" for="statusbutton4"
-                                        >
+                                        <label class="custom-control-label" for="statusbutton4">
                                             Resolved
                                         </label>
                                     </div>
@@ -128,8 +122,7 @@
                                         <input class="custom-control-input" type="radio" name="status"
                                             id="statusbutton5" value="Closed"
                                             <%= data.status == 'Closed' ? ' checked' : '' %>>
-                                        <label class="custom-control-label" for="statusbutton5"
-                                        >
+                                        <label class="custom-control-label" for="statusbutton5">
                                             Closed
                                         </label>
                                     </div>
@@ -137,8 +130,7 @@
                                         <input class="custom-control-input" type="radio" name="status"
                                             id="statusbutton6" value="Rejected"
                                             <%= data.status == 'Rejected' ? ' checked' : '' %>>
-                                        <label class="custom-control-label" for="statusbutton6"
-                                        >
+                                        <label class="custom-control-label" for="statusbutton6">
                                             Rejected
                                         </label>
                                     </div>
@@ -149,15 +141,13 @@
                         <!-- ================= PRIORITY ================ -->
                         <fieldset class="form-group">
                             <div class="form-group row">
-                                <h1 for="prioritybutton" class="col-sm-3 col-form-label-lg display-4"
-                                >Priority</h1>
+                                <h1 for="prioritybutton" class="col-sm-3 col-form-label-lg display-4">Priority</h1>
                                 <div class="col-sm-5">
                                     <div class="custom-control custom-radio">
                                         <input class="custom-control-input" type="radio" name="priority"
                                             id="prioritybutton1" value="Normal"
                                             <%= data.priority == 'Normal' ? ' checked' : '' %>>
-                                        <label class="custom-control-label" for="prioritybutton1"
-                                        >
+                                        <label class="custom-control-label" for="prioritybutton1">
                                             Normal
                                         </label>
                                     </div>
@@ -165,8 +155,7 @@
                                         <input class="custom-control-input" type="radio" name="priority"
                                             id="prioritybutton2" value="High"
                                             <%= data.priority == 'High' ? ' checked' : '' %>>
-                                        <label class="custom-control-label" for="prioritybutton2"
-                                        >
+                                        <label class="custom-control-label" for="prioritybutton2">
                                             High
                                         </label>
                                     </div>
@@ -174,8 +163,7 @@
                                         <input class="custom-control-input" type="radio" name="priority"
                                             id="prioritybutton3" value="Urgent"
                                             <%= data.priority == 'Urgent' ? ' checked' : '' %>>
-                                        <label class="custom-control-label" for="prioritybutton3"
-                                        >
+                                        <label class="custom-control-label" for="prioritybutton3">
                                             Urgent
                                         </label>
                                     </div>
@@ -183,8 +171,7 @@
                                         <input class="custom-control-input" type="radio" name="priority"
                                             id="prioritybutton4" value="Immerdiate"
                                             <%= data.priority == 'Immerdiate' ? ' checked' : '' %>>
-                                        <label class="custom-control-label" for="prioritybutton4"
-                                        >
+                                        <label class="custom-control-label" for="prioritybutton4">
                                             Immerdiate
                                         </label>
                                     </div>
@@ -197,8 +184,8 @@
                             <h1 class="col-sm-3 col-form-label-lg display-4" style="font-size:x-large;">Assignee
                             </h1>
                             <div class="col-12 col-sm-5">
-                                <input type="text" class="form-control form-control"
-                                    placeholder="<%= data.fullname %>" name="assignee" disabled readonly>
+                                <input type="text" class="form-control form-control" placeholder="<%= data.fullname %>"
+                                    name="assignee" disabled readonly>
                             </div>
                         </div>
 
@@ -207,8 +194,7 @@
                             <h1 class="col-sm-3 col-form-label-lg display-4" style="font-size:x-large;">Start Date
                             </h1>
                             <div class="col-12 col-sm-5">
-                                <input type="date" class="form-control form-control"
-                                    placeholder="" name="startdate"
+                                <input type="date" class="form-control form-control" placeholder="" name="startdate"
                                     value="<%= moment(data.startdate).format('YYYY-MM-DD') %>" disabled readonly>
                             </div>
                         </div>
@@ -218,8 +204,7 @@
                             <h1 class="col-sm-3 col-form-label-lg display-4" style="font-size:x-large;">Due Date
                             </h1>
                             <div class="col-12 col-sm-5">
-                                <input type="date" class="form-control form-control"
-                                    placeholder="" name="duedate"
+                                <input type="date" class="form-control form-control" placeholder="" name="duedate"
                                     value="<%= moment(data.duedate).format('YYYY-MM-DD') %>" required>
                             </div>
                         </div>
@@ -229,9 +214,9 @@
                             <h5 class="col-sm-3 col-form-label col-form-label display-4">
                                 Estimated Time</h5>
                             <div class="col-sm-5">
-                                <input type="number" class="form-control form-control"
-                                    id="name" placeholder="<%= data.estimatedtime %> Hours" name="estimatedtime"
-                                    disabled readonly>
+                                <input type="number" class="form-control form-control" id="name"
+                                    placeholder="<%= data.estimatedtime %> Hours" name="estimatedtime" disabled
+                                    readonly>
                             </div>
                         </div>
 
@@ -285,9 +270,8 @@
                             <div class="col-sm-5 ml-3">
                                 <div class="row">
                                     <div class="form-group">
-                                        <input name="files" type="file"
-                                            class="form-control-file" id="exampleFormControlFile1"
-                                            value="<%=data.files%>">
+                                        <input name="files" type="file" class="form-control-file"
+                                            id="exampleFormControlFile1" value="<%=data.files%>">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -326,8 +310,8 @@
                             <h5 class="col-sm-3 col-form-label col-form-label display-4">
                                 Target Version </h5>
                             <div class="col-12 col-sm-5">
-                                <input type="text" class="form-control form-control-lg"
-                                    id="" value="<%= data.targetversion %>" placeholder="<%= data.targetversion %>"
+                                <input type="text" class="form-control form-control-lg" id=""
+                                    value="<%= data.targetversion %>" placeholder="<%= data.targetversion %>"
                                     name="targetversion" required>
                                 <small style="font-size: 1.5vh; color: red !important;" id="passwordHelpInline1"
                                     class="text-muted">
@@ -341,8 +325,8 @@
                             <h5 class="col-sm-3 col-form-label col-form-label display-4">
                                 Author </h5>
                             <div class="col-12 col-sm-5">
-                                <select class="custom-select" name="author"
-                                    aria-describedby="passwordHelpInline" required>
+                                <select class="custom-select" name="author" aria-describedby="passwordHelpInline"
+                                    required>
                                     <option selected disabled>Choose The Assignee ...</option>
                                     <% iduser.forEach((item, i) => {  %>
                                     <option value="<%=item%>">
@@ -362,8 +346,7 @@
                             <h1 class="col-sm-3 col-form-label-lg display-4" style="font-size:x-large;">Parent Task
                             </h1>
                             <div class="col-12 col-sm-5">
-                                <select class="custom-select" name="parenttask"
-                                    aria-describedby="passwordHelpInline1">
+                                <select class="custom-select" name="parenttask" aria-describedby="passwordHelpInline1">
                                     <option selected disabled>Choose The Parent Task ...</option>
                                     <% idIssue.forEach((item, i) => { %>
                                     <option value="<%= item=='undefined' ? '' : item %>">
@@ -381,8 +364,8 @@
                         <!-- ================= BUTTON ================ -->
                         <div class="form-group row">
                             <div class="col-sm-10">
-                                <button type="submit" class="btn btn-outline-success"><i
-                                        class="fa fa-check" aria-hidden="true"></i> Save</button>
+                                <button type="submit" class="btn btn-outline-success"><i class="fa fa-check"
+                                        aria-hidden="true"></i> Save</button>
                                 <button type="button" class="btn btn-outline-light"><a
                                         href="/projects/issues/<%=projectid%>"><i class="fa fa-ban"
                                             aria-hidden="true"></i>
